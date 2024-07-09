@@ -9,16 +9,19 @@
 </head>
 <body>
     <header>
-        <nav>
-            <img src="assets/logo.svg" alt="Ostento Media Agency Logo" class="logo">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#works">Our Works</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </nav>
+        <img src="assets/logo.svg" alt="Ostento Media Agency Logo" class="logo">
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#works">Our Works</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
     </header>
     <section id="home" class="background-image">
         <div class="overlay">
@@ -64,5 +67,15 @@
     <footer>
         <p>&copy; 2024 Ostento Media Agency. All rights reserved.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('header ul');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
