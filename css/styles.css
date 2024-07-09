@@ -4,6 +4,7 @@ body, html {
     font-family: 'Montserrat', Helvetica, sans-serif;
     color: #333;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 header {
@@ -20,7 +21,7 @@ header {
 }
 
 header .logo {
-    height: 50px;
+    height: 80px; /* Increased height for a bigger logo */
 }
 
 header ul {
@@ -41,6 +42,9 @@ header a {
     background: url('assets/background.jpg') no-repeat center center/cover;
     height: 100vh;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .overlay {
@@ -54,7 +58,7 @@ header a {
     justify-content: center;
     align-items: center;
     color: #FFD700; /* Different shade of yellow */
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     text-align: center;
     padding: 0 10px;
 }
@@ -67,6 +71,7 @@ section {
 #about, #works, #services, #contact {
     background: #f0f0f0;
     margin-top: 60px;
+    padding-bottom: 60px;
 }
 
 .gallery {
@@ -94,9 +99,8 @@ footer {
     color: #FFD700; /* Different shade of yellow */
     text-align: center;
     padding: 20px;
-    position: fixed;
+    position: relative;
     width: 100%;
-    bottom: 0;
 }
 
 /* Responsive Design */
