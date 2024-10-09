@@ -43,7 +43,9 @@ nav ul li a {
 }
 
 .hero {
-    background-color: orange;
+    background-image: url('assets/images/background.jpg')
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
     color: white;
     text-align: center;
     padding: 100px 20px;
