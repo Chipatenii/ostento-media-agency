@@ -11,7 +11,7 @@ header {
     color: white;
     padding: 10px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centering the navigation */
     align-items: center;
 }
 
@@ -30,21 +30,49 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
+    position: relative; /* To allow positioning of the rectangle */
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 18px;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: orange; /* Hover effect changes text color */
+}
+
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 5px;
+    background-color: white;
+    border-radius: 10px; /* Rounded corners */
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+}
+
+nav ul li a:hover::after {
+    opacity: 1; /* Shows the rectangle on hover */
 }
 
 /* Hero Section with Background Image */
 .hero {
-    background-image: url('../images/background.jpg'); /* Path to the background image */
+    background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;
