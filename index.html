@@ -4,78 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ostento Media Agency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
-        <img src="assets/logo.svg" alt="Ostento Media Agency Logo" class="logo">
-        <div class="menu-toggle" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#works">Our Works</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Ostento Media Agency Logo">
+                </a>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Our Services</a></li>
+                <li><a href="works.html">Our Works</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="quote.html">Request a Quote</a></li>
+            </ul>
+        </nav>
     </header>
-    <section id="home" class="background-image">
-        <div class="overlay">
+    
+    <section id="home">
+        <div class="hero">
             <h1>Welcome to Ostento Media Agency</h1>
-            <p>Innovating the Future</p>
+            <p>Your one-stop solution for graphic design, web development, and more.</p>
         </div>
     </section>
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Ostento Media Agency is a leading media company specializing in innovative solutions to elevate your brand...</p>
-    </section>
-    <section id="works">
-        <h2>Our Works</h2>
-        <div class="gallery">
-            <!-- Add images or descriptions of your works here -->
-        </div>
-    </section>
-    <section id="services">
-        <h2>Our Services</h2>
-        <ul>
-            <li>Service One</li>
-            <li>Service Two</li>
-            <li>Service Three</li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form action="#" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-        <div class="social-media">
-            <a href="https://web.facebook.com/ostentomedia" target="_blank"><img src="assets/facebook.svg" alt="Facebook"></a>
-            <a href="https://www.linkedin.com/company/ostento-media-agency/" target="_blank"><img src="assets/linkedin.svg" alt="LinkedIn"></a>
-            <a href="https://www.instagram.com/ostentomediaagency?igsh=MW53Z3N5Y3o0c3lldQ==" target="_blank"><img src="assets/instagram.svg" alt="Instagram"></a>
-        </div>
-    </section>
+    
     <footer>
-        <p>&copy; 2024 Ostento Media Agency. All rights reserved.</p>
+        <p>&copy; 2024 Ostento Media Agency</p>
     </footer>
-
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const nav = document.querySelector('header ul');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            nav.classList.toggle('active');
-        });
-    </script>
+    
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+Updated style.css:
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: navy;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: navy;
+    color: white;
+}
