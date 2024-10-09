@@ -24,7 +24,7 @@ nav {
 }
 
 .logo {
-    margin-left: auto; /* Ensures the logo is aligned to the right */
+    margin-left: right; /* Ensures the logo is aligned to the right */
 }
 
 .logo img {
