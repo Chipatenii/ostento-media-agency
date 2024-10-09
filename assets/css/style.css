@@ -1,13 +1,13 @@
 /* Global Styles */
 body {
-    font-family: 'Helvetica', Arial, sans-serif; /* Added Helvetica as the primary font */
+    font-family: 'Helvetica', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
 header {
-    background-color: rgb(255, 255, 255);
+    background-color: navy;
     color: white;
     padding: 10px 0;
     display: flex;
@@ -21,7 +21,7 @@ nav {
 }
 
 .logo img {
-    width: 120px; /* Adjust the size of the logo */
+    width: 120px;
     height: auto;
 }
 
@@ -39,17 +39,32 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-family: 'Helvetica', Arial, sans-serif; /* Ensuring nav links also use Helvetica */
+    font-family: 'Helvetica', Arial, sans-serif;
 }
 
+/* Hero Section with Background Image */
 .hero {
-    background-image: url('assets/images/background.jpg')
-    background-size: cover; /* Ensure the image covers the entire section */
-    background-position: center; /* Center the image */
+    background-image: url('../images/background.jpg'); /* Path to the background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
     color: white;
     text-align: center;
-    padding: 100px 20px;
-    font-family: 'Helvetica', Arial, sans-serif; /* Ensuring hero section text uses Helvetica */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin: 20px 0 0;
 }
 
 footer {
@@ -57,5 +72,4 @@ footer {
     padding: 20px;
     background-color: navy;
     color: white;
-    font-family: 'Helvetica', Arial, sans-serif; /* Footer text uses Helvetica */
 }
