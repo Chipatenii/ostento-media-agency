@@ -1,39 +1,31 @@
-/* Global Styles */
+/* General Styling */
 body {
-    font-family: 'Helvetica', Arial, sans-serif;
+    font-family: 'Helvetica', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    background-image: url('../images/background.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: navy;
 }
 
+/* Navigation Styles */
 header {
     background-color: navy;
-    color: white;
-    padding: 10px 0;
+    padding: 20px 0;
     display: flex;
-    justify-content: space-between; /* Space between logo and nav */
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Padding to keep some space around */
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1; /* To ensure navigation takes center space */
-}
-
-.logo {
-    margin-left: right; /* Ensures the logo is aligned to the right */
 }
 
 .logo img {
     width: 120px;
-    height: auto;
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
@@ -42,69 +34,103 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 20px;
-    position: relative; /* To allow positioning of the rectangle */
+    margin: 0 15px;
+    position: relative;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-family: 'Helvetica', Arial, sans-serif;
     font-size: 18px;
-    position: relative;
-}
-
-nav ul li a:hover {
-    color: orange; /* Hover effect changes text color */
-}
-
-nav ul li a::after {
-    content: '';
+    text-transform: uppercase;
+    padding: 10px;
+    transition: color 0.3s ease;
     display: block;
-    width: 40px;
-    height: 5px;
-    background-color: white;
-    border-radius: 10px; /* Rounded corners */
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.3s ease-in-out;
-}
-
-nav ul li a:hover::after {
-    opacity: 1; /* Shows the rectangle on hover */
-}
-
-/* Hero Section with Background Image */
-.hero {
-    background-image: url('../images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    color: white;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+}
+
+/* Hover effect with rectangle and rounded corners */
+nav ul li a:hover {
+    color: orange;
+}
+
+nav ul li::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 4px;
+    background-color: orange;
+    border-radius: 10px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav ul li:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    color: white;
+    margin: 100px 0;
+    padding: 60px;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .hero h1 {
-    font-size: 3em;
-    margin: 0;
+    font-size: 48px;
+    margin-bottom: 20px;
 }
 
 .hero p {
-    font-size: 1.5em;
-    margin: 20px 0 0;
+    font-size: 24px;
 }
 
+/* Our Services Page Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: navy;
+}
+
+h1 {
+    text-align: center;
+    color: orange;
+}
+
+.service-section {
+    margin-bottom: 40px;
+}
+
+.service-section h2 {
+    font-size: 2em;
+    color: navy;
+    border-bottom: 2px solid orange;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.service-section ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+.service-section ul li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: navy;
+    background-color: rgb(255, 165, 0);
     color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
