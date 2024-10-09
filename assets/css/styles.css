@@ -1,0 +1,59 @@
+/* Global Styles */
+body {
+    font-family: 'Helvetica', Arial, sans-serif; /* Added Helvetica as the primary font */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: navy;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px; /* Adjust the size of the logo */
+    height: auto;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Helvetica', Arial, sans-serif; /* Ensuring nav links also use Helvetica */
+}
+
+.hero {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    font-family: 'Helvetica', Arial, sans-serif; /* Ensuring hero section text uses Helvetica */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: navy;
+    color: white;
+    font-family: 'Helvetica', Arial, sans-serif; /* Footer text uses Helvetica */
+}
