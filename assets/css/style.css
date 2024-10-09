@@ -11,13 +11,20 @@ header {
     color: white;
     padding: 10px 0;
     display: flex;
-    justify-content: center; /* Centering the navigation */
+    justify-content: space-between; /* Space between logo and nav */
     align-items: center;
+    padding: 0 20px; /* Padding to keep some space around */
 }
 
 nav {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* To ensure navigation takes center space */
+}
+
+.logo {
+    margin-left: auto; /* Ensures the logo is aligned to the right */
 }
 
 .logo img {
