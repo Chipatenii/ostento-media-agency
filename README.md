@@ -22,6 +22,7 @@ and based in Lusaka.
 | `assets/css/style.css` | Design system (navy + orange tokens, one type scale, three radii plus a named pill) |
 | `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, 3D hero, cookie consent, forms |
 | `robots.txt`, `sitemap.xml` | Crawl directives. Both need the production domain, see below |
+| `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
 ## Run locally
 
@@ -58,6 +59,19 @@ With a real image, swap the `wm-mono` tile for an `<img>`. For logo artwork add
 `work-card__media--plate`, which puts the mark on a light plate so a dark logo
 is not lost against the navy card.
 
+**Thumbnails for live websites** are generated rather than made by hand:
+
+```bash
+python3 tools/capture-thumbnails.py
+```
+
+It screenshots each homepage listed in the script at 1280x800, the exact 16:10
+ratio the website cards use, writes an optimised JPEG to `assets/images/work/`,
+and swaps that card's monogram tile for an `<img>` in both `portfolio.html` and
+`index.html`. Add a line to `SITES` in the script when you add a site. Re-running
+refreshes the images and leaves already-wired cards alone, so it is safe to run
+again after a client redesigns.
+
 **A review or a client:** open `index.html`, section 05, and use the template
 comments inside the reviews track and the client grids. Stars render only from
 `data-rating`; leave the attribute off and no stars appear. Nothing is assumed.
@@ -82,8 +96,10 @@ grep -rn 'data-todo\|YOUR-DOMAIN.example\|your-form-id' . --include=*.html --inc
 | **Production domain** | `YOUR-DOMAIN.example` in `sitemap.xml`, plus the `TODO(domain)` comment in every page head | No `canonical` or `og:url`; `og:image` stays relative |
 | **Form endpoint** | `your-form-id` in `index.html` and `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
 | **Instagram URL** | `data-todo="social-instagram"`, commented stub in all 7 footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
-| **Client names** | `data-todo="client"` on every portfolio card | "Client" in amber |
-| **Real projects** | The ten example cards in `portfolio.html` | Amber "Example" badge on each |
+| **Client names** | `data-todo="client"` on the example cards | "Client" in amber |
+| **Real projects** | Seven remaining example cards in `portfolio.html` | Amber "Example" badge on each |
+| **Website thumbnails** | Six live client sites have cards but no images | Monogram tiles until `tools/capture-thumbnails.py` is run |
+| **Website results** | The six live sites carry no `work-card__result` line | Omitted rather than invented. Add one per card when you have a result worth stating |
 | **Reviews and clients** | Section 05 of `index.html` | Real empty states, no stars, no aggregate |
 | **Project images** | None on disk | Monogram tiles, which are a designed state |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
