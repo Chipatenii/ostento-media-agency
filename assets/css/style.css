@@ -810,6 +810,53 @@ p { margin: 0 0 var(--sp-3); }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
 .reveal.is-in { opacity: 1; transform: none; }
 
+/* ---------- Registration, trust, and unfilled values ---------- */
+/* Mobile-first: every block below starts at one column and opts into
+   wider layouts with min-width queries. */
+.reg-line {
+    font-size: var(--fs-100);
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: var(--sp-3) 0 0;
+    max-width: 40ch;
+}
+.reg-line strong { color: var(--text); font-weight: var(--w-semi); }
+
+/* A value still waiting on the business. Deliberately conspicuous, so an
+   unfilled one cannot ship looking intentional. List every outstanding item:
+   grep -rn 'data-todo' . --include=*.html */
+[data-todo] {
+    color: var(--amber);
+    border-bottom: 1px dashed currentColor;
+    white-space: nowrap;
+}
+
+.trust-row {
+    display: grid;
+    gap: var(--sp-4);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border);
+}
+.trust-item { display: flex; gap: 0.6rem; align-items: flex-start; }
+.trust-item > svg { flex: 0 0 auto; margin-top: 3px; color: var(--teal); }
+.trust-item__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+}
+.trust-item__val { display: block; font-size: var(--fs-200); color: var(--text); line-height: 1.5; }
+@media (min-width: 620px) {
+    .trust-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1001px) {
+    .trust-row { grid-template-columns: repeat(4, 1fr); }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
