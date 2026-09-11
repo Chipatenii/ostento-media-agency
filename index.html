@@ -15,6 +15,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <noscript><style>
+        /* Without JS the tabs cannot switch, so every panel is shown stacked
+           with its own heading and the dead tab strip is removed. */
+        .proof-panel[hidden] { display: block !important; }
+        .proof-panel + .proof-panel { margin-top: var(--sp-6); }
+        .proof-panel__title { display: block; }
+        .proof-tabs, .rev-controls { display: none; }
+    </style></noscript>
 </head>
 <body>
     <a class="skip-link" href="#numbers">Skip to content</a>
@@ -246,12 +254,115 @@
             </div>
         </section>
 
-        <!-- ============ 05 Studio ============ -->
+
+        <!-- ============ 05 Proof ============ -->
+        <section class="section" id="proof">
+            <div class="container">
+                <div class="sec-head">
+                    <p class="sec-label"><b>05</b> Proof</p>
+                    <h2 class="sec-title">What clients say,<span class="br">and who we work with.</span></h2>
+                    <p>Reviews are published only with the client's permission, and named only where they have agreed to be named.</p>
+                </div>
+
+                <div class="proof reveal">
+                    <div class="rating-summary" id="rating-summary" hidden>
+                        <span class="rating-summary__score" id="rating-score"></span>
+                        <span class="stars" id="rating-stars"></span>
+                        <span class="rating-summary__count" id="rating-count"></span>
+                    </div>
+
+                    <div class="proof-tabs" role="tablist" aria-label="Reviews and clients">
+                        <button class="proof-tab" type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="true">Reviews</button>
+                        <button class="proof-tab" type="button" role="tab" id="tab-current" aria-controls="panel-current" aria-selected="false" tabindex="-1">Current clients</button>
+                        <button class="proof-tab" type="button" role="tab" id="tab-past" aria-controls="panel-past" aria-selected="false" tabindex="-1">Past clients</button>
+                    </div>
+
+                    <!-- ============ Reviews ============ -->
+                    <div class="proof-panel" id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews">
+                        <h3 class="proof-panel__title">Reviews</h3>
+                        <div class="rev-slider">
+                            <div class="rev-track" id="rev-track">
+                                <!-- ==========================================
+                                     TO ADD A REVIEW: copy this block into the
+                                     track, above this comment, and fill it in.
+                                     Publish only what the client has agreed to.
+                                     Drop data-rating entirely if they did not
+                                     give a score. It is never assumed.
+
+                                <article class="rev-slide" data-rating="5">
+                                    <span class="stars"></span>
+                                    <blockquote class="rev-quote">THEIR WORDS, unedited.</blockquote>
+                                    <cite class="rev-cite">
+                                        <span class="rev-cite__name">NAME</span>
+                                        <span class="rev-cite__meta">ROLE, COMPANY &middot; MONTH YEAR</span>
+                                    </cite>
+                                </article>
+                                     ========================================== -->
+                            </div>
+                            <div class="rev-controls" id="rev-controls" hidden>
+                                <button class="rev-nav" type="button" id="rev-prev" aria-controls="rev-track" aria-label="Previous review">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </button>
+                                <button class="rev-nav" type="button" id="rev-next" aria-controls="rev-track" aria-label="Next review">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </button>
+                                <div class="rev-dots" id="rev-dots"></div>
+                            </div>
+                        </div>
+                        <div class="pf-empty" id="rev-empty">
+                            <h3>No published reviews yet</h3>
+                            <p>We publish a review only once the client has read it and agreed to be named. Until then, ask us for references and we will put you in touch with people we have worked for.</p>
+                            <p style="margin-top:var(--sp-4);margin-bottom:0;"><a class="arrow-link" href="#inquiry">Ask for references <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></p>
+                        </div>
+                    </div>
+
+                    <!-- ============ Current clients ============ -->
+                    <div class="proof-panel" id="panel-current" role="tabpanel" aria-labelledby="tab-current" tabindex="0" hidden>
+                        <h3 class="proof-panel__title">Current clients</h3>
+                        <div class="client-grid" id="clients-current">
+                            <!-- ==========================================
+                                 TO ADD A CLIENT: copy this block in, above
+                                 this comment. Name a client only with their
+                                 permission. Replace the two initials with a
+                                 logo when you have the file:
+                                   <span class="client-chip__logo"><img src="..." alt="COMPANY"></span>
+
+                            <div class="client-chip">
+                                <span class="client-chip__logo" aria-hidden="true">AB</span>
+                                <span>
+                                    <span class="client-chip__name">COMPANY NAME</span>
+                                    <span class="client-chip__since">Since YEAR</span>
+                                </span>
+                            </div>
+                                 ========================================== -->
+                        </div>
+                        <div class="pf-empty" id="clients-current-empty">
+                            <h3>Client list in progress</h3>
+                            <p>We are asking current clients for permission before naming them here. We would rather show an empty list than one you cannot verify.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============ Past clients ============ -->
+                    <div class="proof-panel" id="panel-past" role="tabpanel" aria-labelledby="tab-past" tabindex="0" hidden>
+                        <h3 class="proof-panel__title">Past clients</h3>
+                        <div class="client-grid" id="clients-past">
+                            <!-- Same block as above. See the Current clients panel. -->
+                        </div>
+                        <div class="pf-empty" id="clients-past-empty">
+                            <h3>Client list in progress</h3>
+                            <p>Past engagements are being confirmed with the clients concerned before they are listed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 06 Studio ============ -->
         <section class="section" id="studio">
             <div class="container">
                 <div class="grid grid--2" style="align-items:center;gap:var(--sp-7);">
                     <div class="reveal">
-                        <p class="sec-label"><b>05</b> Studio</p>
+                        <p class="sec-label"><b>06</b> Studio</p>
                         <p class="studio-manifesto">Strategy, design, and build, all <em>under one roof</em>, from first sketch to launch.</p>
                     </div>
                     <div class="reveal">
@@ -270,11 +381,11 @@
             </div>
         </section>
 
-        <!-- ============ 06 Process ============ -->
+        <!-- ============ 07 Process ============ -->
         <section class="section" id="process">
             <div class="container">
                 <div class="sec-head">
-                    <p class="sec-label"><b>06</b> Process</p>
+                    <p class="sec-label"><b>07</b> Process</p>
                     <h2 class="sec-title">Four steps,<span class="br">no surprises between them.</span></h2>
                 </div>
                 <div class="process-list">
@@ -302,11 +413,11 @@
             </div>
         </section>
 
-        <!-- ============ 07 FAQ ============ -->
+        <!-- ============ 08 FAQ ============ -->
         <section class="section" id="faq">
             <div class="container">
                 <div class="sec-head">
-                    <p class="sec-label"><b>07</b> Clarity up front</p>
+                    <p class="sec-label"><b>08</b> Clarity up front</p>
                     <h2 class="sec-title">Questions,<span class="br">answered plainly.</span></h2>
                 </div>
                 <div class="faq" id="faq-list">
@@ -350,11 +461,11 @@
             </div>
         </section>
 
-        <!-- ============ 08 The System ============ -->
+        <!-- ============ 09 The System ============ -->
         <section class="section" id="system">
             <div class="container">
                 <div class="sec-head">
-                    <p class="sec-label"><b>08</b> The system</p>
+                    <p class="sec-label"><b>09</b> The system</p>
                     <h2 class="sec-title">The machinery<span class="br">behind a launch.</span></h2>
                 </div>
                 <div class="system-grid">
@@ -397,15 +508,16 @@
             </div>
         </section>
 
-        <!-- ============ 09 Activity ============ -->
+        <!-- ============ 10 Activity ============ -->
         <section class="section" id="activity">
             <div class="container">
                 <div class="sec-head">
-                    <p class="sec-label"><b>09</b> Activity</p>
+                    <p class="sec-label"><b>10</b> Activity</p>
                     <h2 class="sec-title">Always building,<span class="br">week after week.</span></h2>
                 </div>
                 <div class="activity reveal">
                     <div class="activity-grid" id="activity-grid" aria-hidden="true"></div>
+                    <p class="activity-note">An illustration of how build work clusters, not a record of delivered projects.</p>
                     <div class="activity-legend">
                         <span>Quiet</span>
                         <span class="swatch" style="background:var(--surface-2)"></span>
@@ -418,11 +530,11 @@
             </div>
         </section>
 
-        <!-- ============ 10 Project Inquiry ============ -->
+        <!-- ============ 11 Project Inquiry ============ -->
         <section class="section" id="inquiry">
             <div class="container">
                 <div class="inquiry reveal">
-                    <p class="sec-label"><b>10</b> Project inquiry</p>
+                    <p class="sec-label"><b>11</b> Project inquiry</p>
                     <div class="inquiry__head">
                         <span class="badge-60">Takes about 60 seconds</span>
                         <h2>Ready to solve it?</h2>
@@ -492,7 +604,7 @@
         </section>
     </main>
 
-    <!-- ============ 11 Footer ============ -->
+    <!-- ============ 12 Footer ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
