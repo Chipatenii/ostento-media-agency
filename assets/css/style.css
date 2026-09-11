@@ -69,6 +69,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* The UA rule for [hidden] is display:none at zero specificity, so any class
+   that sets display beats it. Several here do, so hiding must be enforced. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
 
 body {
@@ -826,9 +830,13 @@ p { margin: 0 0 var(--sp-3); }
    unfilled one cannot ship looking intentional. List every outstanding item:
    grep -rn 'data-todo' . --include=*.html */
 [data-todo] {
+    display: inline-block;
+    /* .work-card__body is a flex column, and a flex child stretches to full
+       width whatever its display is, which made the dashed rule read as a
+       divider instead of a marked value. */
+    align-self: flex-start;
     color: var(--amber);
     border-bottom: 1px dashed currentColor;
-    white-space: nowrap;
 }
 
 .trust-row {
@@ -856,6 +864,137 @@ p { margin: 0 0 var(--sp-3); }
 @media (min-width: 1001px) {
     .trust-row { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* ---------- Portfolio: media variants and monogram tiles ---------- */
+/* Ratio is per category. One global 16/10 box letterboxes every logo and
+   crops every A4 page, so each discipline gets the shape it actually is. */
+.work-card__media--wide     { aspect-ratio: 16 / 10; }
+.work-card__media--square   { aspect-ratio: 1 / 1; }
+.work-card__media--portrait { aspect-ratio: 3 / 4; }
+
+/* A dark logo on a navy card is invisible, so logo artwork sits on a light
+   plate and is contained rather than cropped. Functional, not decorative. */
+.work-card__media--plate { background: var(--text); }
+.work-card__media--plate img { object-fit: contain; padding: 12%; }
+
+/* Typographic tile, shown whenever a project has no image file yet. Built
+   from the existing .wm-a to .wm-d gradients so it reads as designed rather
+   than missing. */
+.wm-mono { flex-direction: column; gap: 0.45rem; }
+.wm-mono__glyph {
+    font-family: var(--font-display);
+    font-size: var(--fs-700);
+    font-weight: var(--w-bold);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+.wm-mono__cat {
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ---------- Portfolio grid ---------- */
+.pf-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); align-items: start; }
+@media (min-width: 620px)  { .pf-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1001px) { .pf-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Only ever added by JS, so every card is visible with JS off. */
+.pf-card.is-hidden { display: none; }
+
+/* One tab stop per card: the control lives in the heading and its ::after
+   stretches the hit area across the whole card, which is already relative. */
+.work-card__link {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--dur) var(--ease);
+}
+.work-card__link::after { content: ""; position: absolute; inset: 0; }
+.work-card__link:hover { color: var(--orange-soft); }
+.work-card__body h3 { display: flex; }
+
+.pf-example {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid rgba(255, 181, 71, 0.4);
+    border-radius: var(--r-pill);
+    padding: 0.2rem 0.55rem;
+}
+
+/* ---------- Portfolio controls ---------- */
+.pf-controls { margin-bottom: var(--sp-5); }
+
+/* Scrolls rather than wraps on a phone, so the filter row stays one line. */
+.pf-toolbar {
+    display: flex;
+    gap: var(--sp-2);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    padding-bottom: var(--sp-2);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.pf-toolbar::-webkit-scrollbar { display: none; }
+.pf-filter {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-body);
+    font-size: var(--fs-200);
+    font-weight: var(--w-medium);
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-pill);
+    padding: 0.6rem 1rem;
+    min-height: 44px;
+    cursor: pointer;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+                background-color var(--dur) var(--ease);
+}
+.pf-filter:hover { color: var(--text); border-color: var(--border-2); }
+.pf-filter[aria-pressed="true"] {
+    color: var(--text);
+    border-color: var(--border-orange);
+    background: var(--surface-2);
+}
+.pf-filter__count { font-family: var(--font-mono); font-size: var(--fs-100); color: var(--text-muted); }
+.pf-filter[aria-pressed="true"] .pf-filter__count { color: var(--orange); }
+
+.pf-search { max-width: 380px; margin-top: var(--sp-3); }
+.pf-status {
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: var(--sp-3) 0 0;
+    min-height: 1.2em;
+}
+.pf-empty {
+    border: 1px dashed var(--border-2);
+    border-radius: var(--r-md);
+    padding: var(--sp-6) var(--sp-4);
+    text-align: center;
+}
+.pf-empty h3 { font-size: var(--fs-500); margin-bottom: var(--sp-2); }
+.pf-empty p { margin: 0 auto; max-width: 46ch; color: var(--text-muted); font-size: var(--fs-300); }
+.pf-more-wrap { margin-top: var(--sp-5); text-align: center; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {

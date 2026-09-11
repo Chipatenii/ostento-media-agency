@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ostento</title>
+    <meta name="description" content="Websites, company profiles, logos, digital marketing, and print media designed and built by Ostento. Filter the work by discipline.">
+    <meta name="theme-color" content="#0A1430">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon-180.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <noscript><style>
+        /* Without JS these controls cannot work, so they are removed rather
+           than left visible and dead. Every card stays on the page. */
+        .pf-toolbar, .pf-search, .pf-status, .pf-more-wrap { display: none; }
+    </style></noscript>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header is-scrolled" id="site-header">
+        <div class="container nav">
+            <a class="nav__brand" href="index.html" aria-label="Ostento home">
+                <img src="assets/images/logo.png" alt="Ostento">
+            </a>
+            <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+            </button>
+            <ul class="nav__menu" id="nav-menu">
+                <li><a class="nav__link is-active" href="portfolio.html" aria-current="page">Portfolio</a></li>
+                <li><a class="nav__link" href="index.html#studio">Studio</a></li>
+                <li><a class="nav__link" href="index.html#proof">Reviews</a></li>
+                <li><a class="nav__link" href="index.html#process">Process</a></li>
+                <li><a class="nav__link" href="index.html#faq">FAQ</a></li>
+                <li><a class="nav__link nav__academy" href="academy.html">Academy</a></li>
+                <li class="nav__cta"><a class="btn btn--primary" href="index.html#inquiry">Start a project</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- ============ Portfolio ============ -->
+        <section class="legal">
+            <div class="container">
+                <div class="sec-head">
+                    <p class="sec-label"><b>Portfolio</b></p>
+                    <h1 class="sec-title">Websites, brands,<span class="br">and everything printed.</span></h1>
+                    <p>Five disciplines under one roof. Filter by the one you need, or read straight down the list.</p>
+                </div>
+
+                <div class="pf-controls reveal">
+                    <div class="pf-toolbar" role="toolbar" aria-label="Filter projects by discipline">
+                    <button class="pf-filter" type="button" aria-pressed="true" aria-controls="pf-grid" data-filter="all">All <span class="pf-filter__count">0</span></button>
+                    <button class="pf-filter" type="button" aria-pressed="false" aria-controls="pf-grid" data-filter="websites" tabindex="-1">Websites <span class="pf-filter__count">0</span></button>
+                    <button class="pf-filter" type="button" aria-pressed="false" aria-controls="pf-grid" data-filter="profiles" tabindex="-1">Company profiles <span class="pf-filter__count">0</span></button>
+                    <button class="pf-filter" type="button" aria-pressed="false" aria-controls="pf-grid" data-filter="logos" tabindex="-1">Logos <span class="pf-filter__count">0</span></button>
+                    <button class="pf-filter" type="button" aria-pressed="false" aria-controls="pf-grid" data-filter="marketing" tabindex="-1">Digital marketing <span class="pf-filter__count">0</span></button>
+                    <button class="pf-filter" type="button" aria-pressed="false" aria-controls="pf-grid" data-filter="print" tabindex="-1">Print media <span class="pf-filter__count">0</span></button>
+                    </div>
+                    <div class="field pf-search" hidden>
+                        <label for="pf-q">Search the portfolio</label>
+                        <input type="search" id="pf-q" autocomplete="off" placeholder="Try logo, profile, or banner">
+                    </div>
+                    <p class="pf-status" id="pf-status" role="status" aria-live="polite"></p>
+                </div>
+
+                <div class="pf-grid" id="pf-grid">
+                <!-- ==========================================================
+                     TO ADD A PROJECT: copy the block below, paste it above
+                     this comment, and fill in the five marked fields.
+
+                     data-category  one of: websites | profiles | logos |
+                                    marketing | print
+                     data-featured  optional. Add it to the three projects you
+                                    want on the homepage strip.
+                     data-example   DELETE this. It is only on the sample cards
+                                    and it draws the amber "Example" badge.
+
+                     Pick the media line that matches the category:
+                       websites, marketing   --wide      wm-a / wm-b
+                       profiles, print       --portrait  wm-c / wm-d
+                       logos                 --square    wm-a
+                     With a real image, swap the wm-mono tile for:
+                       <img src="assets/images/work/NAME.jpg" alt="..." loading="lazy" decoding="async">
+                     and for logo artwork add work-card__media--plate so a dark
+                     mark is not lost against the navy card.
+
+                     Counts, filters and search all read the DOM, so there is
+                     nothing else to update anywhere.
+
+                <article class="work-card pf-card" data-category="websites">
+                    <div class="work-card__media work-card__media--wide wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">AB</span>
+                        <span class="wm-mono__cat">Website</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Website</span>
+                        <h3>PROJECT TITLE</h3>
+                        <p class="work-card__client">CLIENT NAME</p>
+                        <p class="work-card__result">WHAT IT ACHIEVED, in one plain sentence.</p>
+                    </div>
+                </article>
+                     ========================================================== -->
+
+                <article class="work-card pf-card" data-category="websites" data-example data-featured>
+                    <div class="work-card__media work-card__media--wide wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">&lt;/&gt;</span>
+                        <span class="wm-mono__cat">Website</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Website</span>
+                        <span class="pf-example">Example</span>
+                        <h3><button class="work-card__link" type="button" data-open-project>Business website, five pages</button></h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">Everything a buyer needs to decide, on a site you own.</p>
+                    </div>
+                    <template class="work-card__detail">
+                        <p>Scope: structure, copywriting pass, responsive build, contact form, and handover.</p>
+                    </template>
+                </article>
+                <article class="work-card pf-card" data-category="websites" data-example data-featured>
+                    <div class="work-card__media work-card__media--wide wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">&lt;/&gt;</span>
+                        <span class="wm-mono__cat">Website</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Website</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Booking and enquiry site</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">Enquiries arrive in one inbox instead of three.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="websites" data-example>
+                    <div class="work-card__media work-card__media--wide wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">&lt;/&gt;</span>
+                        <span class="wm-mono__cat">Website</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Website</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Landing page, single goal</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">One page, one action, measured against one number.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="profiles" data-example data-featured>
+                    <div class="work-card__media work-card__media--portrait wm-c wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">CP</span>
+                        <span class="wm-mono__cat">Company profile</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Company profile</span>
+                        <span class="pf-example">Example</span>
+                        <h3><button class="work-card__link" type="button" data-open-project>Company profile, sixteen pages</button></h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">One document that answers what a buyer asks before asking.</p>
+                    </div>
+                    <template class="work-card__detail">
+                        <p>Scope: structure, copy editing, layout, print ready PDF, and a screen version.</p>
+                    </template>
+                </article>
+                <article class="work-card pf-card" data-category="profiles" data-example>
+                    <div class="work-card__media work-card__media--portrait wm-c wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">CP</span>
+                        <span class="wm-mono__cat">Company profile</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Company profile</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Capability statement, four pages</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">A short profile that fits a tender pack.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="logos" data-example>
+                    <div class="work-card__media work-card__media--square wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">Aa</span>
+                        <span class="wm-mono__cat">Logo</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Logo</span>
+                        <span class="pf-example">Example</span>
+                        <h3><button class="work-card__link" type="button" data-open-project>Wordmark and icon set</button></h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">One mark that holds up at favicon size and on a shopfront.</p>
+                    </div>
+                    <template class="work-card__detail">
+                        <p>Scope: primary wordmark, icon, horizontal and stacked lock-ups, and a one page usage sheet.</p>
+                    </template>
+                </article>
+                <article class="work-card pf-card" data-category="logos" data-example>
+                    <div class="work-card__media work-card__media--square wm-a wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">Aa</span>
+                        <span class="wm-mono__cat">Logo</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Logo</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Logo refresh with usage sheet</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">The mark people know, rebuilt to work everywhere.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="marketing" data-example>
+                    <div class="work-card__media work-card__media--wide wm-b wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">%</span>
+                        <span class="wm-mono__cat">Digital marketing</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Digital marketing</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Social campaign, one quarter</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">A posting plan someone can actually keep to.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="marketing" data-example>
+                    <div class="work-card__media work-card__media--wide wm-b wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">%</span>
+                        <span class="wm-mono__cat">Digital marketing</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Digital marketing</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Search and social ad set</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">Ads pointed at one page built to convert.</p>
+                    </div>
+                </article>
+                <article class="work-card pf-card" data-category="print" data-example>
+                    <div class="work-card__media work-card__media--portrait wm-d wm-mono" aria-hidden="true">
+                        <span class="wm-mono__glyph">A3</span>
+                        <span class="wm-mono__cat">Print media</span>
+                    </div>
+                    <div class="work-card__body">
+                        <span class="work-card__tag">Print media</span>
+                        <span class="pf-example">Example</span>
+                        <h3>Flyer, banner and shopfront set</h3>
+                        <p class="work-card__client" data-todo="client">Client</p>
+                        <p class="work-card__result">Consistent artwork from a flyer to a three metre banner.</p>
+                    </div>
+                </article>
+                </div>
+
+                <div class="pf-empty" id="pf-empty" hidden>
+                    <h3>Nothing matches that yet</h3>
+                    <p>Try another discipline, or clear the search. If you are looking for something you cannot see here, ask us directly and we will send relevant examples.</p>
+                </div>
+
+                <div class="pf-more-wrap" id="pf-more-wrap" hidden>
+                    <button class="btn btn--ghost" type="button" id="pf-more">Show more projects</button>
+                </div>
+
+                <p style="margin-top:var(--sp-7);">
+                    <a class="arrow-link" href="index.html#inquiry">Start a project <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="brand-col">
+                    <img src="assets/images/logo.png" alt="Ostento">
+                    <p>Simple solutions for everyday business problems.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/strataforgetechnologies" aria-label="Ostento on Facebook" rel="noopener" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/strataforgetechnologies/" aria-label="Ostento on LinkedIn" rel="noopener" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="3"></rect><path d="M7 10v7M7 7v0M12 17v-4a2 2 0 0 1 4 0v4"></path></svg>
+                        </a>
+                        <!-- Instagram: supply the profile URL, then uncomment. data-todo="social-instagram"
+                        <a href="" aria-label="Ostento on Instagram" rel="noopener" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
+                        </a>
+                        -->
+                    </div>
+                    <p class="reg-line">
+                        Ostento is a trading name of <strong>StrataForge Technologies</strong>, registered in Zambia.<br>
+                        PACRA No. <span data-todo="pacra">to be confirmed</span>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Sections</h4>
+                    <ul>
+                        <li><a href="index.html#build">What we build</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="index.html#proof">Reviews</a></li>
+                        <li><a href="index.html#process">Process</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <ul>
+                        <li><a href="index.html#studio">Under one roof</a></li>
+                        <li><a href="index.html#system">The system</a></li>
+                        <li><a href="index.html#inquiry">Start a project</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:info@ostentomediaagency.com">info@ostentomediaagency.com</a></li>
+                        <li><a href="index.html#inquiry">Project inquiry</a></li>
+                        <li>Lusaka, Zambia</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                        <li><button class="btn-link" type="button" data-cookie-settings>Cookie Settings</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Ostento. All rights reserved.</span>
+                <span>Rendered in real time &middot; WebGL</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
+        <h3>We value your privacy</h3>
+        <p>We use strictly necessary cookies to run this site. With your permission, we also use analytics to understand what works. Nothing beyond the essentials loads until you choose. See our <a href="cookies.html">Cookie Policy</a>.</p>
+        <div class="cookie-actions">
+            <button class="btn btn--primary" type="button" data-cookie="accept">Accept all</button>
+            <button class="btn btn--ghost" type="button" data-cookie="reject">Reject all</button>
+            <button class="btn btn--ghost" type="button" data-cookie="manage">Manage preferences</button>
+        </div>
+    </div>
+
+    <div class="cookie-modal" id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+        <div class="cookie-modal__box">
+            <h3 id="cookie-modal-title">Cookie preferences</h3>
+            <p class="muted" style="font-size:var(--fs-200);">Choose which cookies we may use. You can change this at any time from the Cookie Settings link in the footer.</p>
+            <div class="cookie-cat">
+                <div class="cookie-cat__head">
+                    <h4>Strictly necessary</h4>
+                    <label class="toggle"><input type="checkbox" checked disabled aria-label="Strictly necessary cookies, always on"><span class="toggle__track"></span></label>
+                </div>
+                <p>Required for the site to work. These are always on and never store marketing data.</p>
+            </div>
+            <div class="cookie-cat">
+                <div class="cookie-cat__head">
+                    <h4>Analytics</h4>
+                    <label class="toggle"><input type="checkbox" id="ck-analytics" aria-label="Analytics cookies"><span class="toggle__track"></span></label>
+                </div>
+                <p>Help us understand which pages are useful, so we can improve them. Anonymous and aggregated.</p>
+            </div>
+            <div class="cookie-cat">
+                <div class="cookie-cat__head">
+                    <h4>Marketing</h4>
+                    <label class="toggle"><input type="checkbox" id="ck-marketing" aria-label="Marketing cookies"><span class="toggle__track"></span></label>
+                </div>
+                <p>Used to measure campaigns and show relevant content. Off unless you turn them on.</p>
+            </div>
+            <div class="cookie-actions" style="margin-top:var(--sp-4);">
+                <button class="btn btn--primary" type="button" data-cookie="save">Save preferences</button>
+                <button class="btn btn--ghost" type="button" data-cookie="accept">Accept all</button>
+                <button class="btn btn--ghost" type="button" data-cookie="reject">Reject all</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js" defer></script>
+</body>
+</html>
