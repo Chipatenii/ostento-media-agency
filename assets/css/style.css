@@ -1006,6 +1006,41 @@ p { margin: 0 0 var(--sp-3); }
 .pf-empty p { margin: 0 auto; max-width: 46ch; color: var(--text-muted); font-size: var(--fs-300); }
 .pf-more-wrap { margin-top: var(--sp-5); text-align: center; }
 
+/* ---------- Discipline board (homepage 04) ---------- */
+/* No project counts here. The homepage cannot read portfolio.html's DOM, so a
+   count would have to be authored a second time and would drift silently. The
+   counts live on the portfolio page, where they are derived. */
+.disc-board { display: grid; grid-template-columns: 1fr; gap: var(--sp-3); }
+@media (min-width: 620px)  { .disc-board { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1001px) { .disc-board { grid-template-columns: repeat(5, 1fr); } }
+.disc-tile {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: var(--sp-4);
+    color: var(--text);
+    transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease),
+                background-color var(--dur) var(--ease);
+}
+.disc-tile:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-orange);
+    background: var(--surface-2);
+    color: var(--text);
+}
+.disc-tile__glyph {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-600);
+    font-weight: var(--w-bold);
+    line-height: 1;
+    color: var(--orange);
+    margin-bottom: var(--sp-3);
+}
+.disc-tile h3 { font-size: var(--fs-400); margin-bottom: 0.3rem; }
+.disc-tile p { color: var(--text-muted); font-size: var(--fs-200); margin: 0; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
