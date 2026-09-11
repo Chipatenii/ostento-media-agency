@@ -52,10 +52,11 @@
     --sp-7: 4.5rem;
     --sp-8: 7rem;
 
-    /* Radius - three values */
+    /* Radius - three shapes, plus a named alias for the pill */
     --r-sm: 10px;
     --r-md: 16px;
     --r-lg: 26px;
+    --r-pill: 999px;
 
     /* Motion */
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -98,9 +99,9 @@ h1, h2, h3, h4 {
 p { margin: 0 0 var(--sp-3); }
 
 :focus-visible {
+    /* No border-radius here: it would snap a 999px pill to near-square while focused. */
     outline: 2px solid var(--orange);
     outline-offset: 3px;
-    border-radius: 4px;
 }
 
 .skip-link {
@@ -124,7 +125,7 @@ p { margin: 0 0 var(--sp-3); }
 }
 
 .section {
-    padding: var(--sp-8) 0;
+    padding: clamp(3.5rem, 9vw, 7rem) 0;
     position: relative;
 }
 .section + .section { border-top: 1px solid var(--border); }
@@ -155,7 +156,7 @@ p { margin: 0 0 var(--sp-3); }
 }
 .sec-title .br { display: block; color: var(--text-muted); }
 
-.sec-head { max-width: 760px; margin-bottom: var(--sp-7); }
+.sec-head { max-width: 760px; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
 .sec-head p { color: var(--text-muted); font-size: var(--fs-400); margin: 0; }
 
 .muted { color: var(--text-muted); }
@@ -301,6 +302,7 @@ p { margin: 0 0 var(--sp-3); }
 .hero {
     position: relative;
     min-height: 100vh;
+    min-height: 100svh; /* progressive override: excludes the collapsing mobile URL bar */
     display: flex;
     align-items: center;
     padding-top: var(--header-h);
@@ -461,7 +463,19 @@ p { margin: 0 0 var(--sp-3); }
     color: rgba(244, 246, 251, 0.85);
     overflow: hidden;
 }
-.work-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.work-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Darkening belongs on hover, not baked into every image: a logo or a screenshot
+   needs its real contrast, unlike the decorative crop this rule was written for. */
+.work-card__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+    pointer-events: none;
+}
+.work-card:hover .work-card__media::after { opacity: 0.18; }
 .wm-a { background: linear-gradient(135deg, #13224A, #1B2E5C); }
 .wm-b { background: linear-gradient(135deg, #0E1B3A, #FF6A1A); }
 .wm-c { background: linear-gradient(135deg, #0A1430, #13224A); }
@@ -488,7 +502,7 @@ p { margin: 0 0 var(--sp-3); }
     color: var(--text-muted);
     padding: 0.5rem 0.9rem;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: var(--r-pill);
     background: var(--surface);
 }
 .pairing {
@@ -563,17 +577,40 @@ p { margin: 0 0 var(--sp-3); }
 .meter { margin: var(--sp-2) 0; }
 .meter__row { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-2); }
 .meter__label { flex: 0 0 128px; font-size: var(--fs-200); color: var(--text-muted); }
-.meter__track { flex: 1; height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-.meter__fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--orange), var(--amber)); transition: width 1s var(--ease-out); }
+@media (max-width: 480px) {
+    /* Stack the label above its track so the bar keeps a readable length. */
+    .meter__row { flex-wrap: wrap; gap: 0.35rem var(--sp-3); }
+    .meter__label { flex: 1 0 100%; }
+    .meter__track { flex: 1 1 auto; }
+}
+.meter__track { flex: 1; height: 6px; background: var(--surface-2); border-radius: var(--r-pill); overflow: hidden; }
+.meter__fill { height: 100%; width: 0; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--orange), var(--amber)); transition: width 1s var(--ease-out); }
 .meter__val { flex: 0 0 34px; text-align: right; font-family: var(--font-mono); font-size: var(--fs-100); color: var(--text-muted); }
 .check-list { list-style: none; margin: 0; padding: 0; }
 .check-list li { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.4rem 0; color: var(--text-muted); font-size: var(--fs-200); }
 .check-list li svg { flex: 0 0 auto; margin-top: 3px; color: var(--teal); }
 .stance-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.stance-list li { font-family: var(--font-mono); font-size: var(--fs-200); color: var(--text); padding: 0.4rem 0.8rem; border: 1px solid var(--border-orange); border-radius: 999px; }
+.stance-list li { font-family: var(--font-mono); font-size: var(--fs-200); color: var(--text); padding: 0.4rem 0.8rem; border: 1px solid var(--border-orange); border-radius: var(--r-pill); }
 
 /* ---------- Activity (09) ---------- */
-.activity { overflow-x: auto; }
+.activity {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    /* Fade the right edge so it reads as scrollable rather than clipped. */
+    mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 88%, transparent 100%);
+}
+@media (min-width: 1001px) {
+    /* No fade once the full year fits. */
+    .activity { mask-image: none; -webkit-mask-image: none; }
+}
+.activity-note {
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    color: var(--text-muted);
+    margin: var(--sp-3) 0 0;
+}
 .activity-grid {
     display: grid;
     grid-auto-flow: column;
@@ -652,7 +689,7 @@ p { margin: 0 0 var(--sp-3); }
 .site-footer {
     background: var(--navy);
     border-top: 1px solid var(--border);
-    padding: var(--sp-7) 0 var(--sp-5);
+    padding: clamp(3rem, 8vw, 4.5rem) 0 var(--sp-5);
 }
 .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: var(--sp-5); }
 .site-footer .brand-col img { height: 40px; width: auto; margin-bottom: var(--sp-3); }
@@ -669,10 +706,13 @@ p { margin: 0 0 var(--sp-3); }
 .footer-social a:hover { color: var(--text); border-color: var(--border-orange); transform: translateY(-2px); }
 .footer-col h4 { font-family: var(--font-mono); font-size: var(--fs-100); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-3); font-weight: var(--w-semi); }
 .footer-col ul { list-style: none; margin: 0; padding: 0; }
-.footer-col li { margin-bottom: 0.55rem; }
+.footer-col li { margin-bottom: 0.15rem; }
+/* Tap targets clear 44px: 14px text on a 1.6 line-height plus 0.5rem above and below. */
+.footer-col a,
+.footer-col .btn-link { display: inline-block; padding: 0.5rem 0; min-height: 44px; }
 .footer-col a { color: var(--text-muted); font-size: var(--fs-200); }
 .footer-col a:hover { color: var(--text); }
-.footer-col .btn-link { background: none; border: none; padding: 0; cursor: pointer; font: inherit; font-size: var(--fs-200); color: var(--text-muted); }
+.footer-col .btn-link { background: none; border: none; cursor: pointer; font: inherit; font-size: var(--fs-200); color: var(--text-muted); text-align: left; }
 .footer-col .btn-link:hover { color: var(--text); }
 .footer-bottom {
     margin-top: var(--sp-6);
@@ -691,7 +731,9 @@ p { margin: 0 0 var(--sp-3); }
     position: fixed;
     left: var(--sp-4); right: var(--sp-4); bottom: var(--sp-4);
     max-width: 560px;
-    margin: 0 auto 0 var(--sp-4);
+    /* margin must stay 0: `left` already provides the inset, and a margin-left
+       here would stack on top of it and push the box past its right inset. */
+    margin: 0;
     background: var(--surface);
     border: 1px solid var(--border-2);
     border-radius: var(--r-md);
@@ -732,7 +774,7 @@ p { margin: 0 0 var(--sp-3); }
 /* toggle */
 .toggle { position: relative; display: inline-block; width: 44px; height: 24px; flex: 0 0 auto; }
 .toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-.toggle__track { position: absolute; inset: 0; background: var(--surface-2); border-radius: 999px; transition: background var(--dur) var(--ease); }
+.toggle__track { position: absolute; inset: 0; background: var(--surface-2); border-radius: var(--r-pill); transition: background var(--dur) var(--ease); }
 .toggle__track::before { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--text-muted); transition: transform var(--dur) var(--ease), background var(--dur) var(--ease); }
 .toggle input:checked + .toggle__track { background: rgba(255, 106, 26, 0.4); }
 .toggle input:checked + .toggle__track::before { transform: translateX(20px); background: var(--orange); }
@@ -793,7 +835,12 @@ p { margin: 0 0 var(--sp-3); }
         border-bottom: 1px solid var(--border);
         display: none;
     }
-    .nav__menu.is-open { display: flex; }
+    .nav__menu.is-open {
+        display: flex;
+        max-height: calc(100svh - var(--header-h));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
     .nav__link, .nav__academy { padding: 0.85rem; border-radius: var(--r-sm); }
     .nav__academy { margin: var(--sp-1) 0; text-align: center; }
     .nav__cta { margin: var(--sp-1) 0 0; }
