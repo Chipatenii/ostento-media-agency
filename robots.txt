@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Uncomment once the production domain is live and the placeholder in
+# sitemap.xml has been replaced.
+# Sitemap: https://YOUR-DOMAIN.example/sitemap.xml

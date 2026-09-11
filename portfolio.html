@@ -6,12 +6,38 @@
     <title>Portfolio | Ostento</title>
     <meta name="description" content="Websites, company profiles, logos, digital marketing, and print media designed and built by Ostento. Filter the work by discipline.">
     <meta name="theme-color" content="#0A1430">
+    <meta property="og:site_name" content="Ostento">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio | Ostento">
+    <meta property="og:description" content="Websites, company profiles, logos, digital marketing, and print media designed and built by Ostento. Filter the work by discipline.">
+    <meta property="og:image" content="assets/images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio | Ostento">
+    <meta name="twitter:description" content="Websites, company profiles, logos, digital marketing, and print media designed and built by Ostento. Filter the work by discipline.">
+    <meta name="twitter:image" content="assets/images/hero.jpg">
+    <!-- TODO(domain): with the production domain live, add absolute URLs here:
+           <link rel="canonical" href="https://YOUR-DOMAIN.example/portfolio.html">
+           <meta property="og:url" content="https://YOUR-DOMAIN.example/portfolio.html">
+         and make og:image absolute. Relative og:image resolves on most
+         platforms but not reliably on all. See README. -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
     <link rel="apple-touch-icon" href="assets/images/favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Portfolio",
+        "description": "Websites, company profiles, logos, digital marketing, and print media designed and built by Ostento.",
+        "isPartOf": { "@type": "WebSite", "name": "Ostento" }
+    }
+    </script>
+    <!-- No ItemList here yet. The cards on this page are marked examples, and
+         listing them as CreativeWork entries would assert delivered projects
+         that do not exist. Add an ItemList once real projects replace them. -->
     <noscript><style>
         /* Without JS these controls cannot work, so they are removed rather
            than left visible and dead. Every card stays on the page. */

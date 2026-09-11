@@ -1168,7 +1168,10 @@ p { margin: 0 0 var(--sp-3); }
 
 /* ---------- Client grid ---------- */
 .client-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-3); }
-.client-grid:empty { display: none; }
+/* With JS off, an empty state must hide itself once real content exists.
+   JS does the same explicitly when it is available; :hidden wins over this. */
+.rev-slider:has(.rev-slide) + .pf-empty,
+.client-grid:has(.client-chip) + .pf-empty { display: none; }
 .client-chip {
     display: flex;
     align-items: center;

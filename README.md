@@ -3,20 +3,25 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A dark, single-page, scroll-driven studio site (sections 00 to 11) with a WebGL 3D
-hero, an Academy call to action, a full legal set, and a GDPR cookie banner. Built
-as static HTML, CSS, and vanilla JavaScript. No build step.
+A dark studio site: a scroll-driven home page (sections 00 to 12) with a WebGL
+hero, a filterable portfolio across five disciplines, a tabbed proof section for
+reviews and clients, an Academy waitlist, a full legal set, and a GDPR cookie
+banner. Static HTML, CSS, and vanilla JavaScript. No build step.
+
+Ostento is a trading name of **StrataForge Technologies**, registered in Zambia
+and based in Lusaka.
 
 ## Structure
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Single page: hero, numbers, services, work, studio, process, FAQ, system, activity, inquiry, footer |
+| `index.html` | Home: hero, numbers, services, work, **proof**, studio, process, FAQ, system, activity, inquiry, footer |
+| `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
-| `assets/css/style.css` | Design system (navy + orange tokens, one type scale, three radii) |
-| `assets/js/script.js` | Nav, scroll reveal, FAQ, activity grid, 3D hero, cookie consent, forms |
-| `assets/images/` | Logo, favicons, optimized hero image |
+| `assets/css/style.css` | Design system (navy + orange tokens, one type scale, three radii plus a named pill) |
+| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, 3D hero, cookie consent, forms |
+| `robots.txt`, `sitemap.xml` | Crawl directives. Both need the production domain, see below |
 
 ## Run locally
 
@@ -25,26 +30,100 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
+## Adding content
+
+No database, no CMS, no data file. Content lives in the HTML, which is what
+keeps it visible to search engines, to link previews on Facebook, LinkedIn and
+WhatsApp, and to anyone browsing with JavaScript off. Each list has a paste
+template sitting in a comment right where the items go.
+
+**A project:** open `portfolio.html`, find the template comment at the top of
+the card grid, copy the block, paste it above the comment, and fill in five
+fields. Set `data-category` to one of `websites`, `profiles`, `logos`,
+`marketing`, `print`. Delete `data-example` so the amber badge goes away. Add
+`data-featured` to the three you want on the home page, and copy those three
+into the featured strip in section 04 of `index.html`.
+
+Filter counts, search, and the section totals all read the DOM, so there is
+nothing else to update. Match the media shape to the discipline, since a logo
+in a 16/10 box letterboxes and an A4 page crops:
+
+| Discipline | Media classes |
+|---|---|
+| Websites, digital marketing | `work-card__media--wide` with `wm-a` or `wm-b` |
+| Company profiles, print media | `work-card__media--portrait` with `wm-c` or `wm-d` |
+| Logos | `work-card__media--square` with `wm-a` |
+
+With a real image, swap the `wm-mono` tile for an `<img>`. For logo artwork add
+`work-card__media--plate`, which puts the mark on a light plate so a dark logo
+is not lost against the navy card.
+
+**A review or a client:** open `index.html`, section 05, and use the template
+comments inside the reviews track and the client grids. Stars render only from
+`data-rating`; leave the attribute off and no stars appear. Nothing is assumed.
+
+Both sections ship empty on purpose. An invented testimonial is
+indistinguishable from a real one to the person reading it, so the empty states
+say plainly that reviews are published only once a client has agreed, and offer
+references instead.
+
 ## Before launch: replace the placeholders
 
-These are marked with `TODO` comments or the string `your-form-id` in the source.
+Every unfilled value is marked in the source and rendered in amber with a dashed
+underline, so none of them can ship looking real. List them all:
 
-- **Form endpoint:** replace `https://formspree.io/f/your-form-id` in `index.html` and
-  `academy.html` with your real Formspree (or Supabase) endpoint. The form already handles
-  validation, a loading state, and a success message.
-- **Contact email:** `hello@ostentomedia.com` in the footer and policy pages.
-- **Social links:** the Instagram, X, and LinkedIn URLs in the footer.
-- **Academy link:** currently points at the local `academy.html`; repoint when the Academy is live.
-- **Work section:** swap the placeholder case-study cards in `index.html` for real client
-  names, images, and results.
-- **Legal pages:** written as plain-language templates. Have a qualified lawyer (and, for EU
-  exposure, someone familiar with GDPR) review them before launch.
+```bash
+grep -rn 'data-todo\|YOUR-DOMAIN.example\|your-form-id' . --include=*.html --include=*.txt --include=*.xml
+```
+
+| What | Where | Until then |
+|---|---|---|
+| **PACRA registration number** | `data-todo="pacra"`, all 7 footers plus `terms.html`, `privacy.html`, and the inquiry trust row | Reads "to be confirmed" in amber |
+| **Production domain** | `YOUR-DOMAIN.example` in `sitemap.xml`, plus the `TODO(domain)` comment in every page head | No `canonical` or `og:url`; `og:image` stays relative |
+| **Form endpoint** | `your-form-id` in `index.html` and `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
+| **Instagram URL** | `data-todo="social-instagram"`, commented stub in all 7 footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
+| **Client names** | `data-todo="client"` on every portfolio card | "Client" in amber |
+| **Real projects** | The ten example cards in `portfolio.html` | Amber "Example" badge on each |
+| **Reviews and clients** | Section 05 of `index.html` | Real empty states, no stars, no aggregate |
+| **Project images** | None on disk | Monogram tiles, which are a designed state |
+| **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
+| **Section 01 numbers** | "20+", "10+", "5+" in `index.html` | Asserted as fact and currently unsourced. Confirm or change them |
+
+Once real reviews are live, add `Review` and `AggregateRating` JSON-LD to
+`index.html`. It is deliberately absent: marking up reviews that are not
+genuinely displayed is structured-data spam and risks a manual action. The same
+applies to the `ItemList` left out of `portfolio.html` while the cards are
+examples.
+
+Have a qualified lawyer review the legal pages, and for EU exposure someone
+familiar with GDPR, before launch.
 
 ## Notes
 
-- `three.js` for the 3D hero loads from a CDN; if it is blocked or unsupported, the hero
-  falls back to the static glow and text with no error.
-- Fonts (Space Grotesk, Inter) load from Google Fonts with a system fallback stack.
+- **Mobile first.** Components added since the portfolio work are written
+  mobile first with `min-width` queries at 620px and 1001px. The older CSS is
+  desktop first at 1000px, 760px, and 460px, and was left that way rather than
+  inverting 800 lines; its specific mobile problems were fixed in place.
+- `body { overflow-x: hidden }` is load-bearing, because `.hero__glow`
+  overflows by design. It also hides horizontal overflow bugs, so disable it in
+  devtools when checking a new component at 360px.
+- Portfolio cards deliberately carry no `.reveal` class. That observer
+  unobserves on first intersection, so a card hidden at load would stay at
+  opacity 0 once a filter revealed it. JS applies the enter state instead.
+- The portfolio filter is a toolbar of `aria-pressed` buttons, not a tablist,
+  because one grid is being filtered rather than panels swapped. The proof
+  section is a real tablist, because it has three panels.
+- The review slider transports on CSS scroll-snap, so touch swipe and momentum
+  are native. It does not autoplay.
+- The activity heatmap is generated from a sine wave and deterministic noise.
+  It carries a caption saying so. It is not delivery history.
+- `three.js` for the 3D hero loads from a CDN; if it is blocked or unsupported,
+  the hero falls back to the static glow and text with no error.
+- Fonts (Space Grotesk, Inter) load from Google Fonts with a system fallback.
 - The site honours `prefers-reduced-motion` with a calm, static variant.
-- Cookie consent is opt-in for non-essential cookies and stored per visitor in `localStorage`;
-  the footer "Cookie Settings" link reopens the preferences at any time.
+- Cookie consent is opt-in for non-essential cookies, stored per visitor in
+  `localStorage`; the footer "Cookie Settings" link reopens it at any time.
+- Section numbers in `.sec-label` are hand-maintained. Inserting a section
+  means renumbering the ones after it, in descending order, targeting the
+  `.sec-label` pattern only. A CSS counter would remove the chore but would
+  also drop the numbers with CSS off.
