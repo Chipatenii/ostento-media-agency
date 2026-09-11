@@ -184,6 +184,10 @@
                 answer.style.height = answer.firstElementChild.offsetHeight + "px";
             }
         });
+        // The stylesheet leaves answers open so they are readable with JS
+        // off. With JS present, collapse them before first paint.
+        faqList.querySelectorAll(".faq-a").forEach(function (a) { a.style.height = "0px"; });
+
         window.addEventListener("resize", function () {
             faqList.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(function (q) {
                 q.nextElementSibling.style.height = q.nextElementSibling.firstElementChild.offsetHeight + "px";
@@ -704,6 +708,93 @@
         }
 
         paint();
+    })();
+
+    /* ---------- Project detail modal ---------- */
+    (function projectModal() {
+        var modal = document.getElementById("project-modal");
+        if (!modal) { return; }
+        var titleEl = document.getElementById("project-modal-title");
+        var metaEl = document.getElementById("project-modal-meta");
+        var bodyEl = document.getElementById("project-modal-body");
+        var closeBtn = document.getElementById("project-modal-close");
+        var opener = null;
+        var release = null;
+
+        function open(card, trigger) {
+            var tpl = card.querySelector(".work-card__detail");
+            if (!tpl) { return; }
+            opener = trigger;
+
+            var heading = card.querySelector(".work-card__link") || card.querySelector("h3");
+            titleEl.textContent = heading ? heading.textContent.trim() : "";
+
+            var bits = [];
+            var tag = card.querySelector(".work-card__tag");
+            var client = card.querySelector(".work-card__client");
+            var year = card.getAttribute("data-year");
+            if (tag) { bits.push(tag.textContent.trim()); }
+            // An unfilled client is not surfaced here as though it were a name.
+            if (client && !client.hasAttribute("data-todo")) { bits.push(client.textContent.trim()); }
+            if (year) { bits.push(year); }
+            metaEl.textContent = bits.join(" · ");
+
+            bodyEl.innerHTML = "";
+            bodyEl.appendChild(tpl.content.cloneNode(true));
+
+            modal.classList.add("is-open");
+            lockScroll();
+            release = trapFocus(modal);
+            closeBtn.focus();
+        }
+
+        function close() {
+            if (!modal.classList.contains("is-open")) { return; }
+            modal.classList.remove("is-open");
+            if (release) { release(); release = null; }
+            unlockScroll();
+            // Focus returns to the exact card that opened it.
+            if (opener) { opener.focus(); opener = null; }
+        }
+
+        document.addEventListener("click", function (e) {
+            var trigger = e.target.closest("[data-open-project]");
+            if (trigger) {
+                var card = trigger.closest(".work-card");
+                if (card) { e.preventDefault(); open(card, trigger); }
+                return;
+            }
+            if (e.target.closest("#project-modal-close")) { close(); return; }
+            if (e.target === modal) { close(); } // backdrop, matching the cookie modal
+        });
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") { close(); }
+        });
+    })();
+
+    /* ---------- Image loading state ---------- */
+    (function mediaSkeletons() {
+        var imgs = Array.prototype.slice.call(document.querySelectorAll(".work-card__media img"));
+        imgs.forEach(function (img) {
+            var media = img.closest(".work-card__media");
+            if (!media) { return; }
+
+            function loaded() { media.classList.remove("media-skel"); media.classList.add("is-loaded"); }
+            function failed() {
+                // Drop the broken frame and keep the gradient tile underneath,
+                // which is a designed state rather than an error icon.
+                img.remove();
+                media.classList.remove("media-skel");
+            }
+
+            if (img.complete) {
+                if (img.naturalWidth > 0) { loaded(); } else { failed(); }
+                return;
+            }
+            media.classList.add("media-skel");
+            img.addEventListener("load", loaded);
+            img.addEventListener("error", failed);
+        });
     })();
 
     /* ---------- Forms: validation + submit ---------- */
