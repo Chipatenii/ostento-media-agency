@@ -905,6 +905,16 @@ p { margin: 0 0 var(--sp-3); }
 /* Only ever added by JS, so every card is visible with JS off. */
 .pf-card.is-hidden { display: none; }
 
+/* Enter state for cards a filter or the Show more button reveals. Applied and
+   released by JS, never left in the stylesheet, so nothing is hidden with JS
+   off. Opacity only: a transform here would fight the hover lift. */
+.pf-card {
+    transition: opacity 0.45s var(--ease-out),
+                transform var(--dur) var(--ease),
+                border-color var(--dur) var(--ease);
+}
+.pf-card.is-entering { opacity: 0; }
+
 /* One tab stop per card: the control lives in the heading and its ::after
    stretches the hit area across the whole card, which is already relative. */
 .work-card__link {

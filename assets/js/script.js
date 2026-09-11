@@ -9,6 +9,57 @@
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var STORAGE_KEY = "ostento_cookie_consent_v1";
 
+    /* ---------- Shared helpers ---------- */
+
+    /* Counted, so nested locks (nav under modal) do not unlock each other. */
+    var scrollLocks = 0;
+    function lockScroll() {
+        if (scrollLocks++ > 0) { return; }
+        var bar = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = "hidden";
+        if (bar > 0) { document.body.style.paddingRight = bar + "px"; }
+    }
+    function unlockScroll() {
+        if (scrollLocks === 0 || --scrollLocks > 0) { return; }
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+    }
+
+    var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]),' +
+        ' select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    /* Keeps Tab inside `container`. Returns the function that releases it. */
+    function trapFocus(container) {
+        function onKey(e) {
+            if (e.key !== "Tab") { return; }
+            var items = Array.prototype.slice.call(container.querySelectorAll(FOCUSABLE))
+                .filter(function (el) { return el.getClientRects().length > 0; });
+            if (!items.length) { return; }
+            var first = items[0], last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+        document.addEventListener("keydown", onKey, true);
+        return function release() { document.removeEventListener("keydown", onKey, true); };
+    }
+
+    /* The same 70ms stagger capped at 6 that the .reveal observer uses below,
+       so anything revealed later by a filter or a tab moves identically to
+       everything revealed on scroll. Cards are visible by default, so the
+       starting state is applied here and then released, never left in CSS. */
+    function staggerIn(els) {
+        if (reduceMotion || !els.length) { return; }
+        els.forEach(function (el) {
+            el.style.transitionDelay = "0ms";
+            el.classList.add("is-entering");
+        });
+        void els[0].offsetWidth; // flush the start state before transitioning from it
+        els.forEach(function (el, i) {
+            el.style.transitionDelay = (Math.min(i, 6) * 70) + "ms";
+            el.classList.remove("is-entering");
+        });
+    }
+
     /* ---------- Footer year ---------- */
     var yearEl = document.getElementById("year");
     if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
@@ -27,22 +78,39 @@
     /* ---------- Mobile navigation ---------- */
     var toggle = document.querySelector(".nav__toggle");
     var menu = document.getElementById("nav-menu");
+    var header = document.getElementById("site-header");
     if (toggle && menu) {
+        var releaseNav = null;
+
+        function openNav() {
+            menu.classList.add("is-open");
+            toggle.setAttribute("aria-expanded", "true");
+            lockScroll();
+            // Trap on the header, not the menu, so the toggle stays reachable.
+            releaseNav = trapFocus(header || menu);
+        }
+        function closeNav(returnFocus) {
+            if (!menu.classList.contains("is-open")) { return; }
+            menu.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            if (releaseNav) { releaseNav(); releaseNav = null; }
+            unlockScroll();
+            if (returnFocus) { toggle.focus(); }
+        }
+
         toggle.addEventListener("click", function () {
-            var open = menu.classList.toggle("is-open");
-            toggle.setAttribute("aria-expanded", open ? "true" : "false");
+            if (menu.classList.contains("is-open")) { closeNav(false); } else { openNav(); }
         });
         menu.addEventListener("click", function (e) {
-            if (e.target.closest("a")) {
-                menu.classList.remove("is-open");
-                toggle.setAttribute("aria-expanded", "false");
-            }
+            if (e.target.closest("a")) { closeNav(false); }
         });
         document.addEventListener("keydown", function (e) {
-            if (e.key === "Escape" && menu.classList.contains("is-open")) {
-                menu.classList.remove("is-open");
-                toggle.setAttribute("aria-expanded", "false");
-                toggle.focus();
+            if (e.key === "Escape") { closeNav(true); }
+        });
+        // Growing past the mobile breakpoint must not strand the scroll lock.
+        window.addEventListener("resize", function () {
+            if (menu.classList.contains("is-open") && toggle.getClientRects().length === 0) {
+                closeNav(false);
             }
         });
     }
@@ -301,6 +369,177 @@
         document.addEventListener("keydown", function (e) {
             if (e.key === "Escape" && modal.classList.contains("is-open")) { closeModal(); }
         });
+    })();
+
+    /* ---------- Portfolio: filter, search, paging ---------- */
+    (function portfolio() {
+        var grid = document.getElementById("pf-grid");
+        if (!grid) { return; }
+
+        var cards = Array.prototype.slice.call(grid.querySelectorAll(".pf-card"));
+        var filters = Array.prototype.slice.call(document.querySelectorAll(".pf-filter"));
+        var toolbar = document.querySelector(".pf-toolbar");
+        var searchWrap = document.querySelector(".pf-search");
+        var searchInput = document.getElementById("pf-q");
+        var status = document.getElementById("pf-status");
+        var empty = document.getElementById("pf-empty");
+        var moreWrap = document.getElementById("pf-more-wrap");
+        var moreBtn = document.getElementById("pf-more");
+
+        var PAGE = 9;        // three full rows on the widest grid
+        var SEARCH_MIN = 8;  // below this a search box is noise, not help
+
+        var VALID = { all: true };
+        filters.forEach(function (b) { VALID[b.getAttribute("data-filter")] = true; });
+
+        var state = { category: "all", query: "", shown: PAGE };
+
+        // Cache once. Searching reads this, not textContent on every keystroke.
+        cards.forEach(function (c) {
+            c._cat = c.getAttribute("data-category") || "";
+            c._text = (c.textContent || "").toLowerCase().replace(/\s+/g, " ");
+        });
+
+        function matches(card) {
+            if (state.category !== "all" && card._cat !== state.category) { return false; }
+            if (state.query && card._text.indexOf(state.query) === -1) { return false; }
+            return true;
+        }
+
+        function labelFor(cat) {
+            for (var i = 0; i < filters.length; i++) {
+                if (filters[i].getAttribute("data-filter") === cat) {
+                    return (filters[i].childNodes[0].nodeValue || cat).trim();
+                }
+            }
+            return cat;
+        }
+
+        function render(total) {
+            // Counts are derived from the DOM, never authored twice, so they
+            // stay correct the moment a project is added or removed.
+            filters.forEach(function (b) {
+                var cat = b.getAttribute("data-filter");
+                var on = cat === state.category;
+                b.setAttribute("aria-pressed", on ? "true" : "false");
+                b.tabIndex = on ? 0 : -1;
+                var n = 0;
+                cards.forEach(function (c) { if (cat === "all" || c._cat === cat) { n++; } });
+                var slot = b.querySelector(".pf-filter__count");
+                if (slot) { slot.textContent = n; }
+            });
+
+            var shownNow = Math.min(total, state.shown);
+            if (status) {
+                var txt;
+                if (total === 0) {
+                    txt = "No projects match";
+                } else {
+                    txt = shownNow < total
+                        ? "Showing " + shownNow + " of " + total
+                        : total + (total === 1 ? " project" : " projects");
+                    if (state.category !== "all") { txt += ". Filter: " + labelFor(state.category); }
+                    if (state.query) { txt += ". Search: " + state.query; }
+                }
+                status.textContent = txt;
+            }
+            if (empty) { empty.hidden = total !== 0; }
+            if (moreWrap) { moreWrap.hidden = shownNow >= total; }
+        }
+
+        function apply() {
+            var matched = cards.filter(matches);
+            cards.forEach(function (c) { c._show = false; });
+            matched.slice(0, state.shown).forEach(function (c) { c._show = true; });
+
+            var revealed = [];
+            cards.forEach(function (card) {
+                var wasHidden = card.classList.contains("is-hidden");
+                card.classList.toggle("is-hidden", !card._show);
+                if (card._show && wasHidden) { revealed.push(card); }
+            });
+            staggerIn(revealed);
+            render(matched.length);
+        }
+
+        function writeHash() {
+            if (!history.replaceState) { return; }
+            // replaceState, not location.hash: assigning would push a history
+            // entry per click and turn Back into a filter-undo trap.
+            history.replaceState(null, "", state.category === "all"
+                ? location.pathname + location.search
+                : "#" + state.category);
+        }
+
+        function setCategory(cat) {
+            if (!VALID[cat]) { return; }
+            state.category = cat;
+            state.shown = PAGE;
+            apply();
+            writeHash();
+        }
+
+        if (toolbar) {
+            toolbar.addEventListener("click", function (e) {
+                var b = e.target.closest(".pf-filter");
+                if (b) { setCategory(b.getAttribute("data-filter")); }
+            });
+            // Toolbar pattern: arrows move focus, Enter or Space activates.
+            toolbar.addEventListener("keydown", function (e) {
+                var i = filters.indexOf(document.activeElement);
+                if (i === -1) { return; }
+                var next = -1;
+                if (e.key === "ArrowRight") { next = (i + 1) % filters.length; }
+                else if (e.key === "ArrowLeft") { next = (i - 1 + filters.length) % filters.length; }
+                else if (e.key === "Home") { next = 0; }
+                else if (e.key === "End") { next = filters.length - 1; }
+                if (next === -1) { return; }
+                e.preventDefault();
+                filters[next].focus();
+            });
+            // Roving tabindex: the toolbar is one tab stop.
+            toolbar.addEventListener("focusin", function (e) {
+                var b = e.target.closest(".pf-filter");
+                if (!b) { return; }
+                filters.forEach(function (x) { x.tabIndex = x === b ? 0 : -1; });
+            });
+        }
+
+        if (searchInput && searchWrap) {
+            // Self-deactivating: a search box over seven cards is clutter.
+            if (cards.length >= SEARCH_MIN) { searchWrap.hidden = false; }
+            var debounce = null;
+            searchInput.addEventListener("input", function () {
+                window.clearTimeout(debounce);
+                debounce = window.setTimeout(function () {
+                    state.query = searchInput.value.trim().toLowerCase();
+                    state.shown = PAGE;
+                    apply();
+                }, 150);
+            });
+        }
+
+        if (moreBtn) {
+            moreBtn.addEventListener("click", function () {
+                var before = cards.filter(function (c) { return !c.classList.contains("is-hidden"); }).length;
+                state.shown += PAGE;
+                apply();
+                // Land focus on the first newly shown card rather than losing
+                // it when the button hides itself.
+                var visible = cards.filter(function (c) { return !c.classList.contains("is-hidden"); });
+                var target = visible[before];
+                var link = target && target.querySelector(".work-card__link");
+                if (link) { link.focus(); }
+                else if (moreWrap && moreWrap.hidden) {
+                    grid.setAttribute("tabindex", "-1");
+                    grid.focus();
+                }
+            });
+        }
+
+        var fromHash = (location.hash || "").replace(/^#/, "");
+        if (VALID[fromHash]) { state.category = fromHash; }
+        apply();
     })();
 
     /* ---------- Forms: validation + submit ---------- */
