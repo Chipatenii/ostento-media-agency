@@ -906,6 +906,9 @@ p { margin: 0 0 var(--sp-3); }
 .pf-grid { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); align-items: start; }
 @media (min-width: 620px)  { .pf-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1001px) { .pf-grid { grid-template-columns: repeat(3, 1fr); } }
+/* Homepage featured strip only. Four cards on a 3-column grid would leave the
+   fourth alone on its own row, which reads as a gap rather than a layout. */
+@media (min-width: 1001px) { .pf-grid--four { grid-template-columns: repeat(4, 1fr); } }
 
 /* Only ever added by JS, so every card is visible with JS off. */
 .pf-card.is-hidden { display: none; }

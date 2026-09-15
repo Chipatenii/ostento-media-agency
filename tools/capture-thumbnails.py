@@ -33,6 +33,7 @@ SITES = [
     ("sekoma-energy",          "Sekoma Energy",                "https://sekomaenergy.com/"),
     ("jmg-investment",         "JMG Investment",               "https://www.jmginvestment.com/"),
     ("ann-chota-legal",        "Ann Chota Legal Practitioners", "https://annchotalegalpractitioners.com/"),
+    ("mwembeshi-chemicals",    "Mwembeshi Chemicals",          "https://www.mwembeshichemicals.com/"),
 ]
 
 # 1280x800 is exactly 16:10, which is the ratio the website cards use, so the

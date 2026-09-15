@@ -98,8 +98,8 @@ grep -rn 'data-todo\|YOUR-DOMAIN.example\|your-form-id' . --include=*.html --inc
 | **Instagram URL** | `data-todo="social-instagram"`, commented stub in all 7 footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
 | **Client names** | `data-todo="client"` on the example cards | "Client" in amber |
 | **Real projects** | Seven remaining example cards in `portfolio.html` | Amber "Example" badge on each |
-| **Website thumbnails** | Six live client sites have cards but no images | Monogram tiles until `tools/capture-thumbnails.py` is run |
-| **Website results** | The six live sites carry no `work-card__result` line | Omitted rather than invented. Add one per card when you have a result worth stating |
+| **Website thumbnails** | Seven live client sites have cards but no images | Monogram tiles until `tools/capture-thumbnails.py` is run |
+| **Website results** | The seven live sites carry no `work-card__result` line | Omitted rather than invented. Add one per card when you have a result worth stating |
 | **Reviews and clients** | Section 05 of `index.html` | Real empty states, no stars, no aggregate |
 | **Project images** | None on disk | Monogram tiles, which are a designed state |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
