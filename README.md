@@ -92,7 +92,6 @@ grep -rn 'data-todo\|YOUR-DOMAIN.example\|your-form-id' . --include=*.html --inc
 
 | What | Where | Until then |
 |---|---|---|
-| **PACRA registration number** | `data-todo="pacra"`, all 7 footers plus `terms.html`, `privacy.html`, and the inquiry trust row | Reads "to be confirmed" in amber |
 | **Production domain** | `YOUR-DOMAIN.example` in `sitemap.xml`, plus the `TODO(domain)` comment in every page head | No `canonical` or `og:url`; `og:image` stays relative |
 | **Form endpoint** | `your-form-id` in `index.html` and `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
 | **Instagram URL** | `data-todo="social-instagram"`, commented stub in all 7 footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
