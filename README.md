@@ -19,10 +19,28 @@ and based in Lusaka.
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
-| `assets/css/style.css` | Design system (navy + orange tokens, one type scale, three radii plus a named pill) |
+| `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
 | `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, 3D hero, cookie consent, forms |
 | `robots.txt`, `sitemap.xml` | Crawl directives. Both need the production domain, see below |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
+
+## Colour
+
+Cream is the page, white is the card, orange is the primary, navy is the accent.
+Every colour is a token in `:root`, so the scheme is changed in one place:
+
+| Token | Role |
+|---|---|
+| `--cream`, `--cream-2` | Page background and the one step down from it |
+| `--white` / `--surface` | Cards, panels, the inquiry block, modals |
+| `--orange` | Primary fills: buttons, the heat ramp, indicators |
+| `--orange-ink` | Orange as *text* or a small mark. `--orange` only reaches 2.7:1 on cream, so it is never used for type |
+| `--navy` | Accent: ink, the footer block, selected filter pills, placeholder media tiles |
+| `--field-bg` | Input fill. White on the cream page, flipped to cream inside white panels so one field component reads in both |
+| `--act-0` to `--act-3` | Activity heat ramp, read by both the CSS legend and the JS that fills the grid |
+
+`assets/images/logo.png` is the white wordmark for the navy footer;
+`assets/images/logo-navy.png` is the same mark recoloured for the cream header.
 
 ## Run locally
 
@@ -56,8 +74,8 @@ in a 16/10 box letterboxes and an A4 page crops:
 | Logos | `work-card__media--square` with `wm-a` |
 
 With a real image, swap the `wm-mono` tile for an `<img>`. For logo artwork add
-`work-card__media--plate`, which puts the mark on a light plate so a dark logo
-is not lost against the navy card.
+`work-card__media--plate`, which puts the mark on a plain white plate so a mark
+carrying its own background does not collide with the cream page.
 
 **Thumbnails for live websites** are generated rather than made by hand:
 

@@ -198,7 +198,7 @@
     /* ---------- Activity contribution grid ---------- */
     var actGrid = document.getElementById("activity-grid");
     if (actGrid) {
-        var levels = ["var(--surface-2)", "rgba(255,106,26,0.35)", "rgba(255,106,26,0.65)", "var(--orange)"];
+        var levels = ["var(--act-0)", "var(--act-1)", "var(--act-2)", "var(--act-3)"];
         var frag = document.createDocumentFragment();
         // 53 weeks x 7 days, deterministic pseudo-random so build phases cluster.
         for (var i = 0; i < 53 * 7; i++) {
@@ -238,24 +238,26 @@
         camera.position.set(0, 0, 6);
 
         var geo = new THREE.IcosahedronGeometry(1.7, 1);
+        // Orange body, navy wireframe: the primary reads as the object and
+        // the accent draws its edges, which is what carries on a cream page.
         var mat = new THREE.MeshStandardMaterial({
-            color: 0x13224A, metalness: 0.55, roughness: 0.35,
-            flatShading: true, emissive: 0x0E1B3A, emissiveIntensity: 0.4
+            color: 0xFF6A1A, metalness: 0.35, roughness: 0.45,
+            flatShading: true, emissive: 0xBF4708, emissiveIntensity: 0.18
         });
         mesh = new THREE.Mesh(geo, mat);
         scene.add(mesh);
 
-        var wireMat = new THREE.MeshBasicMaterial({ color: 0xFF6A1A, wireframe: true, transparent: true, opacity: 0.16 });
+        var wireMat = new THREE.MeshBasicMaterial({ color: 0x0E1B3A, wireframe: true, transparent: true, opacity: 0.22 });
         wire = new THREE.Mesh(new THREE.IcosahedronGeometry(1.73, 1), wireMat);
         scene.add(wire);
 
-        var key = new THREE.PointLight(0xFF6A1A, 1.5, 30);
+        var key = new THREE.PointLight(0xFFFFFF, 1.4, 30);
         key.position.set(4, 2, 5);
         scene.add(key);
-        var fill = new THREE.PointLight(0xFFB547, 0.6, 30);
+        var fill = new THREE.PointLight(0xFFB547, 0.7, 30);
         fill.position.set(-5, -3, 3);
         scene.add(fill);
-        scene.add(new THREE.AmbientLight(0x3A4A7A, 0.5));
+        scene.add(new THREE.AmbientLight(0xFBF7F0, 0.9));
 
         function resize() {
             var w = canvas.clientWidth || window.innerWidth;
