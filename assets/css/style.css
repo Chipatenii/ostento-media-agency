@@ -1196,37 +1196,35 @@ p { margin: 0 0 var(--sp-3); }
 .rev-dot:hover::before { background: var(--text-muted); }
 .rev-dot[aria-current="true"]::before { background: var(--orange-ink); }
 
-/* ---------- Client grid ---------- */
-.client-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-3); }
-/* With JS off, an empty state must hide itself once real content exists.
-   JS does the same explicitly when it is available; :hidden wins over this. */
-.rev-slider:has(.rev-slide) + .pf-empty,
-.client-grid:has(.client-chip) + .pf-empty { display: none; }
-.client-chip {
+/* ---------- Client logo carousel ---------- */
+.client-track {
+    display: flex;
+    gap: var(--sp-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.client-track::-webkit-scrollbar { display: none; }
+.client-track:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 3px; }
+.client-logo {
+    flex: 0 0 calc((100% - var(--sp-3)) / 2);
+    min-height: 116px;
     display: flex;
     align-items: center;
-    gap: var(--sp-2);
+    justify-content: center;
+    scroll-snap-align: start;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r-md);
-    padding: var(--sp-3);
-    box-shadow: var(--shadow-sm);
+    color: var(--text-muted);
 }
-.client-chip__logo {
-    flex: 0 0 auto;
-    width: 40px; height: 40px;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--surface-2);
-    border-radius: var(--r-sm);
-    font-family: var(--font-display);
-    font-size: var(--fs-200);
-    font-weight: var(--w-bold);
-    color: var(--text);
-    overflow: hidden;
-}
-.client-chip__logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.client-chip__name { display: block; font-size: var(--fs-200); font-weight: var(--w-medium); color: var(--text); }
-.client-chip__since { display: block; font-family: var(--font-mono); font-size: var(--fs-100); color: var(--text-muted); }
+.client-logo svg { width: 64px; height: 64px; }
+@media (min-width: 620px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 2) / 3); } }
+@media (min-width: 1001px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 3) / 4); } }
+.client-controls { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-3); }
 
 /* ---------- Project detail modal ---------- */
 .modal__box { max-width: 640px; }
@@ -1335,6 +1333,6 @@ p { margin: 0 0 var(--sp-3); }
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
     html { scroll-behavior: auto; }
-    .rev-track { scroll-behavior: auto; }
+    .rev-track, .client-track { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; }
 }

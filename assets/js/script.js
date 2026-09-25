@@ -542,8 +542,59 @@
             list.hidden = !has;
         }
         toggleEmpty("rev-track", "rev-empty", ".rev-slide");
-        toggleEmpty("clients-current", "clients-current-empty", ".client-chip");
-        toggleEmpty("clients-past", "clients-past-empty", ".client-chip");
+    })();
+
+    /* ---------- Proof: placeholder client logo carousel ---------- */
+    (function clientSlider() {
+        var track = document.getElementById("client-track");
+        if (!track) { return; }
+        var slides = Array.prototype.slice.call(track.querySelectorAll(".client-logo"));
+        var panel = document.getElementById("panel-clients");
+        var slider = track.closest(".client-slider");
+        var prev = document.getElementById("client-prev");
+        var next = document.getElementById("client-next");
+        if (slides.length < 2) { return; }
+
+        var index = 0;
+        var inView = !("IntersectionObserver" in window);
+        function step() {
+            return slides[1].offsetLeft - slides[0].offsetLeft;
+        }
+        function lastIndex() {
+            var width = step();
+            return width ? Math.min(slides.length - 1,
+                Math.ceil((track.scrollWidth - track.clientWidth - 1) / width)) : 0;
+        }
+        function go(i) {
+            var last = lastIndex();
+            index = i < 0 ? last : (i > last ? 0 : i);
+            track.scrollTo({
+                left: slides[index].offsetLeft - slides[0].offsetLeft,
+                behavior: reduceMotion ? "auto" : "smooth"
+            });
+        }
+        if (prev) { prev.addEventListener("click", function () { go(index - 1); }); }
+        if (next) { next.addEventListener("click", function () { go(index + 1); }); }
+        track.addEventListener("scroll", function () {
+            var width = step();
+            if (width) { index = Math.min(lastIndex(), Math.round(track.scrollLeft / width)); }
+        }, { passive: true });
+        window.addEventListener("resize", function () {
+            index = Math.min(index, lastIndex());
+        }, { passive: true });
+
+        if ("IntersectionObserver" in window) {
+            new IntersectionObserver(function (entries) {
+                inView = entries[0].isIntersecting;
+            }, { threshold: 0.1 }).observe(slider);
+        }
+        if (!reduceMotion) {
+            window.setInterval(function () {
+                if (document.hidden || !inView || panel.hidden ||
+                    slider.matches(":hover") || slider.matches(":focus-within")) { return; }
+                go(index + 1);
+            }, 4500);
+        }
     })();
 
     /* ---------- Proof: review slider ---------- */
