@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Ostento</title>
-    <meta name="description" content="How Ostento collects, uses, and protects personal data, written to satisfy GDPR.">
+    <title>Clients and reviews | Ostento</title>
+    <meta name="description" content="Explore Ostento's client logo gallery and verified reviews.">
     <meta name="theme-color" content="#FBF7F0">
     <meta property="og:site_name" content="Ostento">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Privacy Policy | Ostento">
-    <meta property="og:description" content="How Ostento collects, uses, and protects personal data, written to satisfy GDPR.">
-    <meta property="og:image" content="assets/images/hero.jpg">
+    <meta property="og:title" content="Clients and reviews | Ostento">
+    <meta property="og:description" content="Explore Ostento's client logo gallery and verified reviews.">
+    <meta property="og:image" content="assets/images/hero-studio.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Privacy Policy | Ostento">
-    <meta name="twitter:description" content="How Ostento collects, uses, and protects personal data, written to satisfy GDPR.">
-    <meta name="twitter:image" content="assets/images/hero.jpg">
-    <!-- TODO(domain): with the production domain live, add absolute URLs here:
-           <link rel="canonical" href="https://YOUR-DOMAIN.example/privacy.html">
-           <meta property="og:url" content="https://YOUR-DOMAIN.example/privacy.html">
-         and make og:image absolute. Relative og:image resolves on most
-         platforms but not reliably on all. See README. -->
+    <meta name="twitter:title" content="Clients and reviews | Ostento">
+    <meta name="twitter:description" content="Explore Ostento's client logo gallery and verified reviews.">
+    <meta name="twitter:image" content="assets/images/hero-studio.jpg">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
     <link rel="apple-touch-icon" href="assets/images/favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css?v=20260925e">
+    <noscript><style>
+        .proof-panel[hidden] { display: block !important; }
+        .proof-panel + .proof-panel { margin-top: var(--sp-6); }
+        .proof-panel__title { display: block; }
+        .proof-tabs, .client-controls { display: none; }
+    </style></noscript>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header is-scrolled" id="site-header">
+<header class="site-header is-scrolled" id="site-header">
         <div class="container nav">
             <a class="nav__brand" href="index.html" aria-label="Ostento home">
                 <img src="assets/images/logo-navy.png" alt="Ostento">
@@ -41,7 +42,7 @@
             <ul class="nav__menu" id="nav-menu">
                 <li><a class="nav__link" href="portfolio.html">Portfolio</a></li>
                 <li><a class="nav__link" href="studio.html">Studio</a></li>
-                <li><a class="nav__link" href="clients.html">Clients and reviews</a></li>
+                <li><a class="nav__link is-active" aria-current="page" href="clients.html">Clients and reviews</a></li>
                 <li><a class="nav__link" href="process.html">Process</a></li>
                 <li><a class="nav__link" href="faq.html">FAQ</a></li>
                 <li><a class="nav__link nav__academy" href="academy.html">Academy</a></li>
@@ -50,47 +51,65 @@
         </div>
     </header>
 
-    <main id="main">
-        <section class="legal"><div class="container"><div class="legal__inner">
-            <h1>Privacy Policy</h1>
-            <p class="updated">Last updated: January 2026</p>
-            <div class="notice">This page is a starting template written in plain language, not legal advice. Have a qualified lawyer (and, for EU exposure, someone familiar with GDPR) review it before launch.</div>
-            <p>This policy explains what personal data we collect, why, how we store it, and the rights you have. Because we work with clients worldwide, we have written it to satisfy the EU and UK General Data Protection Regulation (GDPR), and we honour equivalent rights for visitors elsewhere.</p>
+    <main id="main" class="standalone-main">
+        <section class="section" id="proof">
+            <div class="container">
+                <div class="sec-head">
+                    <h1 class="sec-title">Our clients and reviews</h1>
+                    <p>Client logos will appear here once approved. Reviews are published with the client's permission.</p>
+                </div>
 
-            <p>The data controller for this website operates as <strong>Ostento Media Agency</strong>, a registered trading name in Zambia under PACRA No. 320230069962, based in Lusaka. For any privacy question or request, email <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a>.</p>
+                <div class="proof reveal">
+                    <div class="proof-tabs" role="tablist" aria-label="Clients and reviews">
+                        <button class="proof-tab" type="button" role="tab" id="tab-clients" aria-controls="panel-clients" aria-selected="true">Our Clients</button>
+                        <button class="proof-tab" type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="false" tabindex="-1">Reviews</button>
+                    </div>
 
-            <h2>1. Data we collect</h2>
-            <ul>
-                <li><strong>Inquiry form:</strong> the name, email, and project details you submit when you contact us.</li>
-                <li><strong>Analytics:</strong> if you consent, aggregated, anonymous usage data about which pages are visited.</li>
-                <li><strong>Cookies:</strong> see our <a href="cookies.html">Cookie Policy</a> for the categories we use and how consent works.</li>
-            </ul>
+                    <!-- ============ Our clients ============ -->
+                    <div class="proof-panel" id="panel-clients" role="tabpanel" aria-labelledby="tab-clients">
+                        <h3 class="proof-panel__title">Our Clients</h3>
+                        <div class="client-slider">
+                            <div class="client-track" id="client-track" tabindex="0" aria-label="Placeholder client logos, swipe or use the controls to browse">
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 1">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="40" cy="40" r="19"/><path d="M28 40h24M40 28v24"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 2">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 18 61 53H19L40 18Z"/><circle cx="40" cy="46" r="5"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 3">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="23" y="23" width="34" height="34" rx="10"/><path d="M23 40h34M40 23v34"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 4">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 20c18 0 22 14 22 20S58 60 40 60 18 48 18 40s4-20 22-20Z"/><path d="M27 52 53 28"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 5">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m40 18 20 22-20 22-20-22 20-22Z"/><path d="M28 40h24"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 6">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="31" cy="33" r="10"/><circle cx="49" cy="47" r="10"/><path d="M23 53h34"/></svg>
+                                </div>
+                            </div>
+                            <div class="client-controls">
+                                <button class="client-nav" type="button" id="client-prev" aria-controls="client-track" aria-label="Previous logos">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </button>
+                                <button class="client-nav" type="button" id="client-next" aria-controls="client-track" aria-label="Next logos">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-            <h2>2. Why we use it (lawful basis)</h2>
-            <ul>
-                <li>To reply to your enquiry and, if we work together, to deliver the project (contract / legitimate interest).</li>
-                <li>To understand and improve the site (consent, for analytics).</li>
-                <li>To meet legal and accounting obligations (legal obligation).</li>
-            </ul>
-
-            <h2>3. Where it is stored</h2>
-            <p>Inquiry data is handled through our form provider and stored on our infrastructure (for example Supabase and Cloudflare). Providers may process data in regions outside your own; where that happens, we rely on appropriate safeguards such as standard contractual clauses.</p>
-
-            <h2>4. How long we keep it</h2>
-            <p>We keep enquiry data only as long as needed to respond and, where relevant, for the life of the project plus any period required for legal or accounting reasons. After that it is deleted or anonymised.</p>
-
-            <h2>5. Your rights</h2>
-            <p>Under GDPR and similar laws you can request to access, correct, delete, or port your data, object to or restrict certain processing, and withdraw consent at any time. To exercise any of these, email <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a>. You also have the right to complain to your local data protection authority.</p>
-
-            <h2>6. Sharing</h2>
-            <p>We do not sell your data. We share it only with the service providers that help us run the studio (hosting, analytics, email), each bound to protect it, and where the law requires.</p>
-
-            <h2>7. Security</h2>
-            <p>We use reputable providers and sensible safeguards to protect your data. No method of transmission is perfectly secure, but we work to keep the risk low.</p>
-
-            <h2>8. Contact</h2>
-            <p>For any privacy question or request, email <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a>.</p>
-        </div></div></section>
+                    <!-- ============ Reviews ============ -->
+                    <div class="proof-panel" id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" tabindex="0" hidden>
+                        <h3 class="proof-panel__title">Reviews</h3>
+                        <div id="trustmary-reviews" aria-label="Client reviews"></div>
+                        <p id="trustmary-status" class="muted" role="status" hidden></p>
+                        <noscript><p class="muted">Enable JavaScript to view client reviews.</p></noscript>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
@@ -163,6 +182,7 @@
         </div>
     </footer>
 
+    <!-- ============ Cookie consent ============ -->
         <a class="whatsapp-float" href="https://wa.me/260770381593" target="_blank" rel="noopener noreferrer" aria-label="Chat with Ostento on WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.3A8 8 0 1 1 20 11.5Z"></path>

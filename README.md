@@ -3,9 +3,7 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A studio site: a scroll-driven home page with a photographic hero, a filterable portfolio across five disciplines, a tabbed proof section for
-reviews and clients, an Academy waitlist, a full legal set, and a GDPR cookie
-banner. Static HTML, CSS, and vanilla JavaScript. No build step.
+A multi-page studio site with a photographic homepage, a filterable portfolio across five disciplines, standalone Studio, Clients and reviews, Process, and FAQ pages, an Academy waitlist, a full legal set, a floating WhatsApp link, and a cookie banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
 **Ostento Media Agency** is a registered trading name in Zambia (PACRA No. 320230069962) and is based in Lusaka.
 
@@ -13,13 +11,17 @@ banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Home: hero, numbers, services, work, **proof**, studio, process, FAQ, system, activity, inquiry, footer |
+| `index.html` | Home: hero, numbers, services, featured work, project inquiry |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
+| `studio.html` | Studio overview, delivery approach, and illustrated project activity |
+| `clients.html` | Placeholder client logo carousel and Trustmary reviews |
+| `process.html` | Discovery through launch process |
+| `faq.html` | Frequently asked questions |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
-| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, cookie consent, forms |
-| `robots.txt`, `sitemap.xml` | Crawl directives. Both need the production domain, see below |
+| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
+| `robots.txt`, `sitemap.xml` | Crawl directives for the GitHub Pages URL; update them if a custom domain is used |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
 ## Colour
@@ -88,14 +90,7 @@ and swaps that card's monogram tile for an `<img>` in both `portfolio.html` and
 refreshes the images and leaves already-wired cards alone, so it is safe to run
 again after a client redesigns.
 
-**A review or a client:** open `index.html`, section 05, and use the template
-comments inside the reviews track and the client grids. Stars render only from
-`data-rating`; leave the attribute off and no stars appear. Nothing is assumed.
-
-Both sections ship empty on purpose. An invented testimonial is
-indistinguishable from a real one to the person reading it, so the empty states
-say plainly that reviews are published only once a client has agreed, and offer
-references instead.
+**Client logos and reviews:** replace the six neutral placeholder marks in `clients.html` with approved logo files. The Reviews tab loads the Trustmary widget when opened. Manage which reviews appear in the Trustmary widget settings.
 
 ## Before launch: replace the placeholders
 
@@ -103,28 +98,24 @@ Every unfilled value is marked in the source and rendered in amber with a dashed
 underline, so none of them can ship looking real. List them all:
 
 ```bash
-grep -rn 'data-todo\|YOUR-DOMAIN.example\|your-form-id' . --include=*.html --include=*.txt --include=*.xml
+grep -rn 'data-todo\|your-form-id' . --include=*.html --include=*.txt --include=*.xml
 ```
 
 | What | Where | Until then |
 |---|---|---|
-| **Production domain** | `YOUR-DOMAIN.example` in `sitemap.xml`, plus the `TODO(domain)` comment in every page head | No `canonical` or `og:url`; `og:image` stays relative |
+| **Custom domain** | If introduced, update `robots.txt`, `sitemap.xml`, and the `TODO(domain)` comments in older page heads | The sitemap currently uses the GitHub Pages URL |
 | **Form endpoint** | `your-form-id` in `index.html` and `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
-| **Instagram URL** | `data-todo="social-instagram"`, commented stub in all 7 footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
+| **Instagram URL** | `data-todo="social-instagram"`, commented stub in all footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
 | **Client names** | `data-todo="client"` on the example cards | "Client" in amber |
 | **Real projects** | Seven remaining example cards in `portfolio.html` | Amber "Example" badge on each |
 | **Website thumbnails** | Seven live client sites have cards but no images | Monogram tiles until `tools/capture-thumbnails.py` is run |
 | **Website results** | The seven live sites carry no `work-card__result` line | Omitted rather than invented. Add one per card when you have a result worth stating |
-| **Reviews and clients** | Section 05 of `index.html` | Real empty states, no stars, no aggregate |
+| **Client logos** | `clients.html` | Six neutral placeholder marks until approved logos are supplied |
 | **Project images** | None on disk | Monogram tiles, which are a designed state |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
 | **Section 01 numbers** | "20+", "10+", "5+" in `index.html` | Asserted as fact and currently unsourced. Confirm or change them |
 
-Once real reviews are live, add `Review` and `AggregateRating` JSON-LD to
-`index.html`. It is deliberately absent: marking up reviews that are not
-genuinely displayed is structured-data spam and risks a manual action. The same
-applies to the `ItemList` left out of `portfolio.html` while the cards are
-examples.
+Review markup is left to the Trustmary widget on `clients.html`. Do not add manually asserted `Review` or `AggregateRating` JSON-LD for reviews the page does not display. The `ItemList` is also left out of `portfolio.html` while cards are examples.
 
 Have a qualified lawyer review the legal pages, and for EU exposure someone
 familiar with GDPR, before launch.
@@ -141,15 +132,10 @@ familiar with GDPR, before launch.
 - Portfolio cards deliberately carry no `.reveal` class. That observer
   unobserves on first intersection, so a card hidden at load would stay at
   opacity 0 once a filter revealed it. JS applies the enter state instead.
-- The portfolio filter is a toolbar of `aria-pressed` buttons, not a tablist,
-  because one grid is being filtered rather than panels swapped. The proof
-  section is a real tablist, because it has three panels.
-- The review slider transports on CSS scroll-snap, so touch swipe and momentum
-  are native. It does not autoplay.
+- The portfolio filter is a toolbar of `aria-pressed` buttons. The Clients and reviews page uses a two-panel tablist; its logo carousel supports touch swipe and pauses autoplay on focus, hover, reduced motion, and when hidden.
 - The activity heatmap is generated from a sine wave and deterministic noise.
   It carries a caption saying so. It is not delivery history.
 - Fonts (Space Grotesk, Inter) load from Google Fonts with a system fallback.
 - The site honours `prefers-reduced-motion` with a calm, static variant.
 - Cookie consent is opt-in for non-essential cookies, stored per visitor in
   `localStorage`; the footer "Cookie Settings" link reopens it at any time.
-  also drop the numbers with CSS off.
