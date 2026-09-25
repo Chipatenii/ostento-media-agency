@@ -266,8 +266,12 @@
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
             // Nudge the object toward the right so text on the left stays clear.
-            var offset = w > 900 ? 1.9 : 0;
-            mesh.position.x = wire.position.x = offset;
+            var small = w < 760;
+            var scale = small ? 0.6 : 1;
+            mesh.scale.setScalar(scale);
+            wire.scale.setScalar(scale);
+            mesh.position.x = wire.position.x = w > 900 ? 1.7 : small ? 0.55 : 0.8;
+            mesh.position.y = wire.position.y = small ? 1.05 : 0;
         }
         window.addEventListener("resize", resize);
         resize();
