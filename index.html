@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260925d">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260925e">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -52,15 +52,8 @@
     <!-- Deliberately absent: Review and AggregateRating. Marking up reviews
          that are not genuinely displayed is structured-data spam and risks a
          manual action. Add them only when real, attributable reviews are live
-         in the proof section. -->
-    <noscript><style>
-        /* Without JS the tabs cannot switch, so every panel is shown stacked
-           with its own heading and the dead tab strip is removed. */
-        .proof-panel[hidden] { display: block !important; }
-        .proof-panel + .proof-panel { margin-top: var(--sp-6); }
-        .proof-panel__title { display: block; }
-        .proof-tabs, .client-controls { display: none; }
-    </style></noscript>
+         on the Clients and reviews page. -->
+
 </head>
 <body>
     <a class="skip-link" href="#numbers">Skip to content</a>
@@ -76,10 +69,10 @@
             </button>
             <ul class="nav__menu" id="nav-menu">
                 <li><a class="nav__link" href="portfolio.html">Portfolio</a></li>
-                <li><a class="nav__link" href="#studio">Studio</a></li>
-                <li><a class="nav__link" href="#proof">Clients and reviews</a></li>
-                <li><a class="nav__link" href="#process">Process</a></li>
-                <li><a class="nav__link" href="#faq">FAQ</a></li>
+                <li><a class="nav__link" href="studio.html">Studio</a></li>
+                <li><a class="nav__link" href="clients.html">Clients and reviews</a></li>
+                <li><a class="nav__link" href="process.html">Process</a></li>
+                <li><a class="nav__link" href="faq.html">FAQ</a></li>
                 <li><a class="nav__link nav__academy" href="academy.html">Academy</a></li>
                 <li class="nav__cta"><a class="btn btn--primary" href="#inquiry">Start a project</a></li>
             </ul>
@@ -284,236 +277,7 @@
             </div>
         </section>
 
-
-        <!-- ============ 05 Proof ============ -->
-        <section class="section" id="proof">
-            <div class="container">
-                <div class="sec-head">
-                    <h2 class="sec-title">Our clients and reviews</h2>
-                    <p>Client logos will appear here once approved. Reviews are published with the client's permission.</p>
-                </div>
-
-                <div class="proof reveal">
-                    <div class="proof-tabs" role="tablist" aria-label="Clients and reviews">
-                        <button class="proof-tab" type="button" role="tab" id="tab-clients" aria-controls="panel-clients" aria-selected="true">Our Clients</button>
-                        <button class="proof-tab" type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="false" tabindex="-1">Reviews</button>
-                    </div>
-
-                    <!-- ============ Our clients ============ -->
-                    <div class="proof-panel" id="panel-clients" role="tabpanel" aria-labelledby="tab-clients">
-                        <h3 class="proof-panel__title">Our Clients</h3>
-                        <div class="client-slider">
-                            <div class="client-track" id="client-track" tabindex="0" aria-label="Placeholder client logos, swipe or use the controls to browse">
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 1">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="40" cy="40" r="19"/><path d="M28 40h24M40 28v24"/></svg>
-                                </div>
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 2">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 18 61 53H19L40 18Z"/><circle cx="40" cy="46" r="5"/></svg>
-                                </div>
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 3">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="23" y="23" width="34" height="34" rx="10"/><path d="M23 40h34M40 23v34"/></svg>
-                                </div>
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 4">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 20c18 0 22 14 22 20S58 60 40 60 18 48 18 40s4-20 22-20Z"/><path d="M27 52 53 28"/></svg>
-                                </div>
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 5">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m40 18 20 22-20 22-20-22 20-22Z"/><path d="M28 40h24"/></svg>
-                                </div>
-                                <div class="client-logo" role="img" aria-label="Placeholder client logo 6">
-                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="31" cy="33" r="10"/><circle cx="49" cy="47" r="10"/><path d="M23 53h34"/></svg>
-                                </div>
-                            </div>
-                            <div class="client-controls">
-                                <button class="client-nav" type="button" id="client-prev" aria-controls="client-track" aria-label="Previous logos">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                                </button>
-                                <button class="client-nav" type="button" id="client-next" aria-controls="client-track" aria-label="Next logos">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ============ Reviews ============ -->
-                    <div class="proof-panel" id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" tabindex="0" hidden>
-                        <h3 class="proof-panel__title">Reviews</h3>
-                        <div id="trustmary-reviews" aria-label="Client reviews"></div>
-                        <p id="trustmary-status" class="muted" role="status" hidden></p>
-                        <noscript><p class="muted">Enable JavaScript to view client reviews.</p></noscript>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 06 Studio ============ -->
-        <section class="section" id="studio">
-            <div class="container">
-                <div class="grid grid--2" style="align-items:center;gap:var(--sp-7);">
-                    <div class="reveal">
-                        <h2 class="studio-manifesto">Design and development <em>under one roof</em>.</h2>
-                    </div>
-                    <div class="reveal">
-                        <p class="lede">We start with your problem, not a template. That is the client-first promise: we listen first, plan clearly, and show work early, so what we ship is built around your goals instead of our habits.</p>
-                        <div class="tool-row" aria-label="Tools we use">
-                            <span class="tool-chip">Next.js</span>
-                            <span class="tool-chip">React Native</span>
-                            <span class="tool-chip">Supabase</span>
-                            <span class="tool-chip">Figma</span>
-                            <span class="tool-chip">Cloudflare</span>
-                            <span class="tool-chip">GitHub</span>
-                        </div>
-                        <div class="pairing"><span>Ostento</span> <span class="plus">+</span> <span>You</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 07 Process ============ -->
-        <section class="section" id="process">
-            <div class="container">
-                <div class="sec-head">
-                    <h2 class="sec-title">Our process</h2>
-                </div>
-                <div class="process-list">
-                    <div class="process-step reveal">
-                        <div class="process-step__no">01</div>
-                        <h3>Discovery</h3>
-                        <p>We understand the brand, audience, market, and goals before anything is designed.</p>
-                    </div>
-                    <div class="process-step reveal">
-                        <div class="process-step__no">02</div>
-                        <h3>Concept</h3>
-                        <p>We shape structure, design direction, and user flow, and agree on them together.</p>
-                    </div>
-                    <div class="process-step reveal">
-                        <div class="process-step__no">03</div>
-                        <h3>Design &amp; Development</h3>
-                        <p>We build to a high standard, responsive across devices, with updates at each step.</p>
-                    </div>
-                    <div class="process-step reveal">
-                        <div class="process-step__no">04</div>
-                        <h3>Launch &amp; Optimization</h3>
-                        <p>We publish, test, and refine, so the work keeps improving after it goes live.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 08 FAQ ============ -->
-        <section class="section" id="faq">
-            <div class="container">
-                <div class="sec-head">
-                    <h2 class="sec-title">Frequently asked questions</h2>
-                </div>
-                <div class="faq" id="faq-list">
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            How does a project like this come together?
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-a"><div class="faq-a__inner">
-                            We start with your problem, then shape design and code around it. You see the direction early, review it often, and sign off before we build. No guesswork, no black box.
-                        </div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            What runs technically in the background?
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-a"><div class="faq-a__inner">
-                            This site uses HTML, CSS, and JavaScript. The layout adapts to different screens, and visual effects use CSS without a video background.
-                        </div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            Does it work on every device?
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-a"><div class="faq-a__inner">
-                            Yes. We recompose the layout per device rather than shrinking one design, and we ship a calm, static variant for anyone who prefers reduced motion.
-                        </div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" type="button" aria-expanded="false">
-                            What does working with Ostento cost?
-                            <span class="faq-icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq-a"><div class="faq-a__inner">
-                            Every project is quoted to the brief. No boilerplate packages, no padded scope. Tell us what you need and we reply with an honest assessment and a clear number.
-                        </div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 09 The System ============ -->
-        <section class="section" id="system">
-            <div class="container">
-                <div class="sec-head">
-                    <h2 class="sec-title">How we deliver</h2>
-                </div>
-                <div class="system-grid">
-                    <div class="panel reveal">
-                        <h3>Delivered worldwide</h3>
-                        <p>Served from a global edge network, so pages load quickly wherever your customers are.</p>
-                    </div>
-                    <div class="panel panel--wide reveal">
-                        <h3>Our focus areas</h3>
-                        <div class="meter" data-meter>
-                            <div class="meter__row"><span class="meter__label">Web design</span><span class="meter__track"><span class="meter__fill" data-val="92"></span></span><span class="meter__val">92</span></div>
-                            <div class="meter__row"><span class="meter__label">Development</span><span class="meter__track"><span class="meter__fill" data-val="88"></span></span><span class="meter__val">88</span></div>
-                            <div class="meter__row"><span class="meter__label">Brand &amp; identity</span><span class="meter__track"><span class="meter__fill" data-val="80"></span></span><span class="meter__val">80</span></div>
-                            <div class="meter__row"><span class="meter__label">Growth</span><span class="meter__track"><span class="meter__fill" data-val="74"></span></span><span class="meter__val">74</span></div>
-                        </div>
-                        <p>A profile of where we focus, not measured telemetry.</p>
-                    </div>
-                    <div class="panel reveal">
-                        <h3>Discovery to launch</h3>
-                        <p>Discovery, concept, design and development, launch and optimization. One pipeline, start to finish.</p>
-                    </div>
-                    <div class="panel reveal">
-                        <h3>Pre-launch checks</h3>
-                        <ul class="check-list">
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Scene calibrated</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Frame rate verified</li>
-                            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Contrast verified</li>
-                        </ul>
-                    </div>
-                    <div class="panel reveal">
-                        <h3>Our working principles</h3>
-                        <ul class="stance-list">
-                            <li>Real-time</li>
-                            <li>One team</li>
-                            <li>Measured</li>
-                            <li>Client-first</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 10 Activity ============ -->
-        <section class="section" id="activity">
-            <div class="container">
-                <div class="sec-head">
-                    <h2 class="sec-title">Project activity, illustrated</h2>
-                </div>
-                <div class="activity reveal">
-                    <div class="activity-grid" id="activity-grid" aria-hidden="true"></div>
-                    <p class="activity-note">An illustration of how build work clusters, not a record of delivered projects.</p>
-                    <div class="activity-legend">
-                        <span>Quiet</span>
-                        <span class="swatch" style="background:var(--act-0)"></span>
-                        <span class="swatch" style="background:var(--act-1)"></span>
-                        <span class="swatch" style="background:var(--act-2)"></span>
-                        <span class="swatch" style="background:var(--act-3)"></span>
-                        <span>Building</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ 11 Project Inquiry ============ -->
+        <!-- ============ 05 Project Inquiry ============ -->
         <section class="section" id="inquiry">
             <div class="container">
                 <div class="inquiry reveal">
@@ -585,7 +349,7 @@
         </section>
     </main>
 
-    <!-- ============ 12 Footer ============ -->
+    <!-- ============ Footer ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -615,16 +379,16 @@
                     <ul>
                         <li><a href="#build">What we build</a></li>
                         <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="#proof">Clients and reviews</a></li>
-                        <li><a href="#process">Process</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="clients.html">Clients and reviews</a></li>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Studio</h4>
                     <ul>
-                        <li><a href="#studio">Under one roof</a></li>
-                        <li><a href="#system">The system</a></li>
+                        <li><a href="studio.html">Under one roof</a></li>
+                        <li><a href="studio.html#system">The system</a></li>
                         <li><a href="#inquiry">Start a project</a></li>
                         <li><a href="academy.html">Academy</a></li>
                     </ul>
@@ -657,6 +421,14 @@
     </footer>
 
     <!-- ============ Cookie consent ============ -->
+        <a class="whatsapp-float" href="https://wa.me/260770381593" target="_blank" rel="noopener noreferrer" aria-label="Chat with Ostento on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.3A8 8 0 1 1 20 11.5Z"></path>
+            <path d="M8.5 8.2c.8 3.5 3.1 5.8 6.6 6.6l1.4-1.4 1.5 1c-.4 1.5-1.5 2.2-3 2.2-3.8-.4-7.2-3.8-7.6-7.6 0-1.5.7-2.6 2.2-3l1 1.5-1.1 1.4Z"></path>
+        </svg>
+        <span class="whatsapp-float__label">WhatsApp</span>
+    </a>
+
     <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
         <h3>We value your privacy</h3>
         <p>We use strictly necessary cookies to run this site. With your permission, we also use analytics to understand what works. Nothing beyond the essentials loads until you choose. See our <a href="cookies.html">Cookie Policy</a>.</p>
@@ -700,6 +472,6 @@
         </div>
     </div>
 
-    <script src="assets/js/script.js?v=20260925c" defer></script>
+    <script src="assets/js/script.js?v=20260925e" defer></script>
 </body>
 </html>

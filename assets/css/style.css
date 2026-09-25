@@ -178,6 +178,46 @@ p { margin: 0 0 var(--sp-3); }
 .muted { color: var(--text-muted); }
 .lede { font-size: var(--fs-400); color: var(--text-muted); }
 
+/* ---------- Standalone sections ---------- */
+.standalone-main > .section:first-child { padding-top: calc(var(--header-h) + var(--sp-6)); }
+.standalone-main #studio .studio-manifesto { font-size: clamp(2.25rem, 5vw, 4rem); max-width: 16ch; }
+
+/* ---------- Floating WhatsApp contact ---------- */
+.whatsapp-float {
+    position: fixed;
+    right: calc(1.25rem + env(safe-area-inset-right));
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    z-index: 210;
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border-radius: var(--r-pill);
+    background: #147A47;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(14, 27, 58, 0.18);
+    font-size: var(--fs-200);
+    font-weight: var(--w-semi);
+    text-decoration: none;
+    transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.whatsapp-float:hover { background: #10643A; color: #fff; transform: translateY(-2px); }
+.whatsapp-float:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 3px; }
+.whatsapp-float svg { flex: 0 0 auto; width: 25px; height: 25px; }
+@media (max-width: 760px) {
+    .whatsapp-float {
+        right: calc(1rem + env(safe-area-inset-right));
+        bottom: calc(1rem + env(safe-area-inset-bottom));
+        width: 54px;
+        height: 54px;
+        min-height: 54px;
+        padding: 0;
+    }
+    .whatsapp-float__label { display: none; }
+}
+
 /* ---------- Header / nav ---------- */
 .site-header {
     position: fixed;

@@ -8,6 +8,20 @@
 
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var STORAGE_KEY = "ostento_cookie_consent_v1";
+    /* Keep old homepage section URLs working after their move to standalone pages. */
+    var pageName = location.pathname.split("/").pop();
+    if (!pageName || pageName === "index.html") {
+        var legacyPage = {
+            "#studio": "studio.html",
+            "#proof": "clients.html",
+            "#process": "process.html",
+            "#faq": "faq.html",
+            "#system": "studio.html#system",
+            "#activity": "studio.html#activity"
+        }[location.hash];
+        if (legacyPage) { location.replace(legacyPage); return; }
+    }
+
 
     /* ---------- Shared helpers ---------- */
 
