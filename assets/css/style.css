@@ -1204,13 +1204,14 @@ p { margin: 0 0 var(--sp-3); }
 }
 
 @media (max-width: 760px) {
-    .hero--studio::before { background-position: 58% center; opacity: 0.5; }
+    .hero--studio::before { background-position: 58% center; opacity: 0.92; }
     .hero--studio::after {
         background:
-            linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0.12) 42%),
-            linear-gradient(90deg, rgba(251, 247, 240, 0.9), rgba(251, 247, 240, 0.72));
+            linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0) 22%),
+            linear-gradient(90deg, rgba(251, 247, 240, 0.7), rgba(251, 247, 240, 0.42));
     }
     .hero--studio .hero__title { font-size: clamp(2.7rem, 10vw, 4.25rem); }
+    .hero--studio .hero__sub { color: var(--text); }
     .nav__toggle { display: inline-flex; }
     .nav__menu {
         position: absolute;
