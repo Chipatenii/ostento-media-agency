@@ -339,6 +339,31 @@ p { margin: 0 0 var(--sp-3); }
 .arrow-link:hover svg { transform: translateX(4px); }
 
 /* ---------- Hero ---------- */
+.hero--studio {
+    background: var(--cream);
+    isolation: isolate;
+}
+.hero--studio::before,
+.hero--studio::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+.hero--studio::before {
+    background: url("../images/hero-studio.jpg") center 46% / cover no-repeat;
+    filter: saturate(0.7) contrast(0.88);
+    opacity: 0.64;
+}
+.hero--studio::after {
+    background:
+        linear-gradient(90deg, rgba(251, 247, 240, 0.96) 0%, rgba(251, 247, 240, 0.88) 35%, rgba(251, 247, 240, 0.58) 64%, rgba(251, 247, 240, 0.42) 100%),
+        linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0) 36%);
+}
+.hero--studio .hero__canvas,
+.hero--studio .hero__glow { z-index: 1; }
+.hero--studio .hero__glow { opacity: 0.65; }
 .hero {
     position: relative;
     min-height: 100vh;
@@ -1318,6 +1343,12 @@ p { margin: 0 0 var(--sp-3); }
 }
 
 @media (max-width: 760px) {
+    .hero--studio::before { background-position: 56% center; opacity: 0.42; }
+    .hero--studio::after {
+        background:
+            linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0.18) 45%),
+            linear-gradient(90deg, rgba(251, 247, 240, 0.92), rgba(251, 247, 240, 0.76));
+    }
     .nav__toggle { display: inline-flex; }
     .nav__menu {
         position: absolute;
