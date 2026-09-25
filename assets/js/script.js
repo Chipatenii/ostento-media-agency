@@ -1,7 +1,7 @@
 /* =========================================================
    Ostento - interactions
    Header state, nav, reveal, meters, scroll-spy, FAQ,
-   activity grid, WebGL hero, cookie consent, forms.
+   activity grid, cookie consent, forms.
    ========================================================= */
 (function () {
     "use strict";
@@ -214,108 +214,6 @@
         }
         actGrid.appendChild(frag);
     }
-
-    /* ---------- WebGL hero (three.js) ---------- */
-    (function initHero() {
-        var canvas = document.getElementById("hero-canvas");
-        if (!canvas || typeof window.THREE === "undefined") { return; }
-
-        var gl = null;
-        try { gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl"); } catch (e) { gl = null; }
-        if (!gl) { return; } // fallback: CSS glow + text remain
-
-        var THREE = window.THREE;
-        var renderer, scene, camera, mesh, wire, frameId, running = true;
-        var pointer = { x: 0, y: 0 };
-
-        try {
-            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        } catch (e) { return; }
-
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-        camera.position.set(0, 0, 6);
-
-        var geo = new THREE.IcosahedronGeometry(1.7, 1);
-        // Orange body, navy wireframe: the primary reads as the object and
-        // the accent draws its edges, which is what carries on a cream page.
-        var mat = new THREE.MeshStandardMaterial({
-            color: 0xFF6A1A, metalness: 0.35, roughness: 0.45,
-            flatShading: true, emissive: 0xBF4708, emissiveIntensity: 0.18
-        });
-        mesh = new THREE.Mesh(geo, mat);
-        scene.add(mesh);
-
-        var wireMat = new THREE.MeshBasicMaterial({ color: 0x0E1B3A, wireframe: true, transparent: true, opacity: 0.22 });
-        wire = new THREE.Mesh(new THREE.IcosahedronGeometry(1.73, 1), wireMat);
-        scene.add(wire);
-
-        var key = new THREE.PointLight(0xFFFFFF, 1.4, 30);
-        key.position.set(4, 2, 5);
-        scene.add(key);
-        var fill = new THREE.PointLight(0xFFB547, 0.7, 30);
-        fill.position.set(-5, -3, 3);
-        scene.add(fill);
-        scene.add(new THREE.AmbientLight(0xFBF7F0, 0.9));
-
-        function resize() {
-            var w = canvas.clientWidth || window.innerWidth;
-            var h = canvas.clientHeight || window.innerHeight;
-            renderer.setSize(w, h, false);
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-            // Nudge the object toward the right so text on the left stays clear.
-            var small = w < 760;
-            var scale = small ? 0.6 : 1;
-            mesh.scale.setScalar(scale);
-            wire.scale.setScalar(scale);
-            mesh.position.x = wire.position.x = w > 900 ? 1.7 : small ? 0.55 : 0.8;
-            mesh.position.y = wire.position.y = small ? 1.05 : 0;
-        }
-        window.addEventListener("resize", resize);
-        resize();
-
-        window.addEventListener("pointermove", function (e) {
-            pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-            pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
-        }, { passive: true });
-
-        function render() {
-            mesh.rotation.y = wire.rotation.y += 0.0016;
-            mesh.rotation.x = wire.rotation.x += 0.0007;
-            // Ease toward the cursor for a subtle parallax.
-            var targetY = pointer.x * 0.35;
-            var targetX = pointer.y * 0.2;
-            mesh.rotation.y += (targetY - mesh.rotation.y) * 0.02;
-            wire.rotation.y = mesh.rotation.y;
-            mesh.rotation.x += (targetX - mesh.rotation.x) * 0.02;
-            wire.rotation.x = mesh.rotation.x;
-            renderer.render(scene, camera);
-            if (running) { frameId = requestAnimationFrame(render); }
-        }
-
-        if (reduceMotion) {
-            renderer.render(scene, camera); // one static frame
-        } else {
-            render();
-        }
-
-        // Pause when the hero is off-screen to save the frame budget.
-        if ("IntersectionObserver" in window) {
-            var heroObs = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting && !reduceMotion) {
-                        if (!running) { running = true; render(); }
-                    } else {
-                        running = false;
-                        if (frameId) { cancelAnimationFrame(frameId); }
-                    }
-                });
-            }, { threshold: 0.05 });
-            heroObs.observe(canvas);
-        }
-    })();
 
     /* ---------- Cookie consent ---------- */
     (function cookieConsent() {

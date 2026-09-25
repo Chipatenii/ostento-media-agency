@@ -3,8 +3,7 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A dark studio site: a scroll-driven home page with a WebGL
-hero, a filterable portfolio across five disciplines, a tabbed proof section for
+A studio site: a scroll-driven home page with a photographic hero, a filterable portfolio across five disciplines, a tabbed proof section for
 reviews and clients, an Academy waitlist, a full legal set, and a GDPR cookie
 banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
@@ -20,7 +19,7 @@ and based in Lusaka.
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
-| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, 3D hero, cookie consent, forms |
+| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, proof tabs, review slider, modal, cookie consent, forms |
 | `robots.txt`, `sitemap.xml` | Crawl directives. Both need the production domain, see below |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
@@ -137,7 +136,7 @@ familiar with GDPR, before launch.
   mobile first with `min-width` queries at 620px and 1001px. The older CSS is
   desktop first at 1000px, 760px, and 460px, and was left that way rather than
   inverting 800 lines; its specific mobile problems were fixed in place.
-- `body { overflow-x: hidden }` is load-bearing, because `.hero__glow`
+- `body { overflow-x: hidden }` is load-bearing, because the Academy `.hero__glow`
   overflows by design. It also hides horizontal overflow bugs, so disable it in
   devtools when checking a new component at 360px.
 - Portfolio cards deliberately carry no `.reveal` class. That observer
@@ -150,8 +149,6 @@ familiar with GDPR, before launch.
   are native. It does not autoplay.
 - The activity heatmap is generated from a sine wave and deterministic noise.
   It carries a caption saying so. It is not delivery history.
-- `three.js` for the 3D hero loads from a CDN; if it is blocked or unsupported,
-  the hero falls back to the static glow and text with no error.
 - Fonts (Space Grotesk, Inter) load from Google Fonts with a system fallback.
 - The site honours `prefers-reduced-motion` with a calm, static variant.
 - Cookie consent is opt-in for non-essential cookies, stored per visitor in
