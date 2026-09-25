@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ostento Academy | Coming soon</title>
-    <meta name="description" content="Ostento Academy teaches web design, graphic design, and business for the digital age. Join the waitlist.">
+    <title>Start a project | Ostento</title>
+    <meta name="description" content="Tell Ostento about your project. Reach our Lusaka team by email, WhatsApp, or phone.">
     <meta name="theme-color" content="#FBF7F0">
     <meta property="og:site_name" content="Ostento">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Ostento Academy | Coming soon">
-    <meta property="og:description" content="Ostento Academy teaches web design, graphic design, and business for the digital age. Join the waitlist.">
-    <meta property="og:image" content="assets/images/hero.jpg">
+    <meta property="og:title" content="Start a project | Ostento">
+    <meta property="og:description" content="Tell Ostento about your project by email, WhatsApp, or phone.">
+    <meta property="og:image" content="assets/images/hero-studio.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ostento Academy | Coming soon">
-    <meta name="twitter:description" content="Ostento Academy teaches web design, graphic design, and business for the digital age. Join the waitlist.">
-    <meta name="twitter:image" content="assets/images/hero.jpg">
-    <!-- TODO(domain): with the production domain live, add absolute URLs here:
-           <link rel="canonical" href="https://YOUR-DOMAIN.example/academy.html">
-           <meta property="og:url" content="https://YOUR-DOMAIN.example/academy.html">
-         and make og:image absolute. Relative og:image resolves on most
-         platforms but not reliably on all. See README. -->
+    <meta name="twitter:title" content="Start a project | Ostento">
+    <meta name="twitter:description" content="Tell Ostento about your project by email, WhatsApp, or phone.">
+    <meta name="twitter:image" content="assets/images/hero-studio.jpg">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
     <link rel="apple-touch-icon" href="assets/images/favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css?v=20260925f">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Ostento Media Agency",
+        "identifier": { "@type": "PropertyValue", "name": "PACRA", "value": "320230069962" },
+        "alternateName": "Ostento",
+        "description": "Design, development, and brand experience studio. Websites, company profiles, logos, digital marketing, and print media.",
+        "foundingDate": "2023",
+        "email": "growth@ostentomedia-agency.com",
+        "telephone": "+260770381593",
+        "logo": "assets/images/logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Lusaka",
+            "addressCountry": "ZM"
+        },
+        "sameAs": [
+            "https://www.facebook.com/strataforgetechnologies",
+            "https://www.linkedin.com/company/strataforgetechnologies/"
+        ]
+    }
+    </script>
+    <!-- Deliberately absent: Review and AggregateRating. Marking up reviews
+         that are not genuinely displayed is structured-data spam and risks a
+         manual action. Add them only when real, attributable reviews are live
+         on the Clients and reviews page. -->
+
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
+    <!-- ============ Header ============ -->
     <header class="site-header is-scrolled" id="site-header">
         <div class="container nav">
             <a class="nav__brand" href="index.html" aria-label="Ostento home">
@@ -39,50 +63,37 @@
                 <span></span>
             </button>
             <ul class="nav__menu" id="nav-menu">
-                <li><a class="nav__link" href="index.html">Home</a></li>
+                <li><a class="nav__link" aria-current="page" href="index.html">Home</a></li>
                 <li><a class="nav__link" href="portfolio.html">Portfolio</a></li>
                 <li><a class="nav__link" href="studio.html">Studio</a></li>
                 <li><a class="nav__link" href="clients.html">Clients and reviews</a></li>
                 <li><a class="nav__link" href="process.html">Process</a></li>
                 <li><a class="nav__link" href="faq.html">FAQ</a></li>
-                <li><a class="nav__link nav__academy is-active" href="academy.html">Academy</a></li>
-                <li class="nav__cta"><a class="btn btn--primary" href="contact.html">Start a project</a></li>
+                <li><a class="nav__link nav__academy" href="academy.html">Academy</a></li>
+                <li class="nav__cta"><a class="btn btn--primary" aria-current="page" href="contact.html">Start a project</a></li>
             </ul>
         </div>
     </header>
 
-    <main id="main">
-        <section class="coming">
-            <div class="hero__glow" aria-hidden="true"></div>
+    <main id="main" class="standalone-main">
+        <section class="section" id="contact">
             <div class="container">
-                <div class="hero__inner">
-                    <h1 class="hero__title" style="font-size:clamp(2.5rem,7vw,5rem);">Practical courses for digital skills</h1>
-                    <p class="hero__tagline" style="font-size:clamp(1.25rem,2.6vw,1.9rem);">Web design, graphic design, and business for the digital age.</p>
-                    <p class="hero__sub">The Ostento Academy is on the way. Practical, project-led teaching from a working studio, built for people who want to design, build, and run digital businesses. Join the waitlist and we will let you know the moment it opens.</p>
-                    <form action="https://formspree.io/f/your-form-id" method="POST" data-ajax novalidate style="max-width:460px;">
-                        <div class="field">
-                            <label for="a-email">Email <span class="req">*</span></label>
-                            <input type="email" id="a-email" name="email" autocomplete="email" placeholder="you@example.com" required>
-                            <span class="error-text" aria-live="polite"></span>
-                        </div>
-                        <input type="hidden" name="list" value="academy-waitlist">
-                        <button class="btn btn--primary btn--lg" type="submit">
-                            <span class="btn__spinner" aria-hidden="true"></span>
-                            <span class="btn__label">Join the waitlist</span>
-                        </button>
-                        <p class="form-note" style="margin-top:0.75rem;">No spam. One email when the Academy opens.</p>
-                        <div class="form-status" role="status" aria-live="polite">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span class="form-status__text">You are on the list. We will be in touch when the Academy opens.</span>
-                        </div>
-                    </form>
-                    <p style="margin-top:2rem;"><a class="arrow-link" href="index.html">Back to the studio
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a></p>
+                <div class="inquiry reveal">
+                    <div class="inquiry__head">
+                        <h1>Tell us about your project</h1>
+                        <p>Share what you are trying to solve and what you would like to build. We will reply personally.</p>
+                    </div>
+                    <div class="hero__actions">
+                        <a class="btn btn--primary btn--lg" href="mailto:growth@ostentomedia-agency.com?subject=Project%20inquiry">Email your project</a>
+                        <a class="btn btn--secondary btn--lg" href="https://wa.me/260770381593?text=Hello%20Ostento%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+                    </div>
+                    <p class="form-note" style="margin-top:var(--sp-4);">Email <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a> or call <a href="tel:+260770381593">+260770381593</a>. Based in Lusaka, Zambia.</p>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ============ Footer ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -153,6 +164,7 @@
         </div>
     </footer>
 
+    <!-- ============ Cookie consent ============ -->
         <a class="whatsapp-float" href="https://wa.me/260770381593" target="_blank" rel="noopener noreferrer" aria-label="Chat with Ostento on WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.3A8 8 0 1 1 20 11.5Z"></path>
