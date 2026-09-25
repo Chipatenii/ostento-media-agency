@@ -457,6 +457,27 @@
         var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
         if (!tabs.length) { return; }
 
+        function loadTrustmaryReviews() {
+            var host = document.getElementById("trustmary-reviews");
+            var status = document.getElementById("trustmary-status");
+            if (!host || host.dataset.loaded === "true") { return; }
+            host.dataset.loaded = "true";
+            if (status) { status.textContent = "Loading reviews..."; status.hidden = false; }
+            var embed = document.createElement("script");
+            embed.src = "https://widget.trustmary.com/xLG8xMegZ";
+            embed.async = true;
+            embed.onload = function () {
+                if (status) { status.hidden = true; }
+            };
+            embed.onerror = function () {
+                if (status) {
+                    status.textContent = "Reviews could not be loaded. Please try again later.";
+                    status.hidden = false;
+                }
+            };
+            host.appendChild(embed);
+        }
+
         function select(tab, focus) {
             tabs.forEach(function (t) {
                 var on = t === tab;
@@ -465,6 +486,7 @@
                 var panel = document.getElementById(t.getAttribute("aria-controls"));
                 if (panel) { panel.hidden = !on; }
             });
+            if (tab.id === "tab-reviews") { loadTrustmaryReviews(); }
             if (focus) { tab.focus(); }
             /* Deliberately does not touch the URL: a sub-view on a long page
                should not push history entries. */
@@ -486,62 +508,6 @@
             e.preventDefault();
             select(tabs[next], true); // automatic activation: panels are cheap
         });
-    })();
-
-    /* ---------- Proof: review stars, aggregate, and empty states ---------- */
-    var STAR_FULL = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
-        '<path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>';
-    var STAR_EMPTY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
-        'stroke-linejoin="round" aria-hidden="true">' +
-        '<path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>';
-
-    function paintStars(host, rating) {
-        var out = "";
-        for (var i = 1; i <= 5; i++) { out += (i <= rating ? STAR_FULL : STAR_EMPTY); }
-        host.innerHTML = out;
-        host.setAttribute("role", "img");
-        host.setAttribute("aria-label", "Rated " + rating + " out of 5");
-    }
-
-    (function proofContent() {
-        var track = document.getElementById("rev-track");
-        if (!track) { return; }
-
-        var slides = Array.prototype.slice.call(track.querySelectorAll(".rev-slide"));
-        var rated = [];
-        slides.forEach(function (slide) {
-            var host = slide.querySelector(".stars");
-            var value = parseFloat(slide.getAttribute("data-rating"));
-            // No rating means no stars. Never fall back to five.
-            if (!host) { return; }
-            if (!(value >= 1 && value <= 5)) { host.remove(); return; }
-            paintStars(host, Math.round(value));
-            rated.push(value);
-        });
-
-        var summary = document.getElementById("rating-summary");
-        if (summary && rated.length) {
-            var sum = 0;
-            rated.forEach(function (r) { sum += r; });
-            var avg = sum / rated.length;
-            document.getElementById("rating-score").textContent = avg.toFixed(1);
-            paintStars(document.getElementById("rating-stars"), Math.round(avg));
-            document.getElementById("rating-count").textContent =
-                "from " + rated.length + (rated.length === 1 ? " review" : " reviews");
-            summary.hidden = false;
-        }
-
-        // Empty states are shown against real content, so a panel is never
-        // both empty and silent, and never populated and still apologising.
-        function toggleEmpty(listId, emptyId, itemSel) {
-            var list = document.getElementById(listId);
-            var empty = document.getElementById(emptyId);
-            if (!list || !empty) { return; }
-            var has = list.querySelectorAll(itemSel).length > 0;
-            empty.hidden = has;
-            list.hidden = !has;
-        }
-        toggleEmpty("rev-track", "rev-empty", ".rev-slide");
     })();
 
     /* ---------- Proof: placeholder client logo carousel ---------- */
@@ -595,74 +561,6 @@
                 go(index + 1);
             }, 4500);
         }
-    })();
-
-    /* ---------- Proof: review slider ---------- */
-    (function reviewSlider() {
-        var track = document.getElementById("rev-track");
-        if (!track) { return; }
-        var slides = Array.prototype.slice.call(track.querySelectorAll(".rev-slide"));
-        var controls = document.getElementById("rev-controls");
-        var prev = document.getElementById("rev-prev");
-        var next = document.getElementById("rev-next");
-        var dotWrap = document.getElementById("rev-dots");
-
-        // One review or none leaves nothing to navigate, so the rail stays off.
-        if (slides.length < 2 || !controls) { return; }
-        controls.hidden = false;
-
-        var index = 0;
-        var dots = [];
-        if (dotWrap) {
-            slides.forEach(function (slide, i) {
-                var dot = document.createElement("button");
-                dot.type = "button";
-                dot.className = "rev-dot";
-                dot.setAttribute("aria-label", "Review " + (i + 1) + " of " + slides.length);
-                dot.addEventListener("click", function () { go(i); });
-                dotWrap.appendChild(dot);
-                dots.push(dot);
-            });
-        }
-
-        function paint() {
-            if (prev) { prev.disabled = index <= 0; }
-            if (next) { next.disabled = index >= slides.length - 1; }
-            dots.forEach(function (d, i) {
-                if (i === index) { d.setAttribute("aria-current", "true"); }
-                else { d.removeAttribute("aria-current"); }
-            });
-        }
-
-        function go(i) {
-            index = Math.max(0, Math.min(slides.length - 1, i));
-            /* scrollTo, not scrollIntoView: with body{overflow-x:hidden} the
-               latter is the known trigger for iOS dragging the whole page
-               sideways when it scrolls a snap child into view. */
-            track.scrollTo({
-                left: slides[index].offsetLeft - slides[0].offsetLeft,
-                behavior: reduceMotion ? "auto" : "smooth"
-            });
-            paint();
-        }
-
-        if (prev) { prev.addEventListener("click", function () { go(index - 1); }); }
-        if (next) { next.addEventListener("click", function () { go(index + 1); }); }
-
-        /* The active index follows real scrolling, a touch swipe included,
-           rather than being tracked with scroll maths. */
-        if ("IntersectionObserver" in window) {
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) { return; }
-                    var i = slides.indexOf(entry.target);
-                    if (i !== -1) { index = i; paint(); }
-                });
-            }, { root: track, threshold: 0.6 });
-            slides.forEach(function (slide) { io.observe(slide); });
-        }
-
-        paint();
     })();
 
     /* ---------- Project detail modal ---------- */

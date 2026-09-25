@@ -1106,63 +1106,7 @@ p { margin: 0 0 var(--sp-3); }
 /* Shown only by the noscript block, where the tabs cannot switch panels. */
 .proof-panel__title { display: none; }
 
-.rating-summary {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-4);
-}
-.rating-summary__score {
-    font-family: var(--font-display);
-    font-size: var(--fs-600);
-    font-weight: var(--w-bold);
-    line-height: 1;
-    color: var(--text);
-}
-.rating-summary__count { font-size: var(--fs-200); color: var(--text-muted); }
-.stars { display: inline-flex; gap: 2px; color: var(--amber); line-height: 1; }
-.stars svg { width: 1.05em; height: 1.05em; }
-
-/* ---------- Review slider ---------- */
-/* Transport is native scroll-snap, so a touch swipe and its momentum come
-   free and the whole thing degrades to a readable scrollable row with JS off. */
-.rev-track {
-    display: flex;
-    gap: var(--sp-4);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    /* html's smooth scroll does not reach a scroll container, so the track
-       needs its own. The reduced-motion block below forces it back to auto. */
-    scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.rev-track::-webkit-scrollbar { display: none; }
-.rev-slide {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-md);
-    padding: var(--sp-5);
-    box-shadow: var(--shadow-sm);
-}
-@media (min-width: 620px)  { .rev-slide { flex-basis: calc(50% - (var(--sp-4) / 2)); } }
-@media (min-width: 1001px) { .rev-slide { flex-basis: calc((100% - var(--sp-4) * 2) / 3); } }
-.rev-quote {
-    font-size: var(--fs-400);
-    line-height: 1.6;
-    color: var(--text);
-    margin: var(--sp-3) 0 var(--sp-4);
-}
-.rev-cite { font-style: normal; }
-.rev-cite__name { display: block; font-size: var(--fs-200); font-weight: var(--w-semi); color: var(--text); }
-.rev-cite__meta { display: block; font-size: var(--fs-200); color: var(--text-muted); }
-
-.rev-controls { display: flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-4); }
-.rev-nav {
+.client-nav {
     width: 44px; height: 44px;
     display: inline-flex; align-items: center; justify-content: center;
     background: var(--surface);
@@ -1170,31 +1114,9 @@ p { margin: 0 0 var(--sp-3); }
     border-radius: var(--r-sm);
     color: var(--text);
     cursor: pointer;
-    transition: border-color var(--dur) var(--ease), opacity var(--dur) var(--ease);
+    transition: border-color var(--dur) var(--ease);
 }
-.rev-nav:hover:not(:disabled) { border-color: var(--border-orange); }
-/* Ends disable rather than wrap: wrapping makes the dots lie about position. */
-.rev-nav:disabled { opacity: 0.35; cursor: default; }
-.rev-dots { display: flex; gap: 0.15rem; margin-left: auto; }
-.rev-dot {
-    width: 20px; height: 44px;
-    padding: 0;
-    background: none;
-    border: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-.rev-dot::before {
-    content: "";
-    width: 7px; height: 7px;
-    border-radius: var(--r-pill);
-    background: rgba(14, 27, 58, 0.18);
-    transition: background var(--dur) var(--ease);
-}
-.rev-dot:hover::before { background: var(--text-muted); }
-.rev-dot[aria-current="true"]::before { background: var(--orange-ink); }
+.client-nav:hover { border-color: var(--border-orange); }
 
 /* ---------- Client logo carousel ---------- */
 .client-track {
@@ -1333,6 +1255,6 @@ p { margin: 0 0 var(--sp-3); }
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
     html { scroll-behavior: auto; }
-    .rev-track, .client-track { scroll-behavior: auto; }
+    .client-track { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; }
 }
