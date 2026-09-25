@@ -12,7 +12,7 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | File | Purpose |
 |------|---------|
 | `index.html` | Home: photographic hero, two calls to action, and footer |
-| `contact.html` | Direct email, WhatsApp, and phone project inquiry links |
+| `contact.html` | Project inquiry form that prepares an email or WhatsApp draft, plus direct contact links |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
 | `studio.html` | Studio overview, numbers, services, delivery approach, and illustrated project activity |
 | `clients.html` | Placeholder client logo carousel and Trustmary reviews |

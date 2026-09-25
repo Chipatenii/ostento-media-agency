@@ -669,6 +669,44 @@
         });
     })();
 
+    /* ---------- Contact form: prepare a draft in the visitor's chosen app ---------- */
+    (function contactDraft() {
+        var form = document.querySelector("form[data-contact-draft]");
+        if (!form) { return; }
+        var status = document.getElementById("contact-status");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (!form.reportValidity()) { return; }
+            var data = new FormData(form);
+            var lines = [
+                "Hello Ostento,",
+                "",
+                "I would like to discuss a project.",
+                "",
+                "Name: " + data.get("name").trim(),
+                "Email: " + data.get("email").trim(),
+                "Phone / WhatsApp: " + (data.get("phone").trim() || "Not provided"),
+                "Service: " + data.get("project_type"),
+                "",
+                "Project details:",
+                data.get("message").trim()
+            ];
+            var message = lines.join("\n");
+            var channel = e.submitter && e.submitter.value === "whatsapp" ? "whatsapp" : "email";
+            if (status) {
+                status.textContent = "Your draft is ready. Review it and press Send in " +
+                    (channel === "whatsapp" ? "WhatsApp." : "your email app.");
+            }
+            if (channel === "whatsapp") {
+                location.href = "https://wa.me/260770381593?text=" + encodeURIComponent(message);
+            } else {
+                location.href = "mailto:growth@ostentomedia-agency.com?subject=" +
+                    encodeURIComponent("Project inquiry from " + data.get("name").trim()) +
+                    "&body=" + encodeURIComponent(message);
+            }
+        });
+    })();
+
     /* ---------- Forms: validation + submit ---------- */
     var forms = Array.prototype.slice.call(document.querySelectorAll("form[data-ajax]"));
 
