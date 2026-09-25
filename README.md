@@ -3,7 +3,7 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A dark studio site: a scroll-driven home page (sections 00 to 12) with a WebGL
+A dark studio site: a scroll-driven home page with a WebGL
 hero, a filterable portfolio across five disciplines, a tabbed proof section for
 reviews and clients, an Academy waitlist, a full legal set, and a GDPR cookie
 banner. Static HTML, CSS, and vanilla JavaScript. No build step.
@@ -156,7 +156,4 @@ familiar with GDPR, before launch.
 - The site honours `prefers-reduced-motion` with a calm, static variant.
 - Cookie consent is opt-in for non-essential cookies, stored per visitor in
   `localStorage`; the footer "Cookie Settings" link reopens it at any time.
-- Section numbers in `.sec-label` are hand-maintained. Inserting a section
-  means renumbering the ones after it, in descending order, targeting the
-  `.sec-label` pattern only. A CSS counter would remove the chore but would
   also drop the numbers with CSS off.
