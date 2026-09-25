@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260925">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260925b">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -59,7 +59,7 @@
         .proof-panel[hidden] { display: block !important; }
         .proof-panel + .proof-panel { margin-top: var(--sp-6); }
         .proof-panel__title { display: block; }
-        .proof-tabs, .rev-controls { display: none; }
+        .proof-tabs, .rev-controls, .client-controls { display: none; }
     </style></noscript>
 </head>
 <body>
@@ -77,7 +77,7 @@
             <ul class="nav__menu" id="nav-menu">
                 <li><a class="nav__link" href="portfolio.html">Portfolio</a></li>
                 <li><a class="nav__link" href="#studio">Studio</a></li>
-                <li><a class="nav__link" href="#proof">Reviews</a></li>
+                <li><a class="nav__link" href="#proof">Clients and reviews</a></li>
                 <li><a class="nav__link" href="#process">Process</a></li>
                 <li><a class="nav__link" href="#faq">FAQ</a></li>
                 <li><a class="nav__link nav__academy" href="academy.html">Academy</a></li>
@@ -289,8 +289,8 @@
         <section class="section" id="proof">
             <div class="container">
                 <div class="sec-head">
-                    <h2 class="sec-title">Reviews and clients</h2>
-                    <p>Reviews are published only with the client's permission, and named only where they have agreed to be named.</p>
+                    <h2 class="sec-title">Our clients and reviews</h2>
+                    <p>Client logos will appear here once approved. Reviews are published with the client's permission.</p>
                 </div>
 
                 <div class="proof reveal">
@@ -300,14 +300,48 @@
                         <span class="rating-summary__count" id="rating-count"></span>
                     </div>
 
-                    <div class="proof-tabs" role="tablist" aria-label="Reviews and clients">
-                        <button class="proof-tab" type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="true">Reviews</button>
-                        <button class="proof-tab" type="button" role="tab" id="tab-current" aria-controls="panel-current" aria-selected="false" tabindex="-1">Current clients</button>
-                        <button class="proof-tab" type="button" role="tab" id="tab-past" aria-controls="panel-past" aria-selected="false" tabindex="-1">Past clients</button>
+                    <div class="proof-tabs" role="tablist" aria-label="Clients and reviews">
+                        <button class="proof-tab" type="button" role="tab" id="tab-clients" aria-controls="panel-clients" aria-selected="true">Our Clients</button>
+                        <button class="proof-tab" type="button" role="tab" id="tab-reviews" aria-controls="panel-reviews" aria-selected="false" tabindex="-1">Reviews</button>
+                    </div>
+
+                    <!-- ============ Our clients ============ -->
+                    <div class="proof-panel" id="panel-clients" role="tabpanel" aria-labelledby="tab-clients">
+                        <h3 class="proof-panel__title">Our Clients</h3>
+                        <div class="client-slider">
+                            <div class="client-track" id="client-track" tabindex="0" aria-label="Placeholder client logos, swipe or use the controls to browse">
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 1">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="40" cy="40" r="19"/><path d="M28 40h24M40 28v24"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 2">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 18 61 53H19L40 18Z"/><circle cx="40" cy="46" r="5"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 3">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="23" y="23" width="34" height="34" rx="10"/><path d="M23 40h34M40 23v34"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 4">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M40 20c18 0 22 14 22 20S58 60 40 60 18 48 18 40s4-20 22-20Z"/><path d="M27 52 53 28"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 5">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m40 18 20 22-20 22-20-22 20-22Z"/><path d="M28 40h24"/></svg>
+                                </div>
+                                <div class="client-logo" role="img" aria-label="Placeholder client logo 6">
+                                    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="31" cy="33" r="10"/><circle cx="49" cy="47" r="10"/><path d="M23 53h34"/></svg>
+                                </div>
+                            </div>
+                            <div class="client-controls">
+                                <button class="rev-nav" type="button" id="client-prev" aria-controls="client-track" aria-label="Previous logos">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </button>
+                                <button class="rev-nav" type="button" id="client-next" aria-controls="client-track" aria-label="Next logos">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- ============ Reviews ============ -->
-                    <div class="proof-panel" id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews">
+                    <div class="proof-panel" id="panel-reviews" role="tabpanel" aria-labelledby="tab-reviews" tabindex="0" hidden>
                         <h3 class="proof-panel__title">Reviews</h3>
                         <div class="rev-slider">
                             <div class="rev-track" id="rev-track">
@@ -345,43 +379,6 @@
                         </div>
                     </div>
 
-                    <!-- ============ Current clients ============ -->
-                    <div class="proof-panel" id="panel-current" role="tabpanel" aria-labelledby="tab-current" tabindex="0" hidden>
-                        <h3 class="proof-panel__title">Current clients</h3>
-                        <div class="client-grid" id="clients-current">
-                            <!-- ==========================================
-                                 TO ADD A CLIENT: copy this block in, above
-                                 this comment. Name a client only with their
-                                 permission. Replace the two initials with a
-                                 logo when you have the file:
-                                   <span class="client-chip__logo"><img src="..." alt="COMPANY"></span>
-
-                            <div class="client-chip">
-                                <span class="client-chip__logo" aria-hidden="true">AB</span>
-                                <span>
-                                    <span class="client-chip__name">COMPANY NAME</span>
-                                    <span class="client-chip__since">Since YEAR</span>
-                                </span>
-                            </div>
-                                 ========================================== -->
-                        </div>
-                        <div class="pf-empty" id="clients-current-empty">
-                            <h3>Client list in progress</h3>
-                            <p>We are asking current clients for permission before naming them here. We would rather show an empty list than one you cannot verify.</p>
-                        </div>
-                    </div>
-
-                    <!-- ============ Past clients ============ -->
-                    <div class="proof-panel" id="panel-past" role="tabpanel" aria-labelledby="tab-past" tabindex="0" hidden>
-                        <h3 class="proof-panel__title">Past clients</h3>
-                        <div class="client-grid" id="clients-past">
-                            <!-- Same block as above. See the Current clients panel. -->
-                        </div>
-                        <div class="pf-empty" id="clients-past-empty">
-                            <h3>Client list in progress</h3>
-                            <p>Past engagements are being confirmed with the clients concerned before they are listed.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -656,7 +653,7 @@
                     <ul>
                         <li><a href="#build">What we build</a></li>
                         <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="#proof">Reviews</a></li>
+                        <li><a href="#proof">Clients and reviews</a></li>
                         <li><a href="#process">Process</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
@@ -741,6 +738,6 @@
         </div>
     </div>
 
-    <script src="assets/js/script.js?v=20260925" defer></script>
+    <script src="assets/js/script.js?v=20260925b" defer></script>
 </body>
 </html>
