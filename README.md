@@ -7,8 +7,7 @@ A studio site: a scroll-driven home page with a photographic hero, a filterable 
 reviews and clients, an Academy waitlist, a full legal set, and a GDPR cookie
 banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
-Ostento is a trading name of **StrataForge Technologies**, registered in Zambia
-and based in Lusaka.
+**Ostento Media Agency** is a registered trading name in Zambia (PACRA No. 320230069962) and is based in Lusaka.
 
 ## Structure
 
