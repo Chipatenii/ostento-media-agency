@@ -584,7 +584,7 @@ p { margin: 0 0 var(--sp-3); }
     letter-spacing: 0.16em;
     margin-bottom: var(--sp-3);
 }
-.process-step h3 { font-size: var(--fs-500); margin-bottom: var(--sp-2); }
+.process-step h2 { font-size: var(--fs-500); margin-bottom: var(--sp-2); }
 .process-step p { color: var(--text-muted); font-size: var(--fs-300); margin: 0; }
 
 /* ---------- FAQ (07) ---------- */
