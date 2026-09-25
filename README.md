@@ -11,9 +11,10 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Home: hero, numbers, services, featured work, project inquiry |
+| `index.html` | Home: photographic hero, two calls to action, and footer |
+| `contact.html` | Direct email, WhatsApp, and phone project inquiry links |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
-| `studio.html` | Studio overview, delivery approach, and illustrated project activity |
+| `studio.html` | Studio overview, numbers, services, delivery approach, and illustrated project activity |
 | `clients.html` | Placeholder client logo carousel and Trustmary reviews |
 | `process.html` | Discovery through launch process |
 | `faq.html` | Frequently asked questions |
@@ -60,8 +61,7 @@ template sitting in a comment right where the items go.
 the card grid, copy the block, paste it above the comment, and fill in five
 fields. Set `data-category` to one of `websites`, `profiles`, `logos`,
 `marketing`, `print`. Delete `data-example` so the amber badge goes away. Add
-`data-featured` to the three you want on the home page, and copy those three
-into the featured strip in section 04 of `index.html`.
+`data-featured` to the three you want to highlight on the portfolio page.
 
 Filter counts, search, and the section totals all read the DOM, so there is
 nothing else to update. Match the media shape to the discipline, since a logo
@@ -85,8 +85,7 @@ python3 tools/capture-thumbnails.py
 
 It screenshots each homepage listed in the script at 1280x800, the exact 16:10
 ratio the website cards use, writes an optimised JPEG to `assets/images/work/`,
-and swaps that card's monogram tile for an `<img>` in both `portfolio.html` and
-`index.html`. Add a line to `SITES` in the script when you add a site. Re-running
+and swaps that card's monogram tile for an `<img>` in `portfolio.html`. Add a line to `SITES` in the script when you add a site. Re-running
 refreshes the images and leaves already-wired cards alone, so it is safe to run
 again after a client redesigns.
 
@@ -104,7 +103,7 @@ grep -rn 'data-todo\|your-form-id' . --include=*.html --include=*.txt --include=
 | What | Where | Until then |
 |---|---|---|
 | **Custom domain** | If introduced, update `robots.txt`, `sitemap.xml`, and the `TODO(domain)` comments in older page heads | The sitemap currently uses the GitHub Pages URL |
-| **Form endpoint** | `your-form-id` in `index.html` and `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
+| **Form endpoint** | `your-form-id` in `academy.html` | `script.js` detects the placeholder and fakes a success. This must not ship. |
 | **Instagram URL** | `data-todo="social-instagram"`, commented stub in all footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
 | **Client names** | `data-todo="client"` on the example cards | "Client" in amber |
 | **Real projects** | Seven remaining example cards in `portfolio.html` | Amber "Example" badge on each |
@@ -113,7 +112,7 @@ grep -rn 'data-todo\|your-form-id' . --include=*.html --include=*.txt --include=
 | **Client logos** | `clients.html` | Six neutral placeholder marks until approved logos are supplied |
 | **Project images** | None on disk | Monogram tiles, which are a designed state |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
-| **Section 01 numbers** | "20+", "10+", "5+" in `index.html` | Asserted as fact and currently unsourced. Confirm or change them |
+| **Section 01 numbers** | "20+", "10+", "5+" in `studio.html` | Asserted as fact and currently unsourced. Confirm or change them |
 
 Review markup is left to the Trustmary widget on `clients.html`. Do not add manually asserted `Review` or `AggregateRating` JSON-LD for reviews the page does not display. The `ItemList` is also left out of `portfolio.html` while cards are examples.
 

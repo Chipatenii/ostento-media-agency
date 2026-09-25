@@ -12,6 +12,11 @@
     var pageName = location.pathname.split("/").pop();
     if (!pageName || pageName === "index.html") {
         var legacyPage = {
+            "#numbers": "studio.html#numbers",
+            "#build": "studio.html#build",
+            "#develop": "studio.html#develop",
+            "#work": "portfolio.html",
+            "#inquiry": "contact.html",
             "#studio": "studio.html",
             "#proof": "clients.html",
             "#process": "process.html",
