@@ -37,6 +37,16 @@ image as `zambia-mining-insaka-banner.webp` at **800x672**, with a
 banner and its setting visible. Assets use Lanczos resampling and WebP
 quality 90. The card opens a larger preview in the project modal.
 
+## Logo presentations
+
+Audacia Security Ltd (`audacia-security-logo`) and Marigold (`marigold-logo`)
+use the supplied complete presentation boards. Main images are **1080x1440**,
+with **540x720** siblings ending in `-540.webp`. WebP quality 92 preserves
+the logo edges and presentation text. Resizing preserves the full 3:4 board
+without cropping, stretching or upscaling. Matching portrait frames contain
+the entire artwork, and hover overlays are disabled for legibility. Both
+cards open the larger board using the project modal.
+
 ## Optional live captures
 
 For projects without a supplied screenshot, run from the project root:
