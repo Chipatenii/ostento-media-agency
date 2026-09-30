@@ -1282,6 +1282,9 @@ p { margin: 0 0 var(--sp-3); }
 .modal__meta:empty { display: none; }
 .modal__body { color: var(--text-muted); font-size: var(--fs-300); }
 .modal__body img { width: 100%; height: auto; border-radius: var(--r-sm); }
+.project-gallery { display: grid; gap: var(--sp-4); }
+.project-gallery figure { margin: 0; }
+.project-gallery figcaption { margin-top: var(--sp-1); font-size: var(--fs-200); }
 .modal__body p:last-child { margin-bottom: 0; }
 
 /* ---------- Image loading state ---------- */

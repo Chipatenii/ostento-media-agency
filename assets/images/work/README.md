@@ -47,6 +47,15 @@ without cropping, stretching or upscaling. Matching portrait frames contain
 the entire artwork, and hover overlays are disabled for legibility. Both
 cards open the larger board using the project modal.
 
+## Digital marketing campaign
+
+The single Hisense campaign card uses `hisense-campaign-hero` as its square
+thumbnail. Its project gallery includes that announcement and the
+`hisense-campaign-how-to-win` participation guide. Both supplied designs
+are preserved in full at **1080x1080**, with **540x540** siblings ending in
+`-540.webp`. Assets use Lanczos resampling and WebP quality 90. The two
+images belong to one project, so the Digital marketing filter counts one card.
+
 ## Optional live captures
 
 For projects without a supplied screenshot, run from the project root:
