@@ -12,12 +12,12 @@
     var pageName = location.pathname.split("/").pop();
     if (!pageName || pageName === "index.html") {
         var legacyPage = {
-            "#numbers": "studio.html",
-            "#build": "studio.html#services",
-            "#develop": "studio.html#software",
+            "#numbers": "services.html",
+            "#build": "services.html#services",
+            "#develop": "services.html#software",
             "#work": "portfolio.html",
             "#inquiry": "contact.html",
-            "#studio": "studio.html",
+            "#studio": "services.html",
             "#proof": "clients.html",
             "#process": "process.html",
             "#system": "process.html",
@@ -174,7 +174,7 @@
             });
         }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
         revealEls.forEach(function (el) {
-            if (el.closest(".studio-main")) { el.classList.add("is-pending"); }
+            if (el.closest(".studio-main, .process-main")) { el.classList.add("is-pending"); }
             io.observe(el);
         });
     }
@@ -199,41 +199,42 @@
         sections.forEach(function (s) { spy.observe(s); });
     }
 
-    /* ---------- Studio service navigation ---------- */
-    (function studioServiceNav() {
-        var nav = document.querySelector(".studio-service-nav");
-        if (!nav) { return; }
-        var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-        var sections = links.map(function (link) {
-            return document.getElementById(link.getAttribute("href").slice(1));
-        }).filter(Boolean);
-        function markCurrent(id) {
-            links.forEach(function (link) {
-                if (link.getAttribute("href") === "#" + id) {
-                    link.setAttribute("aria-current", "location");
-                } else {
-                    link.removeAttribute("aria-current");
-                }
-            });
-        }
-        function markHash() {
-            if (sections.some(function (section) { return "#" + section.id === location.hash; })) {
-                markCurrent(location.hash.slice(1));
+    /* ---------- Service and process section navigation ---------- */
+    (function sectionNavigation() {
+        var navs = document.querySelectorAll(".studio-service-nav, .process-stage-nav");
+        navs.forEach(function (nav) {
+            var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+            var sections = links.map(function (link) {
+                return document.getElementById(link.getAttribute("href").slice(1));
+            }).filter(Boolean);
+            function markCurrent(id) {
+                links.forEach(function (link) {
+                    if (link.getAttribute("href") === "#" + id) {
+                        link.setAttribute("aria-current", "location");
+                    } else {
+                        link.removeAttribute("aria-current");
+                    }
+                });
             }
-        }
-        nav.addEventListener("click", function (event) {
-            var link = event.target.closest('a[href^="#"]');
-            if (link && nav.contains(link)) { markCurrent(link.getAttribute("href").slice(1)); }
-        });
-        window.addEventListener("hashchange", markHash);
-        markHash();
-        if (!("IntersectionObserver" in window)) { return; }
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) { markCurrent(entry.target.id); }
+            function markHash() {
+                if (sections.some(function (section) { return "#" + section.id === location.hash; })) {
+                    markCurrent(location.hash.slice(1));
+                }
+            }
+            nav.addEventListener("click", function (event) {
+                var link = event.target.closest('a[href^="#"]');
+                if (link && nav.contains(link)) { markCurrent(link.getAttribute("href").slice(1)); }
             });
-        }, { rootMargin: "-32% 0px -48% 0px", threshold: 0 });
-        sections.forEach(function (section) { observer.observe(section); });
+            window.addEventListener("hashchange", markHash);
+            markHash();
+            if (!("IntersectionObserver" in window)) { return; }
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) { markCurrent(entry.target.id); }
+                });
+            }, { rootMargin: "-32% 0px -48% 0px", threshold: 0 });
+            sections.forEach(function (section) { observer.observe(section); });
+        });
     })();
 
     /* ---------- Cookie consent ---------- */
@@ -686,6 +687,14 @@
         var form = document.querySelector("form[data-contact-draft]");
         if (!form) { return; }
         var status = document.getElementById("contact-status");
+        var serviceSelect = form.querySelector('[name="project_type"]');
+        var requestedService = new URLSearchParams(location.search).get("service");
+        if (serviceSelect && requestedService) {
+            var matches = Array.prototype.some.call(serviceSelect.options, function (option) {
+                return option.value === requestedService && option.value !== "";
+            });
+            if (matches) { serviceSelect.value = requestedService; }
+        }
         form.addEventListener("submit", function (e) {
             e.preventDefault();
             if (!form.reportValidity()) { return; }
@@ -698,7 +707,7 @@
                 "Name: " + data.get("name").trim(),
                 "Email: " + data.get("email").trim(),
                 "Phone / WhatsApp: " + (data.get("phone").trim() || "Not provided"),
-                "Service: " + data.get("project_type"),
+                "Service: " + serviceSelect.options[serviceSelect.selectedIndex].textContent.trim(),
                 "",
                 "Project details:",
                 data.get("message").trim()
@@ -719,91 +728,4 @@
         });
     })();
 
-    /* ---------- Forms: validation + submit ---------- */
-    var forms = Array.prototype.slice.call(document.querySelectorAll("form[data-ajax]"));
-
-    function setError(field, msg) {
-        field.classList.add("has-error");
-        var err = field.querySelector(".error-text");
-        if (err) { err.textContent = msg; }
-    }
-    function clearError(field) {
-        field.classList.remove("has-error");
-        var err = field.querySelector(".error-text");
-        if (err) { err.textContent = ""; }
-    }
-    function validateControl(control) {
-        var field = control.closest(".field");
-        if (!field) { return true; }
-        var value = (control.value || "").trim();
-        if (control.required && !value) { setError(field, "This field is required."); return false; }
-        if (control.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-            setError(field, "Enter a valid email address."); return false;
-        }
-        clearError(field);
-        return true;
-    }
-
-    forms.forEach(function (form) {
-        var controls = Array.prototype.slice.call(form.querySelectorAll("input, select, textarea"));
-        controls.forEach(function (control) {
-            control.addEventListener("input", function () {
-                var field = control.closest(".field");
-                if (field && field.classList.contains("has-error")) { validateControl(control); }
-            });
-        });
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            var valid = true;
-            controls.forEach(function (c) { if (!validateControl(c)) { valid = false; } });
-            if (!valid) {
-                var firstBad = form.querySelector(".field.has-error input, .field.has-error select, .field.has-error textarea");
-                if (firstBad) { firstBad.focus(); }
-                return;
-            }
-
-            var button = form.querySelector("button[type='submit']");
-            var status = form.querySelector(".form-status");
-            var endpoint = form.getAttribute("action") || "";
-            var isPlaceholder = !endpoint || endpoint.indexOf("your-form-id") !== -1;
-
-            button.classList.add("is-loading");
-            button.disabled = true;
-
-            function done(ok, msg) {
-                button.classList.remove("is-loading");
-                button.disabled = false;
-                if (ok && status) {
-                    if (msg) { status.querySelector(".form-status__text").textContent = msg; }
-                    status.classList.add("is-visible");
-                    form.reset();
-                } else if (!ok) {
-                    alert(msg || "Something went wrong. Please try again or email us directly.");
-                }
-            }
-
-            if (isPlaceholder) {
-                // No endpoint connected yet: demonstrate the loading + success flow.
-                window.setTimeout(function () {
-                    done(true, "Thanks. Your details are ready to send once the form endpoint is connected.");
-                }, 900);
-                return;
-            }
-
-            fetch(endpoint, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
-                .then(function (res) {
-                    if (res.ok) { done(true); }
-                    else {
-                        res.json().then(function (data) {
-                            var m = (data && data.errors && data.errors.length)
-                                ? data.errors.map(function (x) { return x.message; }).join(", ")
-                                : null;
-                            done(false, m);
-                        }).catch(function () { done(false); });
-                    }
-                })
-                .catch(function () { done(false, "Network error. Please check your connection and try again."); });
-        });
-    });
 })();

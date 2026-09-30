@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Project briefing session photo placeholder</title>
+  <desc id="desc">Reserved space for a project photograph showing project briefing session.</desc>
+  <rect width="800" height="500" fill="#EFE8DC"/>
+  <rect x="65" y="55" width="670" height="390" rx="18" fill="none" stroke="#0E1B3A" stroke-opacity=".15" stroke-width="2"/>
+  <path d="M93 117V83h34M673 83h34v34M707 383v34h-34M127 417H93v-34" fill="none" stroke="#0E1B3A" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="400" cy="218" r="90" fill="#FFFFFF" fill-opacity=".7"/>
+  <path d="M345 190h22l13-17h40l13 17h22v64H345z" fill="none" stroke="#0E1B3A" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="400" cy="222" r="23" fill="none" stroke="#BF4708" stroke-width="4"/>
+  <circle cx="441" cy="204" r="4" fill="#0E1B3A"/>
+  <text x="400" y="350" text-anchor="middle" fill="#0E1B3A" font-family="Arial, sans-serif" font-size="25">Project briefing session</text>
+  <text x="400" y="382" text-anchor="middle" fill="#5C6885" font-family="Arial, sans-serif" font-size="17">Photo placeholder</text>
+</svg>

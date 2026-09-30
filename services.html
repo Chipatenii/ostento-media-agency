@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms &amp; Conditions | Ostento</title>
-    <meta name="description" content="The terms for using the Ostento site and engaging Ostento's services.">
+    <title>Our Services | Ostento Media Agency</title>
+    <meta name="description" content="Website and web app development, custom business software including ERP and loan management systems, marketing, branding and graphic design, and large format printing.">
     <meta name="theme-color" content="#FBF7F0">
     <meta property="og:site_name" content="Ostento">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Terms &amp; Conditions | Ostento">
-    <meta property="og:description" content="The terms for using the Ostento site and engaging Ostento's services.">
-    <meta property="og:image" content="assets/images/hero.jpg">
+    <meta property="og:title" content="Our Services | Ostento Media Agency">
+    <meta property="og:description" content="Website and web app development, custom business software including ERP and loan management systems, marketing, branding and graphic design, and large format printing.">
+    <meta property="og:image" content="assets/images/hero-studio.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Terms &amp; Conditions | Ostento">
-    <meta name="twitter:description" content="The terms for using the Ostento site and engaging Ostento's services.">
-    <meta name="twitter:image" content="assets/images/hero.jpg">
-    <!-- TODO(domain): with the production domain live, add absolute URLs here:
-           <link rel="canonical" href="https://YOUR-DOMAIN.example/terms.html">
-           <meta property="og:url" content="https://YOUR-DOMAIN.example/terms.html">
-         and make og:image absolute. Relative og:image resolves on most
-         platforms but not reliably on all. See README. -->
+    <meta name="twitter:title" content="Our Services | Ostento Media Agency">
+    <meta name="twitter:description" content="Website and web app development, custom business software including ERP and loan management systems, marketing, branding and graphic design, and large format printing.">
+    <meta name="twitter:image" content="assets/images/hero-studio.jpg">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/ostento-favicon-32.png">
     <link rel="apple-touch-icon" href="assets/images/ostento-favicon-180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +36,7 @@
             <ul class="nav__menu" id="nav-menu">
                 <li><a class="nav__link" href="index.html">Home</a></li>
                 <li><a class="nav__link" href="portfolio.html">Portfolio</a></li>
-                <li><a class="nav__link" href="services.html">Our Services</a></li>
+                <li><a class="nav__link is-active" aria-current="page" href="services.html">Our Services</a></li>
                 <li><a class="nav__link" href="clients.html">Clients</a></li>
                 <li><a class="nav__link" href="process.html">Process</a></li>
                 <li><a class="nav__link" href="academy.html">Academy</a></li>
@@ -51,46 +46,122 @@
         <div class="nav__backdrop" hidden></div>
     </header>
 
-    <main id="main">
-        <section class="legal"><div class="container"><div class="legal__inner">
-            <h1>Terms &amp; Conditions</h1>
-            <p class="updated">Last updated: September 2026</p>
-            <p>These terms govern your use of the Ostento website and the website and web app development, business software, marketing, branding and graphic design, and large format printing services you engage us to provide. By using this site or working with us, you agree to them.</p>
+    <main id="main" class="standalone-main studio-main">
+        <section class="section studio-intro" id="services-intro">
+            <div class="container studio-intro__grid">
+                <h1 class="studio-title reveal">Our services</h1>
+                <div class="studio-intro__copy reveal">
+                    <p class="lede">Websites and web apps, custom business software, marketing, branding and graphic design, and large format printing.</p>
+                    <p>Every project has an agreed brief, deliverables and quote. Explore the service you need below.</p>
+                    <div class="studio-actions">
+                        <a class="btn btn--primary" href="#websites">Explore our services</a>
+                        <a class="studio-text-link" href="portfolio.html">View our work <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <h2>1. Who we are</h2>
-            <p>Ostento Media Agency is a registered trading name in Zambia under PACRA No. 320230069962, based in Lusaka and serving clients worldwide. In these terms, "we", "us", and "Ostento" refer to the business operating under that name; "you" means the visitor or client. You can reach us at <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a>.</p>
+        <section class="studio-services" id="services" aria-label="Our services">
+            <div class="studio-services-bar">
+                <nav class="container studio-service-nav" aria-label="Browse services">
+                    <a href="#websites">Websites &amp; web apps</a>
+                    <a href="#software">Software</a>
+                    <a href="#marketing">Marketing</a>
+                    <a href="#branding">Branding &amp; design</a>
+                    <a href="#printing">Large format printing</a>
+                </nav>
+            </div>
+            <div class="container">
+                <article class="studio-service reveal" id="websites" aria-labelledby="websites-title">
+                    <div class="studio-service__media">
+                        <img src="assets/images/services/websites-placeholder.svg" alt="Placeholder illustration for website and web application projects" width="800" height="500" loading="lazy" decoding="async">
+                    </div>
+                    <div class="studio-service__copy">
+                        <h2 id="websites-title">Websites &amp; web apps</h2>
+                        <p>Business websites, customer portals and web apps, with interface design and development in one project. Tell us the pages, features and online workflows you need.</p>
+                        <ul class="studio-service__list">
+                            <li>Business websites</li>
+                            <li>Web apps &amp; customer portals</li>
+                            <li>Interface design &amp; development</li>
+                        </ul>
+                        <a class="studio-text-link" href="contact.html?service=websites" aria-label="Request a quote for websites and web apps">Request a quote <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+                <article class="studio-service reveal" id="software" aria-labelledby="software-title">
+                    <div class="studio-service__media">
+                        <img src="assets/images/services/software-placeholder.svg" alt="Placeholder illustration for ERP and loan management software" width="800" height="500" loading="lazy" decoding="async">
+                    </div>
+                    <div class="studio-service__copy">
+                        <h2 id="software-title">Custom business software</h2>
+                        <p>ERP, loan management and other business systems built around the records, roles, approvals and reports your team uses.</p>
+                        <ul class="studio-service__list">
+                            <li>Enterprise resource planning (ERP) systems</li>
+                            <li>Loan management systems</li>
+                            <li>Custom business management tools</li>
+                        </ul>
+                        <a class="studio-text-link" href="contact.html?service=software" aria-label="Request a quote for custom business software">Request a quote <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+                <article class="studio-service reveal" id="marketing" aria-labelledby="marketing-title">
+                    <div class="studio-service__media">
+                        <img src="assets/images/services/marketing-placeholder.svg" alt="Placeholder illustration for marketing campaigns" width="800" height="500" loading="lazy" decoding="async">
+                    </div>
+                    <div class="studio-service__copy">
+                        <h2 id="marketing-title">Marketing</h2>
+                        <p>Social media management, digital advertising and campaign content. We agree the audience, channels, content requirements and reporting before work starts.</p>
+                        <ul class="studio-service__list">
+                            <li>Social media management</li>
+                            <li>Digital advertising</li>
+                            <li>Content &amp; campaign design</li>
+                        </ul>
+                        <a class="studio-text-link" href="contact.html?service=marketing" aria-label="Request a quote for marketing">Request a quote <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+                <article class="studio-service reveal" id="branding" aria-labelledby="branding-title">
+                    <div class="studio-service__media">
+                        <img src="assets/images/services/branding-placeholder.svg" alt="Placeholder illustration for branding and graphic design projects" width="800" height="500" loading="lazy" decoding="async">
+                    </div>
+                    <div class="studio-service__copy">
+                        <h2 id="branding-title">Branding &amp; graphic design</h2>
+                        <p>Logos, company profiles, posters, stationery and other brand materials. We prepare the designs and final files for the formats you need.</p>
+                        <ul class="studio-service__list">
+                            <li>Logos &amp; brand identity</li>
+                            <li>Posters &amp; promotional materials</li>
+                            <li>Company profiles &amp; stationery</li>
+                        </ul>
+                        <a class="studio-text-link" href="contact.html?service=branding" aria-label="Request a quote for branding and graphic design">Request a quote <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+                <article class="studio-service reveal" id="printing" aria-labelledby="printing-title">
+                    <div class="studio-service__media">
+                        <img src="assets/images/services/printing-placeholder.svg" alt="Placeholder illustration for large format printing projects" width="800" height="500" loading="lazy" decoding="async">
+                    </div>
+                    <div class="studio-service__copy">
+                        <h2 id="printing-title">Large format printing</h2>
+                        <p>Banners, roll-up displays, large posters and signage. We confirm the artwork, dimensions, quantities and finish before printing.</p>
+                        <ul class="studio-service__list">
+                            <li>Banners &amp; roll-up banners</li>
+                            <li>Large format posters &amp; signage</li>
+                            <li>Branded promotional displays</li>
+                        </ul>
+                        <a class="studio-text-link" href="contact.html?service=printing" aria-label="Request a quote for large format printing">Request a quote <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-            <h2>2. Scope of work</h2>
-            <p>Every project is defined in a written proposal or statement of work that sets out deliverables, timelines, and price. That document, together with these terms, forms our agreement. Anything outside the agreed scope is treated as a new request and quoted separately.</p>
-
-            <h2>3. Payment terms</h2>
-            <ul>
-                <li>Projects usually begin with a deposit, with the balance tied to agreed milestones.</li>
-                <li>Invoices are due within the period stated on the invoice.</li>
-                <li>Work may pause if an invoice is overdue, and agreed timelines shift accordingly.</li>
-            </ul>
-
-            <h2>4. Timelines</h2>
-            <p>We commit to the timeline in the proposal and keep you updated at each milestone. Timelines assume timely feedback and content from you; delays in either can move delivery dates.</p>
-
-            <h2>5. Ownership and intellectual property</h2>
-            <p>On full payment, ownership of the final deliverables transfers to you, except for third-party assets (fonts, libraries, stock) which remain under their own licences, and our own pre-existing tools and components, which we license to you for use within the project. We may show the work in our portfolio unless you ask us in writing not to.</p>
-
-            <h2>6. Your responsibilities</h2>
-            <p>You confirm that any content, logos, or materials you provide are yours to use and do not infringe anyone else's rights. You are responsible for reviewing deliverables and for the final decision to publish.</p>
-
-            <h2>7. Liability</h2>
-            <p>We take care to deliver quality work, but to the extent the law allows, our liability for any claim connected to a project is limited to the fees paid for that project. We are not liable for indirect or consequential losses.</p>
-
-            <h2>8. Governing law</h2>
-            <p>These terms are governed by the laws of Zambia. For international clients, we work with you in good faith to resolve any dispute, and nothing here removes rights you may have under the mandatory laws of your own country.</p>
-
-            <h2>9. Changes</h2>
-            <p>We may update these terms as our services evolve. The version in force is the one published here when you engage us.</p>
-
-            <h2>10. Contact</h2>
-            <p>Questions about these terms? Email <a href="mailto:growth@ostentomedia-agency.com">growth@ostentomedia-agency.com</a>.</p>
-        </div></div></section>
+        <section class="section studio-contact" aria-labelledby="studio-contact-title">
+            <div class="container studio-contact__inner reveal">
+                <div>
+                    <h2 id="studio-contact-title">Send us your project brief.</h2>
+                    <p>Tell us the service, deliverables and timing you have in mind. We will discuss the requirements and prepare a quote.</p>
+                </div>
+                <div class="studio-actions">
+                    <a class="btn btn--primary" href="contact.html">Request a quote</a>
+                    <a class="studio-text-link" href="process.html">How we work <span aria-hidden="true">&rarr;</span></a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
@@ -140,6 +211,7 @@
         </div>
     </footer>
 
+    <!-- ============ Cookie consent ============ -->
         <a class="whatsapp-float" href="https://wa.me/260770381593" target="_blank" rel="noopener noreferrer" aria-label="Chat with Ostento on WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.3A8 8 0 1 1 20 11.5Z"></path>
