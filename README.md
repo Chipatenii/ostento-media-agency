@@ -3,7 +3,7 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A multi-page studio site with a photographic homepage, a filterable portfolio across five disciplines, standalone Studio, Clients and reviews, and Process pages, an Academy waitlist, a full legal set, a floating WhatsApp link, and a cookie banner. Static HTML, CSS, and vanilla JavaScript. No build step.
+A multi-page studio site with a photographic homepage, a filterable portfolio across five disciplines, standalone Our Services, Clients and reviews, and Process pages, an Academy waitlist, a full legal set, a floating WhatsApp link, and a cookie banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
 **Ostento Media Agency** is a registered trading name in Zambia (PACRA No. 320230069962) and is based in Lusaka.
 
@@ -14,9 +14,9 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `index.html` | Home: photographic hero, two calls to action, and footer |
 | `contact.html` | Project inquiry form that prepares an email or WhatsApp draft, plus direct contact links |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
-| `studio.html` | Five services with image placeholders, section navigation, and project inquiry links |
+| `services.html` | Five services with image placeholders, section navigation, and project inquiry links |
 | `clients.html` | Eight client logos in a carousel and Trustmary reviews |
-| `process.html` | Discovery through launch process |
+| `process.html` | Four project stages with photo placeholders, stage navigation and deliverable notes |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
@@ -26,9 +26,9 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 
 ## Shared navigation and footer
 
-All 11 HTML pages share the same header and footer markup, with each page's current navigation link marked using `aria-current="page"`. Keep these blocks in sync when adding a page.
+All 11 content pages share the same header and footer markup, with each page's current navigation link marked using `aria-current="page"`. Keep these blocks in sync when adding a page.
 
-The header uses one contact action and a consistent active state. At 1000px and below, the Menu button opens an animated two-column panel with Escape, outside-click closing, focus containment, and scroll locking. Without JavaScript, the navigation stays visible. Reduced-motion preferences disable the transitions.
+The header uses one contact action and a consistent active state. At 1100px and below, the Menu button opens an animated two-column panel with Escape, outside-click closing, focus containment, and scroll locking. Without JavaScript, the navigation stays visible. Reduced-motion preferences disable the transitions.
 
 The footer uses three desktop columns, a two-column tablet layout, and stacked mobile sections with a two-column link grid. Contact details use inline SVG icons. Policies and the business registration sit in a separate bottom row. The floating WhatsApp shortcut hides while footer contacts are visible or the mobile menu is open.
 
@@ -147,12 +147,14 @@ familiar with GDPR, before launch.
 - Cookie consent is opt-in for non-essential cookies, stored per visitor in
   `localStorage`; the footer "Cookie Settings" link reopens it at any time.
 
-## Studio services
+## Our Services and project process
 
-Studio presents website and web app development, custom business software, marketing,
+Our Services presents website and web app development, custom business software, marketing,
 branding and graphic design, and large format printing. Each service has a matching
 800 x 500 SVG image placeholder in `assets/images/services/`. Replace the corresponding
 `studio-service__media` image with a project photo or screenshot while retaining its
 width, height and lazy loading attributes. These illustrations are placeholders, not
 representations of completed client work. The section links work without JavaScript;
 scroll tracking, reveal motion and hover effects progressively enhance the page.
+
+`studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. Process photo slots use 800 x 500 SVG placeholders in `assets/images/process/`; replace them with project photos when available. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
