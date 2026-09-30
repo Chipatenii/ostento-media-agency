@@ -29,6 +29,14 @@ use a matching 3:2 frame. These assets use Lanczos resampling, a centered
 crop and WebP quality 90, with no upscaling from the supplied source images.
 Both cards open a larger image preview using the existing project modal.
 
+## Print media
+
+The Zambia Mining and Investment Insaka hanging banner uses the supplied
+image as `zambia-mining-insaka-banner.webp` at **800x672**, with a
+**400x336** sibling ending in `-400.webp`. A matching 25:21 frame keeps the
+banner and its setting visible. Assets use Lanczos resampling and WebP
+quality 90. The card opens a larger preview in the project modal.
+
 ## Optional live captures
 
 For projects without a supplied screenshot, run from the project root:

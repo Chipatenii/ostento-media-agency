@@ -978,6 +978,7 @@ p { margin: 0 0 var(--sp-3); }
 .work-card__media--square   { aspect-ratio: 1 / 1; }
 .work-card__media--portrait { aspect-ratio: 3 / 4; }
 .work-card__media--mockup   { aspect-ratio: 3 / 2; }
+.work-card__media--print    { aspect-ratio: 25 / 21; }
 
 /* Keep every website preview aligned with the supplied 1280x720 screenshots. */
 .pf-card[data-category="websites"] .work-card__media { aspect-ratio: 16 / 9; }
