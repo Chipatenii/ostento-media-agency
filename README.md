@@ -48,8 +48,10 @@ Every colour is a token in `:root`, so the scheme is changed in one place:
 | `--field-bg` | Input fill. White on the cream page, flipped to cream inside white panels so one field component reads in both |
 | `--act-0` to `--act-3` | Activity heat ramp, read by both the CSS legend and the JS that fills the grid |
 
-`assets/images/logo.png` is the white wordmark for the navy footer;
-`assets/images/logo-navy.png` is the same mark recoloured for the cream header.
+`assets/images/ostento-logo.webp` is the transparent orange and navy stacked logo
+used throughout the site. The footer renders the same asset entirely white using
+`brightness(0) invert(1)`, preserving its transparent background and exact shape.
+The `ostento-favicon-32.png` and `ostento-favicon-180.png` icons use its orange monogram.
 
 ## Run locally
 

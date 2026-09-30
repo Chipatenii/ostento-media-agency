@@ -562,7 +562,7 @@
         });
     })();
 
-    /* ---------- Proof: placeholder client logo carousel ---------- */
+    /* ---------- Proof: client logo carousel ---------- */
     (function clientSlider() {
         var track = document.getElementById("client-track");
         if (!track) { return; }

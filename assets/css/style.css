@@ -238,7 +238,7 @@ p { margin: 0 0 var(--sp-3); }
 .site-header.is-scrolled { box-shadow: var(--shadow-sm); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-5); }
 .nav__brand { display: inline-flex; align-items: center; flex-shrink: 0; }
-.nav__brand img { height: 34px; width: auto; }
+.nav__brand img { height: 60px; width: auto; object-fit: contain; }
 .nav__menu { list-style: none; display: flex; align-items: center; gap: 0.2rem; margin: 0; padding: 0; }
 .nav__menu li { min-width: 0; }
 .nav__link {
@@ -783,7 +783,12 @@ p { margin: 0 0 var(--sp-3); }
 }
 .footer-top > * { min-width: 0; }
 .footer-brand__logo { display: inline-flex; align-items: center; min-height: 40px; margin-bottom: var(--sp-3); }
-.footer-brand__logo img { height: 40px; width: auto; }
+.footer-brand__logo img {
+    height: 128px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
 .footer-brand p { max-width: 27ch; margin: 0; color: var(--text-muted); font-size: var(--fs-200); }
 .footer-social { display: flex; gap: var(--sp-1); margin-top: var(--sp-3); }
 .footer-social a {
@@ -1240,17 +1245,23 @@ p { margin: 0 0 var(--sp-3); }
 .client-track:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 3px; }
 .client-logo {
     flex: 0 0 calc((100% - var(--sp-3)) / 2);
-    min-height: 116px;
+    height: 148px;
+    padding: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
-    background: var(--surface);
+    background: #fff;
     border: 1px solid var(--border);
     border-radius: var(--r-md);
-    color: var(--text-muted);
 }
-.client-logo svg { width: 64px; height: 64px; }
+.client-logo img {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    height: 112px;
+    object-fit: contain;
+}
 @media (min-width: 620px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 2) / 3); } }
 @media (min-width: 1001px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 3) / 4); } }
 .client-controls { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-3); }
