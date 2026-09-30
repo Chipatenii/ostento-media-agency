@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+  <title id="title">Large format printing image placeholder</title>
+  <rect width="800" height="500" fill="#EFE9DE"/>
+  <g fill="none" stroke="#0E1B3A" stroke-opacity=".8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="129" y="74" width="181" height="332" rx="4" fill="#fff"/><path d="M118 411h202M147 426h145" stroke-width="8"/><path d="M152 105h135M152 127h89"/><path d="m150 173 137 0-137 159z" fill="#FF6A1A" stroke="none"/><path d="M152 359h135M152 379h99"/><rect x="390" y="224" width="303" height="119" rx="12" fill="#0E1B3A"/><rect x="422" y="269" width="237" height="17" rx="5" fill="#fff" stroke="none"/><circle cx="663" cy="248" r="5" fill="#FF6A1A" stroke="none"/><path d="M406 343v54M678 343v54" stroke-width="10"/><path d="M448 277h184v130H448z" fill="#fff"/><path d="M469 306h142M469 329h100"/><rect x="469" y="353" width="142" height="30" rx="3" fill="#FF6A1A" stroke="none"/><path d="M416 192h254" stroke-width="8"/></g>
+</svg>

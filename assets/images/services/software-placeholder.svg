@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+  <title id="title">Business software image placeholder</title>
+  <rect width="800" height="500" fill="#E9EEF1"/>
+  <g fill="none" stroke="#0E1B3A" stroke-opacity=".8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="100" y="80" width="600" height="340" rx="14" fill="#fff"/><path d="M230 80v340"/><rect x="125" y="112" width="80" height="18" rx="5" fill="#0E1B3A" stroke="none"/><path d="M125 168h72M125 203h52M125 238h62M125 273h45"/><rect x="263" y="112" width="115" height="67" rx="7" fill="#F3ECE0" stroke="none"/><rect x="403" y="112" width="115" height="67" rx="7" fill="#F3ECE0" stroke="none"/><rect x="543" y="112" width="115" height="67" rx="7" fill="#FFE0C5" stroke="none"/><rect x="263" y="215" width="395" height="165" rx="7" fill="#F8F7F4" stroke="none"/><path d="M290 346h338M290 306h338M290 266h338" stroke="#D5DADF"/><path d="m292 330 64-35 64 12 62-49 63 12 65-36" stroke="#BF4708" stroke-width="5"/></g>
+</svg>

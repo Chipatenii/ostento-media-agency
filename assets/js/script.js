@@ -1,7 +1,7 @@
 /* =========================================================
    Ostento - interactions
-   Header state, nav, reveal, meters, scroll-spy, FAQ,
-   activity grid, cookie consent, forms.
+   Header state, nav, reveal, service navigation, scroll-spy,
+   cookie consent, forms.
    ========================================================= */
 (function () {
     "use strict";
@@ -12,17 +12,16 @@
     var pageName = location.pathname.split("/").pop();
     if (!pageName || pageName === "index.html") {
         var legacyPage = {
-            "#numbers": "studio.html#numbers",
-            "#build": "studio.html#build",
-            "#develop": "studio.html#develop",
+            "#numbers": "studio.html",
+            "#build": "studio.html#services",
+            "#develop": "studio.html#software",
             "#work": "portfolio.html",
             "#inquiry": "contact.html",
             "#studio": "studio.html",
             "#proof": "clients.html",
             "#process": "process.html",
-            "#faq": "faq.html",
-            "#system": "studio.html#system",
-            "#activity": "studio.html#activity"
+            "#system": "process.html",
+            "#activity": "portfolio.html"
         }[location.hash];
         if (legacyPage) { location.replace(legacyPage); return; }
     }
@@ -157,16 +156,10 @@
         });
     }
 
-    /* ---------- Staggered reveal + capability meters ---------- */
+    /* ---------- Staggered reveal ---------- */
     var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-    function fillMeters(scope) {
-        scope.querySelectorAll(".meter__fill").forEach(function (el) {
-            el.style.width = (el.getAttribute("data-val") || 0) + "%";
-        });
-    }
     if (reduceMotion || !("IntersectionObserver" in window)) {
         revealEls.forEach(function (el) { el.classList.add("is-in"); });
-        fillMeters(document);
     } else {
         var io = new IntersectionObserver(function (entries, obs) {
             entries.forEach(function (entry) {
@@ -176,11 +169,14 @@
                 var idx = siblings.indexOf(el);
                 el.style.transitionDelay = (idx > 0 ? Math.min(idx, 6) * 70 : 0) + "ms";
                 el.classList.add("is-in");
-                if (el.querySelector(".meter__fill")) { fillMeters(el); }
+                el.classList.remove("is-pending");
                 obs.unobserve(el);
             });
         }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
-        revealEls.forEach(function (el) { io.observe(el); });
+        revealEls.forEach(function (el) {
+            if (el.closest(".studio-main")) { el.classList.add("is-pending"); }
+            io.observe(el);
+        });
     }
 
     /* ---------- Scroll-spy active nav ---------- */
@@ -203,59 +199,42 @@
         sections.forEach(function (s) { spy.observe(s); });
     }
 
-    /* ---------- FAQ accordion ---------- */
-    var faqList = document.getElementById("faq-list");
-    if (faqList) {
-        faqList.addEventListener("click", function (e) {
-            var q = e.target.closest(".faq-q");
-            if (!q) { return; }
-            var open = q.getAttribute("aria-expanded") === "true";
-            var answer = q.nextElementSibling;
-            // Close others for a clean single-open accordion.
-            faqList.querySelectorAll(".faq-q").forEach(function (other) {
-                if (other !== q) {
-                    other.setAttribute("aria-expanded", "false");
-                    other.nextElementSibling.style.height = "0px";
+    /* ---------- Studio service navigation ---------- */
+    (function studioServiceNav() {
+        var nav = document.querySelector(".studio-service-nav");
+        if (!nav) { return; }
+        var links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+        var sections = links.map(function (link) {
+            return document.getElementById(link.getAttribute("href").slice(1));
+        }).filter(Boolean);
+        function markCurrent(id) {
+            links.forEach(function (link) {
+                if (link.getAttribute("href") === "#" + id) {
+                    link.setAttribute("aria-current", "location");
+                } else {
+                    link.removeAttribute("aria-current");
                 }
             });
-            if (open) {
-                q.setAttribute("aria-expanded", "false");
-                answer.style.height = "0px";
-            } else {
-                q.setAttribute("aria-expanded", "true");
-                answer.style.height = answer.firstElementChild.offsetHeight + "px";
-            }
-        });
-        // The stylesheet leaves answers open so they are readable with JS
-        // off. With JS present, collapse them before first paint.
-        faqList.querySelectorAll(".faq-a").forEach(function (a) { a.style.height = "0px"; });
-
-        window.addEventListener("resize", function () {
-            faqList.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(function (q) {
-                q.nextElementSibling.style.height = q.nextElementSibling.firstElementChild.offsetHeight + "px";
-            });
-        });
-    }
-
-    /* ---------- Activity contribution grid ---------- */
-    var actGrid = document.getElementById("activity-grid");
-    if (actGrid) {
-        var levels = ["var(--act-0)", "var(--act-1)", "var(--act-2)", "var(--act-3)"];
-        var frag = document.createDocumentFragment();
-        // 53 weeks x 7 days, deterministic pseudo-random so build phases cluster.
-        for (var i = 0; i < 53 * 7; i++) {
-            var week = Math.floor(i / 7);
-            var wave = Math.sin(week / 4) * 0.5 + 0.5;          // build phases ebb and flow
-            var noise = ((i * 2654435761) % 100) / 100;          // cheap deterministic noise
-            var score = wave * 0.7 + noise * 0.4;
-            var lvl = score > 0.85 ? 3 : score > 0.6 ? 2 : score > 0.38 ? 1 : 0;
-            var cell = document.createElement("span");
-            cell.className = "activity-cell";
-            cell.style.background = levels[lvl];
-            frag.appendChild(cell);
         }
-        actGrid.appendChild(frag);
-    }
+        function markHash() {
+            if (sections.some(function (section) { return "#" + section.id === location.hash; })) {
+                markCurrent(location.hash.slice(1));
+            }
+        }
+        nav.addEventListener("click", function (event) {
+            var link = event.target.closest('a[href^="#"]');
+            if (link && nav.contains(link)) { markCurrent(link.getAttribute("href").slice(1)); }
+        });
+        window.addEventListener("hashchange", markHash);
+        markHash();
+        if (!("IntersectionObserver" in window)) { return; }
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) { markCurrent(entry.target.id); }
+            });
+        }, { rootMargin: "-32% 0px -48% 0px", threshold: 0 });
+        sections.forEach(function (section) { observer.observe(section); });
+    })();
 
     /* ---------- Cookie consent ---------- */
     (function cookieConsent() {

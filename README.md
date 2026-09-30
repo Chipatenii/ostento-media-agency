@@ -3,7 +3,7 @@
 Marketing site for Ostento, a design, development, and brand studio.
 Tagline: **Simple solutions for everyday business problems.**
 
-A multi-page studio site with a photographic homepage, a filterable portfolio across five disciplines, standalone Studio, Clients and reviews, Process, and FAQ pages, an Academy waitlist, a full legal set, a floating WhatsApp link, and a cookie banner. Static HTML, CSS, and vanilla JavaScript. No build step.
+A multi-page studio site with a photographic homepage, a filterable portfolio across five disciplines, standalone Studio, Clients and reviews, and Process pages, an Academy waitlist, a full legal set, a floating WhatsApp link, and a cookie banner. Static HTML, CSS, and vanilla JavaScript. No build step.
 
 **Ostento Media Agency** is a registered trading name in Zambia (PACRA No. 320230069962) and is based in Lusaka.
 
@@ -14,20 +14,19 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `index.html` | Home: photographic hero, two calls to action, and footer |
 | `contact.html` | Project inquiry form that prepares an email or WhatsApp draft, plus direct contact links |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
-| `studio.html` | Studio overview, numbers, services, delivery approach, and illustrated project activity |
-| `clients.html` | Placeholder client logo carousel and Trustmary reviews |
+| `studio.html` | Five services with image placeholders, section navigation, and project inquiry links |
+| `clients.html` | Eight client logos in a carousel and Trustmary reviews |
 | `process.html` | Discovery through launch process |
-| `faq.html` | Frequently asked questions |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
-| `assets/js/script.js` | Nav, reveal, FAQ, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
+| `assets/js/script.js` | Nav, reveal, service navigation, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
 | `robots.txt`, `sitemap.xml` | Crawl directives for the GitHub Pages URL; update them if a custom domain is used |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
 ## Shared navigation and footer
 
-All 12 HTML pages share the same header and footer markup, with each page's current navigation link marked using `aria-current="page"`. Keep these blocks in sync when adding a page.
+All 11 HTML pages share the same header and footer markup, with each page's current navigation link marked using `aria-current="page"`. Keep these blocks in sync when adding a page.
 
 The header uses one contact action and a consistent active state. At 1000px and below, the Menu button opens an animated two-column panel with Escape, outside-click closing, focus containment, and scroll locking. Without JavaScript, the navigation stays visible. Reduced-motion preferences disable the transitions.
 
@@ -122,7 +121,6 @@ grep -rn 'data-todo\|your-form-id' . --include=*.html --include=*.txt --include=
 | **Client logos** | `clients.html` | Six neutral placeholder marks until approved logos are supplied |
 | **Project images** | None on disk | Monogram tiles, which are a designed state |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
-| **Section 01 numbers** | "20+", "10+", "5+" in `studio.html` | Asserted as fact and currently unsourced. Confirm or change them |
 
 Review markup is left to the Trustmary widget on `clients.html`. Do not add manually asserted `Review` or `AggregateRating` JSON-LD for reviews the page does not display. The `ItemList` is also left out of `portfolio.html` while cards are examples.
 
@@ -148,3 +146,13 @@ familiar with GDPR, before launch.
 - The site honours `prefers-reduced-motion` with a calm, static variant.
 - Cookie consent is opt-in for non-essential cookies, stored per visitor in
   `localStorage`; the footer "Cookie Settings" link reopens it at any time.
+
+## Studio services
+
+Studio presents website and web app development, custom business software, marketing,
+branding and graphic design, and large format printing. Each service has a matching
+800 x 500 SVG image placeholder in `assets/images/services/`. Replace the corresponding
+`studio-service__media` image with a project photo or screenshot while retaining its
+width, height and lazy loading attributes. These illustrations are placeholders, not
+representations of completed client work. The section links work without JavaScript;
+scroll tracking, reveal motion and hover effects progressively enhance the page.
