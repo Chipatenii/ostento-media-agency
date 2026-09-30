@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=20260930-thumbnails">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260930-categories">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -137,6 +137,7 @@
                      See that directory's README for dimensions and maintenance.
                      Add a <p class="work-card__result"> line to any card once
                      you have a result worth stating. -->
+                <h2 class="pf-category" data-portfolio-category="websites">Websites</h2>
                 <article class="work-card pf-card" data-category="websites" data-slug="flaxio-investment" data-featured>
                     <div class="work-card__media work-card__media--wide" data-thumb="flaxio-investment">
                         <img src="assets/images/work/flaxio-investment.webp"
@@ -235,35 +236,38 @@
                     </div>
                 </article>
 
-                <article class="work-card pf-card" data-category="profiles" data-example data-featured>
-                    <div class="work-card__media work-card__media--portrait wm-c wm-mono" aria-hidden="true">
-                        <span class="wm-mono__glyph">CP</span>
-                        <span class="wm-mono__cat">Company profile</span>
+                <h2 class="pf-category" data-portfolio-category="profiles">Company profiles</h2>
+                <article class="work-card pf-card" data-category="profiles" data-slug="geonsi-engineering" data-featured>
+                    <div class="work-card__media work-card__media--mockup" data-thumb="geonsi-engineering">
+                        <img src="assets/images/work/geonsi-engineering.webp"
+                             srcset="assets/images/work/geonsi-engineering-480.webp 480w, assets/images/work/geonsi-engineering.webp 960w"
+                             sizes="(max-width: 619px) calc(100vw - 50px), (max-width: 1000px) calc((100vw - 76px) / 2), (max-width: 1199px) calc((100vw - 102px) / 3), 366px"
+                             width="960" height="640" alt="Geonsi Engineering Limited company profile mockup" loading="lazy" decoding="async">
                     </div>
                     <div class="work-card__body">
                         <span class="work-card__tag">Company profile</span>
-                        <span class="pf-example">Example</span>
-                        <h3><button class="work-card__link" type="button" data-open-project>Company profile, sixteen pages</button></h3>
-                        <p class="work-card__client" data-todo="client">Client</p>
-                        <p class="work-card__result">One document that answers what a buyer asks before asking.</p>
+                        <h3><button class="work-card__link" type="button" data-open-project>Geonsi Engineering Limited</button></h3>
                     </div>
                     <template class="work-card__detail">
-                        <p>Scope: structure, copy editing, layout, print ready PDF, and a screen version.</p>
+                        <img src="assets/images/work/geonsi-engineering.webp" width="960" height="640" alt="Geonsi Engineering Limited company profile mockup" decoding="async">
                     </template>
                 </article>
-                <article class="work-card pf-card" data-category="profiles" data-example>
-                    <div class="work-card__media work-card__media--portrait wm-c wm-mono" aria-hidden="true">
-                        <span class="wm-mono__glyph">CP</span>
-                        <span class="wm-mono__cat">Company profile</span>
+                <article class="work-card pf-card" data-category="profiles" data-slug="hems-technologies">
+                    <div class="work-card__media work-card__media--mockup" data-thumb="hems-technologies">
+                        <img src="assets/images/work/hems-technologies.webp"
+                             srcset="assets/images/work/hems-technologies-480.webp 480w, assets/images/work/hems-technologies.webp 960w"
+                             sizes="(max-width: 619px) calc(100vw - 50px), (max-width: 1000px) calc((100vw - 76px) / 2), (max-width: 1199px) calc((100vw - 102px) / 3), 366px"
+                             width="960" height="640" alt="Hems Technologies Limited company profile mockup" loading="lazy" decoding="async">
                     </div>
                     <div class="work-card__body">
                         <span class="work-card__tag">Company profile</span>
-                        <span class="pf-example">Example</span>
-                        <h3>Capability statement, four pages</h3>
-                        <p class="work-card__client" data-todo="client">Client</p>
-                        <p class="work-card__result">A short profile that fits a tender pack.</p>
+                        <h3><button class="work-card__link" type="button" data-open-project>Hems Technologies Limited</button></h3>
                     </div>
+                    <template class="work-card__detail">
+                        <img src="assets/images/work/hems-technologies.webp" width="960" height="640" alt="Hems Technologies Limited company profile mockup" decoding="async">
+                    </template>
                 </article>
+                <h2 class="pf-category" data-portfolio-category="logos">Logos</h2>
                 <article class="work-card pf-card" data-category="logos" data-example data-featured>
                     <div class="work-card__media work-card__media--square wm-a wm-mono" aria-hidden="true">
                         <span class="wm-mono__glyph">Aa</span>
@@ -293,6 +297,7 @@
                         <p class="work-card__result">The mark people know, rebuilt to work everywhere.</p>
                     </div>
                 </article>
+                <h2 class="pf-category" data-portfolio-category="marketing">Digital marketing</h2>
                 <article class="work-card pf-card" data-category="marketing" data-example>
                     <div class="work-card__media work-card__media--wide wm-b wm-mono" aria-hidden="true">
                         <span class="wm-mono__glyph">%</span>
@@ -319,6 +324,7 @@
                         <p class="work-card__result">Ads pointed at one page built to convert.</p>
                     </div>
                 </article>
+                <h2 class="pf-category" data-portfolio-category="print">Print media</h2>
                 <article class="work-card pf-card" data-category="print" data-example>
                     <div class="work-card__media work-card__media--portrait wm-d wm-mono" aria-hidden="true">
                         <span class="wm-mono__glyph">A3</span>
@@ -462,6 +468,6 @@
         </div>
     </div>
 
-    <script src="assets/js/script.js?v=20260925g" defer></script>
+    <script src="assets/js/script.js?v=20260930-categories" defer></script>
 </body>
 </html>

@@ -20,6 +20,15 @@ The HTML uses `srcset`, `sizes`, explicit dimensions and lazy loading.
 
 Use the supplied screenshots when updating these files.
 
+## Company profile mockups
+
+Geonsi Engineering Limited (`geonsi-engineering`) and Hems Technologies
+Limited (`hems-technologies`) use supplied landscape mockups. Each main WebP
+is **960x640**, with a **480x320** sibling ending in `-480.webp`. The cards
+use a matching 3:2 frame. These assets use Lanczos resampling, a centered
+crop and WebP quality 90, with no upscaling from the supplied source images.
+Both cards open a larger image preview using the existing project modal.
+
 ## Optional live captures
 
 For projects without a supplied screenshot, run from the project root:

@@ -327,6 +327,7 @@
         if (!grid) { return; }
 
         var cards = Array.prototype.slice.call(grid.querySelectorAll(".pf-card"));
+        var categoryHeadings = Array.prototype.slice.call(grid.querySelectorAll(".pf-category"));
         var filters = Array.prototype.slice.call(document.querySelectorAll(".pf-filter"));
         var toolbar = document.querySelector(".pf-toolbar");
         var searchWrap = document.querySelector(".pf-search");
@@ -379,7 +380,7 @@
                 if (slot) { slot.textContent = n; }
             });
 
-            var shownNow = Math.min(total, state.shown);
+            var shownNow = state.category === "all" ? total : Math.min(total, state.shown);
             if (status) {
                 var txt;
                 if (total === 0) {
@@ -400,13 +401,22 @@
         function apply() {
             var matched = cards.filter(matches);
             cards.forEach(function (c) { c._show = false; });
-            matched.slice(0, state.shown).forEach(function (c) { c._show = true; });
+            // The overview shows every category together; individual filters
+            // retain their existing Show more behavior.
+            var limit = state.category === "all" ? matched.length : state.shown;
+            matched.slice(0, limit).forEach(function (c) { c._show = true; });
 
             var revealed = [];
             cards.forEach(function (card) {
                 var wasHidden = card.classList.contains("is-hidden");
                 card.classList.toggle("is-hidden", !card._show);
                 if (card._show && wasHidden) { revealed.push(card); }
+            });
+            categoryHeadings.forEach(function (heading) {
+                var category = heading.getAttribute("data-portfolio-category");
+                heading.hidden = state.category !== "all" || !cards.some(function (card) {
+                    return card._cat === category && card._show;
+                });
             });
             staggerIn(revealed);
             render(matched.length);
