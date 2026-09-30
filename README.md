@@ -25,6 +25,14 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `robots.txt`, `sitemap.xml` | Crawl directives for the GitHub Pages URL; update them if a custom domain is used |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
+## Shared navigation and footer
+
+All 12 HTML pages share the same header and footer markup, with each page's current navigation link marked using `aria-current="page"`. Keep these blocks in sync when adding a page.
+
+The header uses one contact action and a consistent active state. At 1000px and below, the Menu button opens an animated two-column panel with Escape, outside-click closing, focus containment, and scroll locking. Without JavaScript, the navigation stays visible. Reduced-motion preferences disable the transitions.
+
+The footer uses three desktop columns, a two-column tablet layout, and stacked mobile sections with a two-column link grid. Contact details use inline SVG icons. Policies and the business registration sit in a separate bottom row. The floating WhatsApp shortcut hides while footer contacts are visible or the mobile menu is open.
+
 ## Colour
 
 Cream is the page, white is the card, orange is the primary, navy is the accent.

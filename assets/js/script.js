@@ -83,6 +83,16 @@
     var yearEl = document.getElementById("year");
     if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
 
+    /* Keep the floating contact shortcut clear of the footer's contact links. */
+    var whatsappFloat = document.querySelector(".whatsapp-float");
+    var footerContact = document.querySelector(".footer-contact");
+    if (whatsappFloat && footerContact && "IntersectionObserver" in window) {
+        var contactObserver = new IntersectionObserver(function (entries) {
+            whatsappFloat.classList.toggle("is-hidden", entries[0].isIntersecting);
+        });
+        contactObserver.observe(footerContact);
+    }
+
     /* ---------- Sticky header state ---------- */
     var header = document.getElementById("site-header");
     if (header) {
@@ -97,13 +107,20 @@
     /* ---------- Mobile navigation ---------- */
     var toggle = document.querySelector(".nav__toggle");
     var menu = document.getElementById("nav-menu");
-    var header = document.getElementById("site-header");
     if (toggle && menu) {
         var releaseNav = null;
+        var backdrop = document.querySelector(".nav__backdrop");
+        var toggleLabel = toggle.querySelector(".nav__toggle-label");
+        if (header) { header.classList.add("nav-ready"); }
 
         function openNav() {
+            if (menu.classList.contains("is-open")) { return; }
             menu.classList.add("is-open");
+            if (header) { header.classList.add("nav-is-open"); }
             toggle.setAttribute("aria-expanded", "true");
+            toggle.setAttribute("aria-label", "Close menu");
+            if (toggleLabel) { toggleLabel.textContent = "Close"; }
+            if (backdrop) { backdrop.hidden = false; }
             lockScroll();
             // Trap on the header, not the menu, so the toggle stays reachable.
             releaseNav = trapFocus(header || menu);
@@ -111,12 +128,18 @@
         function closeNav(returnFocus) {
             if (!menu.classList.contains("is-open")) { return; }
             menu.classList.remove("is-open");
+            if (header) { header.classList.remove("nav-is-open"); }
             toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open menu");
+            if (toggleLabel) { toggleLabel.textContent = "Menu"; }
+            if (backdrop) { backdrop.hidden = true; }
             if (releaseNav) { releaseNav(); releaseNav = null; }
             unlockScroll();
             if (returnFocus) { toggle.focus(); }
         }
 
+        if (backdrop) { backdrop.addEventListener("click", function () { closeNav(true); }); }
+        window.addEventListener("pageshow", function () { closeNav(false); });
         toggle.addEventListener("click", function () {
             if (menu.classList.contains("is-open")) { closeNav(false); } else { openNav(); }
         });
