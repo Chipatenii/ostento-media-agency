@@ -19,7 +19,7 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `process.html` | Four project stages with photo placeholders, stage navigation and deliverable notes |
 | `academy.html` | Academy "coming soon" waitlist capture |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
-| `assets/css/style.css` | Design system (cream page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
+| `assets/css/style.css` | Design system (white page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
 | `assets/js/script.js` | Nav, reveal, service navigation, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
 | `robots.txt`, `sitemap.xml` | Crawl directives for the GitHub Pages URL; update them if a custom domain is used |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
@@ -34,17 +34,17 @@ The footer uses three desktop columns, a two-column tablet layout, and stacked m
 
 ## Colour
 
-Cream is the page, white is the card, orange is the primary, navy is the accent.
+Pure white (#FFFFFF) is the page and card background, orange is the primary, and navy is the accent. Neutral grey is used for hover states and loading surfaces.
 Every colour is a token in `:root`, so the scheme is changed in one place:
 
 | Token | Role |
 |---|---|
-| `--cream`, `--cream-2` | Page background and the one step down from it |
+| `--white`, `--surface-2` | Pure white backgrounds and neutral grey interaction surfaces |
 | `--white` / `--surface` | Cards, panels, the inquiry block, modals |
 | `--orange` | Primary fills: buttons, the heat ramp, indicators |
-| `--orange-ink` | Orange as *text* or a small mark. `--orange` only reaches 2.7:1 on cream, so it is never used for type |
+| `--orange-ink` | Orange as *text* or a small mark. `--orange` does not meet body-text contrast on white, so it is never used for type |
 | `--navy` | Accent: ink, the footer block, selected filter pills, placeholder media tiles |
-| `--field-bg` | Input fill. White on the cream page, flipped to cream inside white panels so one field component reads in both |
+| `--field-bg` | White input fills with visible borders on pages and panels |
 | `--act-0` to `--act-3` | Activity heat ramp, read by both the CSS legend and the JS that fills the grid |
 
 `assets/images/ostento-logo.webp` is the transparent orange and navy stacked logo
@@ -84,7 +84,7 @@ in a 16/10 box letterboxes and an A4 page crops:
 
 With a real image, swap the `wm-mono` tile for an `<img>`. For logo artwork add
 `work-card__media--plate`, which puts the mark on a plain white plate so a mark
-carrying its own background does not collide with the cream page.
+carrying its own background does not collide with the white page.
 
 **Thumbnails for live websites** are generated rather than made by hand:
 

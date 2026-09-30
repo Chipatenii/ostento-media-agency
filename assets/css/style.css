@@ -1,30 +1,28 @@
 /* =========================================================
    Ostento - light editorial studio site
-   Cream foundation, orange as the primary, navy kept for accents.
+   White foundation, orange as the primary, navy kept for accents.
    One type scale, three radii, measured motion.
    ========================================================= */
 
 :root {
-    /* Core palette. Cream is the page, white is the card, navy is ink and
+    /* Core palette. Pure white is the page and card background; navy is ink and
        the one dark block at the foot of the page. */
-    --cream:       #FBF7F0;
-    --cream-2:     #F3ECE0;
     --white:       #FFFFFF;
-    --bg:          var(--cream);
+    --bg:          var(--white);
     --surface:     var(--white);
-    --surface-2:   var(--cream-2);
+    --surface-2:   #F5F5F5;
     --navy:        #0E1B3A;
     --navy-2:      #1B2E5C;
 
     /* Orange is the primary. --orange fills; --orange-ink carries text and
-       small marks, because #FF6A1A only reaches 2.7:1 on cream. */
+       small marks, because #FF6A1A does not meet body-text contrast on white. */
     --orange:      #FF6A1A;
     --orange-ink:  #BF4708;
     --orange-hover:#F05A0B;
     --orange-soft: #FF8A4C;
     --orange-tint: rgba(255, 106, 26, 0.10);
 
-    /* Supporting marks, each dark enough to read on cream */
+    /* Supporting marks, each dark enough to read on white */
     --amber:       #9E5F06;
     --teal:        #1F7A74;
     --danger:      #B3261E;
@@ -35,9 +33,7 @@
     --border-2:    rgba(14, 27, 58, 0.20);
     --border-orange: rgba(255, 106, 26, 0.45);
 
-    /* Input fill. One field component, two backdrops: white reads as a well
-       on the cream page, cream reads as one inside a white card. Panels that
-       are themselves white flip this token rather than redeclaring the field. */
+    /* Inputs use white fills and visible borders on both pages and cards. */
     --field-bg: var(--white);
 
     /* Activity heat ramp, read by both the CSS legend and the JS that
@@ -228,7 +224,7 @@ p { margin: 0 0 var(--sp-3); }
     height: var(--header-h);
     display: flex;
     align-items: center;
-    background: rgba(251, 247, 240, 0.94);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: saturate(140%) blur(16px);
     -webkit-backdrop-filter: saturate(140%) blur(16px);
     border-bottom: 1px solid var(--border);
@@ -253,7 +249,7 @@ p { margin: 0 0 var(--sp-3); }
     font-weight: var(--w-medium);
     transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-.nav__link:hover, .nav__link.is-active { background: var(--cream-2); color: var(--navy); }
+.nav__link:hover, .nav__link.is-active { background: var(--surface-2); color: var(--navy); }
 .nav__link::after {
     content: "";
     position: absolute;
@@ -301,7 +297,7 @@ p { margin: 0 0 var(--sp-3); }
     font-size: var(--fs-200);
     cursor: pointer;
 }
-.nav__toggle:hover { background: var(--cream-2); }
+.nav__toggle:hover { background: var(--surface-2); }
 .nav__toggle-icon { position: relative; width: 18px; height: 14px; }
 .nav__toggle-icon::before, .nav__toggle-icon::after {
     content: "";
@@ -348,14 +344,14 @@ p { margin: 0 0 var(--sp-3); }
     color: var(--navy);
     border-color: var(--border-2);
 }
-.btn--secondary:hover { color: var(--cream); background: var(--navy); transform: translateY(-2px); }
+.btn--secondary:hover { color: var(--white); background: var(--navy); transform: translateY(-2px); }
 .btn--ghost {
-    /* Cream, not white: these sit inside the white cookie banner and modal. */
-    background: var(--cream);
+    /* White buttons inside the cookie banner and modal. */
+    background: var(--white);
     color: var(--text);
     border-color: var(--border-2);
 }
-.btn--ghost:hover { background: var(--cream-2); border-color: var(--navy-2); transform: translateY(-2px); }
+.btn--ghost:hover { background: var(--surface-2); border-color: var(--navy-2); transform: translateY(-2px); }
 .btn--lg { padding: 1.1rem 1.8rem; font-size: var(--fs-300); }
 .btn--block { width: 100%; }
 .btn__spinner {
@@ -383,7 +379,7 @@ p { margin: 0 0 var(--sp-3); }
 
 /* ---------- Hero ---------- */
 .hero--studio {
-    background: var(--cream);
+    background: var(--white);
     isolation: isolate;
 }
 .hero--studio::before,
@@ -401,8 +397,8 @@ p { margin: 0 0 var(--sp-3); }
 }
 .hero--studio::after {
     background:
-        linear-gradient(90deg, rgba(251, 247, 240, 0.96) 0%, rgba(251, 247, 240, 0.86) 38%, rgba(251, 247, 240, 0.42) 70%, rgba(251, 247, 240, 0.27) 100%),
-        linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0) 32%);
+        linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.86) 38%, rgba(255, 255, 255, 0.42) 70%, rgba(255, 255, 255, 0.27) 100%),
+        linear-gradient(0deg, var(--white) 0%, rgba(255, 255, 255, 0) 32%);
 }
 .hero--studio .hero__inner { max-width: 680px; }
 .hero--studio .hero__title {
@@ -540,7 +536,7 @@ p { margin: 0 0 var(--sp-3); }
     display: flex; align-items: center; justify-content: center;
     font-family: var(--font-display);
     font-size: var(--fs-700);
-    color: rgba(251, 247, 240, 0.9);
+    color: rgba(255, 255, 255, 0.9);
     overflow: hidden;
 }
 .work-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -557,7 +553,7 @@ p { margin: 0 0 var(--sp-3); }
 }
 .work-card:hover .work-card__media::after { opacity: 0.18; }
 /* Placeholder tiles stay dark: navy is the accent that lets the light
-   monogram on top read, and it keeps the grid from going flat on cream. */
+   monogram on top read, and it keeps the grid from going flat on white. */
 .wm-a { background: linear-gradient(135deg, #0E1B3A, #1B2E5C); }
 .wm-b { background: linear-gradient(135deg, #0E1B3A, #FF6A1A); }
 .wm-c { background: linear-gradient(135deg, #BF4708, #FF8A4C); }
@@ -600,7 +596,7 @@ p { margin: 0 0 var(--sp-3); }
     position: sticky;
     top: var(--header-h);
     z-index: 100;
-    background: var(--cream);
+    background: var(--white);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
@@ -630,7 +626,7 @@ p { margin: 0 0 var(--sp-3); }
     scroll-margin-top: calc(var(--header-h) + 88px);
 }
 .studio-service:nth-child(even) .studio-service__media { order: 2; }
-.studio-service__media { aspect-ratio: 8 / 5; overflow: hidden; border-radius: var(--r-md); background: var(--cream-2); }
+.studio-service__media { aspect-ratio: 8 / 5; overflow: hidden; border: 1px solid var(--border); border-radius: var(--r-md); background: var(--white); }
 .studio-service__media img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s var(--ease-out); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     .studio-service:hover .studio-service__media img { transform: scale(1.025); }
@@ -736,7 +732,7 @@ p { margin: 0 0 var(--sp-3); }
 
 /* ---------- Inquiry (10) ---------- */
 .inquiry {
-    --field-bg: var(--cream);
+    --field-bg: var(--white);
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--r-lg);
@@ -793,7 +789,7 @@ p { margin: 0 0 var(--sp-3); }
 
 /* ---------- Shared footer ---------- */
 .site-footer {
-    --text: #F4F1EA;
+    --text: #FFFFFF;
     --text-muted: #B8C1D5;
     --border: rgba(255, 255, 255, 0.12);
     background: var(--navy);
@@ -894,7 +890,7 @@ p { margin: 0 0 var(--sp-3); }
 .modal.is-open { display: flex; }
 .cookie-modal__box,
 .modal__box {
-    --field-bg: var(--cream);
+    --field-bg: var(--white);
     width: 100%; max-width: 560px;
     background: var(--surface);
     border: 1px solid var(--border-2);
@@ -1018,7 +1014,7 @@ p { margin: 0 0 var(--sp-3); }
 .pf-card[data-category="websites"] .work-card__media img { object-position: top; }
 
 /* Logo artwork is contained rather than cropped, on a plain white plate so
-   a mark with its own background does not collide with the cream page. */
+   a mark with its own background does not collide with the white page. */
 .work-card__media--plate { background: var(--white); }
 .work-card__media--plate img { object-fit: contain; padding: 12%; }
 
@@ -1032,14 +1028,14 @@ p { margin: 0 0 var(--sp-3); }
     font-weight: var(--w-bold);
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--cream);
+    color: var(--white);
 }
 .wm-mono__cat {
     font-family: var(--font-mono);
     font-size: var(--fs-100);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(251, 247, 240, 0.72);
+    color: rgba(255, 255, 255, 0.72);
 }
 
 /* ---------- Portfolio grid ---------- */
@@ -1147,7 +1143,7 @@ p { margin: 0 0 var(--sp-3); }
 /* Selected reads as a solid navy pill rather than a tint, so the active
    filter is unmistakable at a glance on a light page. */
 .pf-filter[aria-pressed="true"] {
-    color: var(--cream);
+    color: var(--white);
     border-color: var(--navy);
     background: var(--navy);
 }
@@ -1361,7 +1357,7 @@ p { margin: 0 0 var(--sp-3); }
         padding: var(--sp-3);
         border: 1px solid var(--border);
         border-radius: var(--r-md);
-        background: var(--cream);
+        background: var(--white);
         box-shadow: var(--shadow-lg);
         max-height: calc(100dvh - var(--header-h) - var(--sp-4));
         overflow-y: auto;
@@ -1398,8 +1394,8 @@ p { margin: 0 0 var(--sp-3); }
     .hero--studio::before { background-position: 58% center; opacity: 0.92; }
     .hero--studio::after {
         background:
-            linear-gradient(0deg, var(--cream) 0%, rgba(251, 247, 240, 0) 22%),
-            linear-gradient(90deg, rgba(251, 247, 240, 0.7), rgba(251, 247, 240, 0.42));
+            linear-gradient(0deg, var(--white) 0%, rgba(255, 255, 255, 0) 22%),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.42));
     }
     .hero--studio .hero__title { font-size: clamp(2.7rem, 10vw, 4.25rem); }
     .hero--studio .hero__sub { color: var(--text); }
@@ -1438,7 +1434,7 @@ p { margin: 0 0 var(--sp-3); }
 .process-intro__grid p { max-width: 54ch; color: var(--text-muted); }
 .process-main .reveal { opacity: 1; transform: none; }
 .process-main .reveal.is-pending { opacity: 0; transform: translateY(18px); }
-.process-stage-bar { position: sticky; top: var(--header-h); z-index: 100; background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.process-stage-bar { position: sticky; top: var(--header-h); z-index: 100; background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .process-stage-nav { display: flex; gap: clamp(1rem, 3vw, 2.5rem); overflow-x: auto; scroll-snap-type: x proximity; }
 .process-stage-nav a { display: inline-flex; align-items: center; gap: 0.6rem; flex-shrink: 0; min-height: 64px; border-bottom: 2px solid transparent; white-space: nowrap; color: var(--text-muted); font-size: var(--fs-200); font-weight: var(--w-medium); scroll-snap-align: start; }
 .process-stage-nav a span { font-size: var(--fs-100); color: var(--orange-ink); }
