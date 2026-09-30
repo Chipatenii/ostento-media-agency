@@ -978,6 +978,10 @@ p { margin: 0 0 var(--sp-3); }
 .work-card__media--square   { aspect-ratio: 1 / 1; }
 .work-card__media--portrait { aspect-ratio: 3 / 4; }
 
+/* Keep every website preview aligned with the supplied 1280x720 screenshots. */
+.pf-card[data-category="websites"] .work-card__media { aspect-ratio: 16 / 9; }
+.pf-card[data-category="websites"] .work-card__media img { object-position: top; }
+
 /* Logo artwork is contained rather than cropped, on a plain white plate so
    a mark with its own background does not collide with the cream page. */
 .work-card__media--plate { background: var(--white); }
