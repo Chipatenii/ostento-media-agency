@@ -153,11 +153,12 @@ Our Services presents website and web app development, custom business software,
 branding and graphic design, and large format printing. Custom business software uses
 the supplied StrataForge laptop and phone image; large format printing uses the supplied
 Ostento branded display and vehicle image. Branding and graphic design uses the supplied
-stationery mockup with an orange background. All three have responsive WebP files at
-1200 x 750 and 600 x 375, with lazy loading. The other two services have matching 800 x 500 SVG
-image placeholders in `assets/images/services/`. Replace those `studio-service__media`
-images with project photos or screenshots while retaining dimensions and lazy loading.
-The placeholder illustrations do not represent completed client work. The section links work without JavaScript;
+stationery mockup with an orange background. Marketing uses the supplied laptop and
+planning image with an orange background. Websites and web apps uses the supplied HTML
+laptop photo with an orange Ostento Media mug. All five use responsive WebP files at
+1200 x 750 and 600 x 375 in `assets/images/services/`, with lazy loading. When replacing
+`studio-service__media` images, retain their dimensions, responsive sources and lazy loading.
+The section links work without JavaScript;
 scroll tracking, reveal motion and hover effects progressively enhance the page.
 
 `studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. Process photo slots use 800 x 500 SVG placeholders in `assets/images/process/`; replace them with project photos when available. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
