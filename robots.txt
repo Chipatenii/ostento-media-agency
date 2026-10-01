@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://chipatenii.github.io/ostento-media-agency/sitemap.xml
+Sitemap: https://ostentomedia-agency.com/sitemap.xml

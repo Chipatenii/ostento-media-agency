@@ -3,8 +3,8 @@
 How this site is set up to appear in Google Search, Google Maps and other Google
 services for each of its services, and what still has to be done outside the code.
 
-Site address used in all tags: `https://chipatenii.github.io/ostento-media-agency/`
-(set once in `tools/seo.py`).
+Live site address used in all tags: `https://ostentomedia-agency.com/`
+(set once as `SITE_URL` in `tools/seo.py`).
 
 ## 1. What is already in the code
 
@@ -87,23 +87,24 @@ searches such as "printing near me" or "web design Lusaka".
 Import the site straight from Search Console at <https://www.bing.com/webmasters>.
 This also covers DuckDuckGo and Yahoo.
 
-## 4. Moving to a custom domain
+## 4. Changing the site address
 
-Search engines rank the address in the canonical tags, so do this as soon as a
-domain such as `ostentomedia-agency.com` points at the site:
+Every canonical URL, `og:url`, share image, structured data address,
+`sitemap.xml` and `robots.txt` uses `SITE_URL`. If the address ever changes
+(for example to a `www.` version):
 
 1. Edit `SITE_URL` in `tools/seo.py`.
-2. Run `python3 tools/seo.py`. It rewrites canonical URLs, `og:url`, share
-   images, structured data addresses, `sitemap.xml` and `robots.txt`.
-3. Add a `CNAME` file for GitHub Pages and configure DNS.
-4. Add the new domain as a **Domain** property in Search Console, submit the
-   sitemap again and use **Change of address** from the old property.
+2. Run `python3 tools/seo.py`.
+3. Update the canonical links in the redirect pages `studio.html` and
+   `refund-policy.html`.
+4. Add the new address in Search Console, submit the sitemap again and use
+   **Change of address** from the old property.
 5. Update the website link in the Google Business Profile and social profiles.
 
-Note: on a GitHub Pages project address, Google reads `robots.txt` from the
-domain root (`chipatenii.github.io/robots.txt`), not from this folder. The
-sitemap still works when submitted in Search Console. Both files take full
-effect on a custom domain.
+Make sure `https://ostentomedia-agency.com/` is the address visitors end up on.
+If the host redirects to `www.ostentomedia-agency.com`, set `SITE_URL` to the
+`www.` address instead, so the canonical tags match the page Google actually
+loads.
 
 ## 5. Maintenance checklist
 
