@@ -150,11 +150,14 @@ familiar with GDPR, before launch.
 ## Our Services and project process
 
 Our Services presents website and web app development, custom business software, marketing,
-branding and graphic design, and large format printing. Each service has a matching
-800 x 500 SVG image placeholder in `assets/images/services/`. Replace the corresponding
-`studio-service__media` image with a project photo or screenshot while retaining its
-width, height and lazy loading attributes. These illustrations are placeholders, not
-representations of completed client work. The section links work without JavaScript;
+branding and graphic design, and large format printing. Custom business software uses
+the supplied StrataForge laptop and phone image; large format printing uses the supplied
+Ostento branded display and vehicle image. Branding and graphic design uses the supplied
+stationery mockup with an orange background. All three have responsive WebP files at
+1200 x 750 and 600 x 375, with lazy loading. The other two services have matching 800 x 500 SVG
+image placeholders in `assets/images/services/`. Replace those `studio-service__media`
+images with project photos or screenshots while retaining dimensions and lazy loading.
+The placeholder illustrations do not represent completed client work. The section links work without JavaScript;
 scroll tracking, reveal motion and hover effects progressively enhance the page.
 
 `studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. Process photo slots use 800 x 500 SVG placeholders in `assets/images/process/`; replace them with project photos when available. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
