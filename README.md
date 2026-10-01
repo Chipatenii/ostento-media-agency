@@ -17,7 +17,7 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `services.html` | Five services with image placeholders, section navigation, and project inquiry links |
 | `clients.html` | Eight client logos in a carousel and Trustmary reviews |
 | `process.html` | Four project stages with photo placeholders, stage navigation and deliverable notes |
-| `academy.html` | Course availability enquiry with an Academy homepage preview |
+| `academy.html` | Course availability enquiry over an Academy screenshot background |
 | `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (white page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
 | `assets/js/script.js` | Nav, reveal, service navigation, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
@@ -163,6 +163,8 @@ scroll tracking, reveal motion and hover effects progressively enhance the page.
 
 `studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. All four process stages use the supplied team discussion, report review, desk work and handshake photos as responsive WebP files at 1200 x 750 and 600 x 375 in `assets/images/process/`, with lazy loading. The "Create and review" photo is framed around the hands, keyboard and mouse. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
 
-The Academy page displays the supplied homepage screenshot beside its introductory text,
-stacking below the text at 900px and narrower. Responsive WebP previews at 1200px and 600px
-wide are stored in `assets/images/academy/`, preserving the complete screenshot.
+The Academy page uses the supplied homepage screenshot as a full-width background behind
+its introductory text. A white colour overlay is strongest behind the copy and on smaller
+screens; a masked backdrop blur softens only the image edges. Text and buttons sit above
+both effects. Responsive WebP files at 1200px and 600px wide remain in
+`assets/images/academy/`. The decorative background is hidden from screen readers.
