@@ -13,7 +13,7 @@ Site address used in all tags: `https://chipatenii.github.io/ostento-media-agenc
 | Page titles and meta descriptions | `<head>` of every page | Each names the service and "Lusaka" or "Zambia", so the page matches local searches |
 | Canonical URL and `og:url` | Every indexable page | Tells Google which address is the real one and prevents duplicate listings |
 | Absolute `og:image` and `twitter:image` | Every indexable page | Reliable link previews on WhatsApp, Facebook, LinkedIn and X |
-| `ProfessionalService` and `WebSite` structured data | `index.html` | Business name, logo, phone, email, Lusaka address, PACRA number, areas served and a catalogue of all five services |
+| `ProfessionalService` and `WebSite` structured data | `index.html` | Business name, logo, phone, email, Lusaka address, PACRA number, areas served, social profiles (`sameAs`) and a catalogue of all five services |
 | `ItemList` of `Service` entries | `services.html` | One entry per service, each linked to its section, image and the business |
 | `ContactPage` structured data | `contact.html` | Connects the quote page to the business and its contact details |
 | `CollectionPage` structured data | `portfolio.html` | Marks the portfolio as part of the site and about the business |
@@ -76,7 +76,7 @@ searches such as "printing near me" or "web design Lusaka".
    descriptions as `services.html`.
 5. Phone `+260 770 381 593`, website the homepage address, service area Lusaka
    and Zambia. Use the same details everywhere (site, profile, Facebook,
-   LinkedIn, directories). Consistent name, address and phone is a ranking
+   LinkedIn, Instagram, directories). Consistent name, address and phone is a ranking
    factor for local results.
 6. Upload the logo, the service photos from `assets/images/services/` and
    project images from `assets/images/work/`.

@@ -33,7 +33,7 @@ All 11 content pages share the same header and footer markup, with each page's c
 
 The header uses one contact action and a consistent active state. At 1100px and below, the Menu button opens an animated two-column panel with Escape, outside-click closing, focus containment, and scroll locking. Without JavaScript, the navigation stays visible. Reduced-motion preferences disable the transitions.
 
-The footer uses three desktop columns, a two-column tablet layout, and stacked mobile sections with a two-column link grid. Contact details use inline SVG icons. Policies and the business registration sit in a separate bottom row. The floating WhatsApp shortcut hides while footer contacts are visible or the mobile menu is open.
+The footer uses three desktop columns, a two-column tablet layout, and stacked mobile sections with a two-column link grid. Contact details and the Facebook, LinkedIn and Instagram links use inline SVG icons. When a social address changes, update every footer and the `sameAs` list in `index.html`. Policies and the business registration sit in a separate bottom row. The floating WhatsApp shortcut hides while footer contacts are visible or the mobile menu is open.
 
 ## Colour
 
@@ -123,7 +123,6 @@ python3 tools/seo.py
 | **Custom domain** | `SITE_URL` in `tools/seo.py` | Uses the GitHub Pages URL until a domain is connected. See SEO.md |
 | **Google Search Console** | Verification meta tag in `index.html` | Not yet added. See SEO.md |
 | **Google Business Profile** | business.google.com | Not yet linked. See SEO.md |
-| **Instagram URL** | All footers | Facebook and LinkedIn ship; Instagram is absent rather than dead |
 | **Website results** | Website cards in `portfolio.html` | No `work-card__result` line yet. Add one per card when you have a result worth stating |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
 
