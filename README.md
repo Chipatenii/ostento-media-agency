@@ -15,12 +15,12 @@ A multi-page studio site with a photographic homepage, a filterable portfolio ac
 | `contact.html` | Project inquiry form that prepares an email or WhatsApp draft, plus direct contact links |
 | `portfolio.html` | Filterable portfolio: websites, company profiles, logos, digital marketing, print media |
 | `services.html` | Five services with image placeholders, section navigation, and project inquiry links |
-| `clients.html` | Eight client logos in a carousel and Trustmary reviews |
+| `clients.html` | Eight client logos in a continuous scrolling loop and Trustmary reviews |
 | `process.html` | Four project stages with photo placeholders, stage navigation and deliverable notes |
 | `academy.html` | Course availability enquiry over an Academy screenshot background |
-| `terms.html`, `privacy.html`, `refund-policy.html`, `cookies.html` | Policy pages |
+| `terms.html`, `privacy.html`, `refund-policy-and-payment-terms.html`, `cookies.html` | Policy pages |
 | `assets/css/style.css` | Design system (white page, orange primary, navy accent tokens, one type scale, three radii plus a named pill) |
-| `assets/js/script.js` | Nav, reveal, service navigation, portfolio filter, client carousel, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
+| `assets/js/script.js` | Nav, reveal, service navigation, portfolio filter, client logo loop, Trustmary loader, modal, cookie consent, forms, old homepage hash redirects |
 | `robots.txt`, `sitemap.xml` | Crawl directives for the GitHub Pages URL; update them if a custom domain is used |
 | `tools/capture-thumbnails.py` | Screenshots each live client homepage and wires it into the cards |
 
@@ -139,7 +139,7 @@ familiar with GDPR, before launch.
 - Portfolio cards deliberately carry no `.reveal` class. That observer
   unobserves on first intersection, so a card hidden at load would stay at
   opacity 0 once a filter revealed it. JS applies the enter state instead.
-- The portfolio filter is a toolbar of `aria-pressed` buttons. The Clients and reviews page uses a two-panel tablist; its logo carousel supports touch swipe and pauses autoplay on focus, hover, reduced motion, and when hidden.
+- The portfolio filter is a toolbar of `aria-pressed` buttons. The Clients and reviews page uses a two-panel tablist; its client logos scroll continuously on desktop and mobile, with no previous or next buttons. Motion pauses on keyboard focus, desktop hover, and when offscreen or hidden. Reduced-motion settings and JavaScript-free browsing use a manually scrollable row with no duplicated logos.
 - The activity heatmap is generated from a sine wave and deterministic noise.
   It carries a caption saying so. It is not delivery history.
 - Fonts (Space Grotesk, Inter) load from Google Fonts with a system fallback.
@@ -168,3 +168,5 @@ its introductory text. A white colour overlay is strongest behind the copy and o
 screens; a masked backdrop blur softens only the image edges. Text and buttons sit above
 both effects. Responsive WebP files at 1200px and 600px wide remain in
 `assets/images/academy/`. The decorative background is hidden from screen readers.
+
+The Refund Policy and Payment Terms page sets out service-specific payments, cancellation refunds, non-performance, third-party costs and the refund request process, updated October 1, 2026. The former `refund-policy.html` URL redirects to `refund-policy-and-payment-terms.html`.

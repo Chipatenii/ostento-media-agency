@@ -927,6 +927,19 @@ p { margin: 0 0 var(--sp-3); }
 .legal ul { padding-left: 1.2rem; }
 .legal li { margin-bottom: 0.5rem; }
 .legal a { color: var(--orange-ink); }
+.legal-steps { padding-left: 1.4rem; }
+.legal-steps a { overflow-wrap: anywhere; }
+.legal-table { width: 100%; border-collapse: collapse; margin: var(--sp-4) 0; font-size: var(--fs-300); }
+.legal-table caption { text-align: left; font-weight: 600; color: var(--text); padding-bottom: var(--sp-2); }
+.legal-table th, .legal-table td { padding: var(--sp-3); border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.legal-table thead { background: var(--surface); color: var(--text); }
+.legal-table tbody th { font-weight: 500; color: var(--text); }
+.legal-table th span { display: block; font-weight: 400; color: var(--text-muted); }
+.legal-table td { width: 22%; white-space: nowrap; color: var(--orange-ink); font-weight: 600; }
+@media (max-width: 460px) {
+    .legal-table th, .legal-table td { padding: var(--sp-2); }
+}
+
 .notice {
     background: var(--orange-tint);
     border: 1px solid var(--border-orange);
@@ -1239,39 +1252,43 @@ p { margin: 0 0 var(--sp-3); }
 /* Shown only by the noscript block, where the tabs cannot switch panels. */
 .proof-panel__title { display: none; }
 
-.client-nav {
-    width: 44px; height: 44px;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-sm);
-    color: var(--text);
-    cursor: pointer;
-    transition: border-color var(--dur) var(--ease);
-}
-.client-nav:hover { border-color: var(--border-orange); }
-
-/* ---------- Client logo carousel ---------- */
-.client-track {
-    display: flex;
-    gap: var(--sp-3);
+/* ---------- Continuously scrolling client logos ---------- */
+.client-slider {
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
     scrollbar-width: none;
-    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
 }
-.client-track::-webkit-scrollbar { display: none; }
-.client-track:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 3px; }
+.client-slider::-webkit-scrollbar { display: none; }
+.client-slider:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 3px; }
+.client-slider.is-animated { overflow: hidden; }
+.client-track { display: flex; width: max-content; }
+.client-group {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--sp-3);
+    padding-right: var(--sp-3);
+}
+.client-slider.is-animated .client-track {
+    animation: client-scroll 48s linear infinite;
+    will-change: transform;
+}
+.client-slider.is-paused .client-track,
+.client-slider:focus-visible .client-track { animation-play-state: paused; }
+@media (hover: hover) and (pointer: fine) {
+    .client-slider:hover .client-track { animation-play-state: paused; }
+}
+@keyframes client-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
 .client-logo {
-    flex: 0 0 calc((100% - var(--sp-3)) / 2);
+    flex: 0 0 clamp(160px, 24vw, 260px);
+    width: clamp(160px, 24vw, 260px);
     height: 148px;
     padding: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    scroll-snap-align: start;
     background: #fff;
     border: 1px solid var(--border);
     border-radius: var(--r-md);
@@ -1283,9 +1300,11 @@ p { margin: 0 0 var(--sp-3); }
     height: 112px;
     object-fit: contain;
 }
-@media (min-width: 620px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 2) / 3); } }
-@media (min-width: 1001px) { .client-logo { flex-basis: calc((100% - var(--sp-3) * 3) / 4); } }
-.client-controls { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-3); }
+@media (prefers-reduced-motion: reduce) {
+    .client-slider.is-animated { overflow-x: auto; }
+    .client-slider.is-animated .client-track { animation: none; transform: none; will-change: auto; }
+    .client-group[aria-hidden="true"] { display: none; }
+}
 
 /* ---------- Project detail modal ---------- */
 .modal__box { max-width: 640px; }
@@ -1417,7 +1436,6 @@ p { margin: 0 0 var(--sp-3); }
 @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
     html { scroll-behavior: auto; }
-    .client-track { scroll-behavior: auto; }
     .reveal, .studio-main .reveal.is-pending { opacity: 1; transform: none; }
 }
 

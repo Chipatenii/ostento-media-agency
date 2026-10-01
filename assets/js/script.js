@@ -542,57 +542,36 @@
         });
     })();
 
-    /* ---------- Proof: client logo carousel ---------- */
+    /* ---------- Proof: continuous client logo loop ---------- */
     (function clientSlider() {
         var track = document.getElementById("client-track");
         if (!track) { return; }
-        var slides = Array.prototype.slice.call(track.querySelectorAll(".client-logo"));
-        var panel = document.getElementById("panel-clients");
         var slider = track.closest(".client-slider");
-        var prev = document.getElementById("client-prev");
-        var next = document.getElementById("client-next");
-        if (slides.length < 2) { return; }
+        var group = track.querySelector(".client-group");
+        if (!slider || !group || group.children.length < 2) { return; }
 
-        var index = 0;
-        var inView = !("IntersectionObserver" in window);
-        function step() {
-            return slides[1].offsetLeft - slides[0].offsetLeft;
-        }
-        function lastIndex() {
-            var width = step();
-            return width ? Math.min(slides.length - 1,
-                Math.ceil((track.scrollWidth - track.clientWidth - 1) / width)) : 0;
-        }
-        function go(i) {
-            var last = lastIndex();
-            index = i < 0 ? last : (i > last ? 0 : i);
-            track.scrollTo({
-                left: slides[index].offsetLeft - slides[0].offsetLeft,
-                behavior: reduceMotion ? "auto" : "smooth"
-            });
-        }
-        if (prev) { prev.addEventListener("click", function () { go(index - 1); }); }
-        if (next) { next.addEventListener("click", function () { go(index + 1); }); }
-        track.addEventListener("scroll", function () {
-            var width = step();
-            if (width) { index = Math.min(lastIndex(), Math.round(track.scrollLeft / width)); }
-        }, { passive: true });
-        window.addEventListener("resize", function () {
-            index = Math.min(index, lastIndex());
-        }, { passive: true });
+        // Equal groups include the trailing gap so the loop joins seamlessly.
+        var copy = group.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        copy.querySelectorAll("img").forEach(function (img) {
+            img.alt = "";
+            img.loading = "eager";
+        });
+        track.appendChild(copy);
+        slider.classList.add("is-animated");
 
+        var inView = true;
+        function updatePlayback() {
+            slider.classList.toggle("is-paused", document.hidden || !inView);
+        }
+        document.addEventListener("visibilitychange", updatePlayback);
         if ("IntersectionObserver" in window) {
             new IntersectionObserver(function (entries) {
                 inView = entries[0].isIntersecting;
-            }, { threshold: 0.1 }).observe(slider);
+                updatePlayback();
+            }, { threshold: 0 }).observe(slider);
         }
-        if (!reduceMotion) {
-            window.setInterval(function () {
-                if (document.hidden || !inView || panel.hidden ||
-                    slider.matches(":hover") || slider.matches(":focus-within")) { return; }
-                go(index + 1);
-            }, 4500);
-        }
+        updatePlayback();
     })();
 
     /* ---------- Project detail modal ---------- */
