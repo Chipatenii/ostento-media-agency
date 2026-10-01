@@ -180,41 +180,84 @@ p { margin: 0 0 var(--sp-3); }
 /* ---------- Floating WhatsApp contact ---------- */
 .whatsapp-float {
     position: fixed;
-    right: calc(1.25rem + env(safe-area-inset-right));
-    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    right: calc(1.5rem + env(safe-area-inset-right));
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
     z-index: 210;
-    min-height: 52px;
+    width: 64px;
+    height: 64px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1rem;
-    border-radius: var(--r-pill);
-    background: #147A47;
+    padding: 0;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #149F4D, #087B38);
     color: #fff;
-    box-shadow: 0 4px 16px rgba(14, 27, 58, 0.18);
-    font-size: var(--fs-200);
-    font-weight: var(--w-semi);
+    box-shadow: 0 6px 22px rgba(8, 123, 56, 0.32), 0 2px 6px rgba(14, 27, 58, 0.15);
     text-decoration: none;
-    transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+    isolation: isolate;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
-.whatsapp-float:hover { background: #10643A; color: #fff; transform: translateY(-2px); }
-.whatsapp-float:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 3px; }
-.whatsapp-float svg { flex: 0 0 auto; width: 25px; height: 25px; }
+.whatsapp-float::before,
+.whatsapp-float::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    z-index: -1;
+    border: 2px solid #149F4D;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: whatsapp-pulse 3.2s ease-out infinite;
+}
+.whatsapp-float::after { animation-delay: -1.6s; }
+@keyframes whatsapp-pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    75%, 100% { transform: scale(1.55); opacity: 0; }
+}
+.whatsapp-float svg { display: block; flex: 0 0 auto; width: 34px; height: 34px; }
+.whatsapp-float:focus-visible { outline: 3px solid var(--navy); outline-offset: 5px; }
+.whatsapp-float:active { transform: scale(0.96); }
+.whatsapp-float__label {
+    position: absolute;
+    right: calc(100% + 14px);
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--r-sm);
+    background: var(--navy);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+    font-size: var(--fs-200);
+    font-weight: var(--w-medium);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(6px);
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+}
+.whatsapp-float:focus-visible .whatsapp-float__label { opacity: 1; visibility: visible; transform: translateX(0); }
+@media (hover: hover) and (pointer: fine) {
+    .whatsapp-float:hover { color: #fff; transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 28px rgba(8, 123, 56, 0.4), 0 3px 8px rgba(14, 27, 58, 0.18); }
+    .whatsapp-float:hover .whatsapp-float__label { opacity: 1; visibility: visible; transform: translateX(0); }
+}
 @media (max-width: 760px) {
     .whatsapp-float {
-        right: calc(1rem + env(safe-area-inset-right));
-        bottom: calc(1rem + env(safe-area-inset-bottom));
-        width: 54px;
-        height: 54px;
-        min-height: 54px;
-        padding: 0;
+        right: calc(1.25rem + env(safe-area-inset-right));
+        bottom: calc(1.25rem + env(safe-area-inset-bottom));
+        width: 60px;
+        height: 60px;
     }
-    .whatsapp-float__label { display: none; }
+    .whatsapp-float svg { width: 32px; height: 32px; }
 }
-
+@media (prefers-reduced-motion: reduce) {
+    .whatsapp-float::before, .whatsapp-float::after { animation: none; opacity: 0; }
+    .whatsapp-float, .whatsapp-float__label { transition: none; }
+}
 .whatsapp-float.is-hidden,
 .site-header.nav-is-open ~ .whatsapp-float { opacity: 0; visibility: hidden; pointer-events: none; }
+.whatsapp-float.is-hidden::before, .whatsapp-float.is-hidden::after,
+.site-header.nav-is-open ~ .whatsapp-float::before,
+.site-header.nav-is-open ~ .whatsapp-float::after { animation-play-state: paused; }
 
 /* ---------- Shared header / navigation ---------- */
 .site-header {

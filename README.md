@@ -170,3 +170,5 @@ both effects. Responsive WebP files at 1200px and 600px wide remain in
 `assets/images/academy/`. The decorative background is hidden from screen readers.
 
 The Refund Policy and Payment Terms page sets out service-specific payments, cancellation refunds, non-performance, third-party costs and the refund request process, updated October 1, 2026. The former `refund-policy.html` URL redirects to `refund-policy-and-payment-terms.html`.
+
+The floating WhatsApp shortcut is circular on desktop and mobile, with a larger chat-and-phone icon, green background, white border and soft pulse rings. The tooltip appears on desktop hover or keyboard focus, and reduced-motion settings disable the pulse.
