@@ -161,4 +161,4 @@ laptop photo with an orange Ostento Media mug. All five use responsive WebP file
 The section links work without JavaScript;
 scroll tracking, reveal motion and hover effects progressively enhance the page.
 
-`studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. Process photo slots use 800 x 500 SVG placeholders in `assets/images/process/`; replace them with project photos when available. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
+`studio.html` is retained only as a redirect to `services.html`, preserving old bookmarks and section links. All four process stages use the supplied team discussion, report review, desk work and handshake photos as responsive WebP files at 1200 x 750 and 600 x 375 in `assets/images/process/`, with lazy loading. The "Create and review" photo is framed around the hands, keyboard and mouse. Contact links from each service preselect its quote category. Academy enquiries open an email draft instead of using an unconnected signup endpoint.
