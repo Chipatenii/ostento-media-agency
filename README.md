@@ -120,7 +120,6 @@ python3 tools/seo.py
 
 | What | Where | Status |
 |---|---|---|
-| **Custom domain** | `SITE_URL` in `tools/seo.py` | Uses the GitHub Pages URL until a domain is connected. See SEO.md |
 | **Google Search Console** | Verification meta tag in `index.html` | Not yet added. See SEO.md |
 | **Google Business Profile** | business.google.com | Not yet linked. See SEO.md |
 | **Website results** | Website cards in `portfolio.html` | No `work-card__result` line yet. Add one per card when you have a result worth stating |
