@@ -20,7 +20,7 @@ import re
 
 # The live address of the site, with a trailing slash. Change this one line
 # when a custom domain goes live, then re-run the script.
-SITE_URL = "https://ostentomedia-agency.com/"
+SITE_URL = "https://www.ostentomedia-agency.com/"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -3,7 +3,7 @@
 How this site is set up to appear in Google Search, Google Maps and other Google
 services for each of its services, and what still has to be done outside the code.
 
-Live site address used in all tags: `https://ostentomedia-agency.com/`
+Live site address used in all tags: `https://www.ostentomedia-agency.com/`
 (set once as `SITE_URL` in `tools/seo.py`).
 
 ## 1. What is already in the code
@@ -52,7 +52,9 @@ Google Maps. Do them in this order.
 ### Google Search Console
 
 1. Go to <https://search.google.com/search-console> and add a **URL prefix**
-   property for the site address above.
+   property for `https://www.ostentomedia-agency.com/` (or a **Domain**
+   property for `ostentomedia-agency.com`, verified by DNS, which covers both
+   the `www.` and bare addresses).
 2. Verify with the **HTML tag** method: paste the `google-site-verification`
    meta tag Google gives you into the `<head>` of `index.html`, just under
    `<meta name="theme-color">`, then push. Keep the tag in place permanently.
@@ -101,10 +103,9 @@ Every canonical URL, `og:url`, share image, structured data address,
    **Change of address** from the old property.
 5. Update the website link in the Google Business Profile and social profiles.
 
-Make sure `https://ostentomedia-agency.com/` is the address visitors end up on.
-If the host redirects to `www.ostentomedia-agency.com`, set `SITE_URL` to the
-`www.` address instead, so the canonical tags match the page Google actually
-loads.
+The tags use the `www.` address because `ostentomedia-agency.com` redirects
+there. Canonical tags must match the page Google actually loads, so keep the
+two in step if the host's redirect ever changes.
 
 ## 5. Maintenance checklist
 
