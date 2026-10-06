@@ -7,7 +7,9 @@
     "use strict";
 
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var STORAGE_KEY = "ostento_cookie_consent_v1";
+    /* v2 since the Meta Pixel was added: choices made before it existed are
+       not carried over, so every visitor is asked again. */
+    var STORAGE_KEY = "ostento_cookie_consent_v2";
     /* Keep old homepage section URLs working after their move to standalone pages. */
     var pageName = location.pathname.split("/").pop();
     if (!pageName || pageName === "index.html") {
@@ -279,6 +281,7 @@
         }
         function closeModal() { modal.classList.remove("is-open"); }
 
+        try { localStorage.removeItem("ostento_cookie_consent_v1"); } catch (e) {} // superseded by v2
         var existing = read();
         if (existing) { applyConsent(existing); }
         else { openBanner(); }
