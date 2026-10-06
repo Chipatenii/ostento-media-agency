@@ -33,6 +33,9 @@
         script.async = true;
         script.src = "https://connect.facebook.net/en_US/fbevents.js";
         document.head.appendChild(script);
+        // No automatic button-click or page-metadata events: only the events
+        // below are sent, as the Privacy Policy lists. Must come before init.
+        fbq("set", "autoConfig", false, PIXEL_ID);
         fbq("init", PIXEL_ID);
         fbq("track", "PageView");
         loaded = true;
