@@ -124,7 +124,7 @@ python3 tools/seo.py
 | **Google Search Console** | Verification meta tag in `index.html` | Not yet added. See SEO.md |
 | **Google Business Profile** | business.google.com | Not yet linked. See SEO.md |
 | **Website results** | Website cards in `portfolio.html` | No `work-card__result` line yet. Add one per card when you have a result worth stating |
-| **Meta Pixel** | `PIXEL_ID` in `assets/js/meta-pixel.js`; Events Manager > Data sources > your Pixel > Settings | Not yet set. First turn **Automatic advanced matching** off, since `privacy.html` states it is off and it can read the quote form's contact fields. Then paste the ID and deploy. Before launch, use Test Events or Meta Pixel Helper on `index.html` and `contact.html` to confirm only PageView, Lead and Contact are sent, with no `em`, `ph` or `fn` parameters. Code already disables automatic events (`autoConfig`) |
+| **Meta Pixel** | `PIXEL_ID` in `assets/js/meta-pixel.js`; Events Manager > Data sources > your Pixel > Settings | ID set (956320665525611). Before this reaches `main`, turn **Automatic advanced matching** off, since `privacy.html` states it is off and it can read the quote form's contact fields. After deploying, use Test Events or Meta Pixel Helper on `index.html` and `contact.html` to confirm only PageView, Lead and Contact are sent, with no `em`, `ph` or `fn` parameters. Code already disables automatic events (`autoConfig`) |
 | **Share image** | `og:image` points at `hero.jpg`, a 1920x1280 3:2 crop | Platforms crop it to 1.91:1. A purpose-built 1200x630 card would be better |
 
 Review markup is left to the Trustmary widget on `clients.html`. Do not add manually asserted `Review` or `AggregateRating` JSON-LD for reviews the page does not display.

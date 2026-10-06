@@ -7,7 +7,7 @@
 (function () {
     "use strict";
 
-    var PIXEL_ID = "PASTE_YOUR_PIXEL_ID"; // the numeric ID from Meta Events Manager
+    var PIXEL_ID = "956320665525611"; // the numeric ID from Meta Events Manager
     var STORAGE_KEY = "ostento_cookie_consent_v2"; // same key as script.js
 
     var loaded = false;
