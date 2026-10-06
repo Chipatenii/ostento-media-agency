@@ -185,6 +185,61 @@
         });
     }
 
+    /* ---------- Homepage hero depth ----------
+       After the CSS entrance, the photo drifts a few pixels against the
+       pointer and the copy eases up and out as the visitor scrolls toward the
+       footer, so the hero keeps responding instead of sitting still. Values
+       are written as custom properties and smoothed in one rAF loop that
+       stops once it has caught up. */
+    var motionHero = document.querySelector(".hero--motion");
+    if (motionHero && !reduceMotion) {
+        var target = { x: 0, y: 0 };
+        var current = { x: 0, y: 0 };
+        var heroFrame = null;
+        var PARALLAX = 14; // px of photo travel at the viewport edge
+
+        var renderHero = function () {
+            current.x += (target.x - current.x) * 0.08;
+            current.y += (target.y - current.y) * 0.08;
+            motionHero.style.setProperty("--hero-px", current.x.toFixed(2) + "px");
+            motionHero.style.setProperty("--hero-py", current.y.toFixed(2) + "px");
+            var settled = Math.abs(target.x - current.x) < 0.05 && Math.abs(target.y - current.y) < 0.05;
+            heroFrame = settled ? null : window.requestAnimationFrame(renderHero);
+        };
+        var queueHero = function () {
+            if (!heroFrame) { heroFrame = window.requestAnimationFrame(renderHero); }
+        };
+
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            motionHero.addEventListener("pointermove", function (e) {
+                var rect = motionHero.getBoundingClientRect();
+                target.x = -((e.clientX - rect.left) / rect.width - 0.5) * PARALLAX;
+                target.y = -((e.clientY - rect.top) / rect.height - 0.5) * PARALLAX;
+                queueHero();
+            });
+            motionHero.addEventListener("pointerleave", function () {
+                target.x = 0;
+                target.y = 0;
+                queueHero();
+            });
+        }
+
+        var heroScrollTicking = false;
+        var updateHeroScroll = function () {
+            heroScrollTicking = false;
+            var progress = Math.min(Math.max(window.scrollY / motionHero.offsetHeight, 0), 1);
+            motionHero.style.setProperty("--hero-lift", (progress * -48).toFixed(1) + "px");
+            motionHero.style.setProperty("--hero-fade", (1 - progress * 0.6).toFixed(3));
+        };
+        window.addEventListener("scroll", function () {
+            if (!heroScrollTicking) {
+                heroScrollTicking = true;
+                window.requestAnimationFrame(updateHeroScroll);
+            }
+        }, { passive: true });
+        updateHeroScroll();
+    }
+
     /* ---------- Scroll-spy active nav ---------- */
     var spyLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__menu a[href^="#"]'));
     if (spyLinks.length && "IntersectionObserver" in window) {
