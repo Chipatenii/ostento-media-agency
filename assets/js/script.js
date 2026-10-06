@@ -7,7 +7,9 @@
     "use strict";
 
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var STORAGE_KEY = "ostento_cookie_consent_v1";
+    /* v2 since the Meta Pixel was added: choices made before it existed are
+       not carried over, so every visitor is asked again. */
+    var STORAGE_KEY = "ostento_cookie_consent_v2";
     /* Keep old homepage section URLs working after their move to standalone pages. */
     var pageName = location.pathname.split("/").pop();
     if (!pageName || pageName === "index.html") {
@@ -23,7 +25,11 @@
             "#system": "process.html",
             "#activity": "portfolio.html"
         }[location.hash];
-        if (legacyPage) { location.replace(legacyPage); return; }
+        if (legacyPage) {
+            // Keep the query (UTM tags) ahead of any hash in the target.
+            location.replace(legacyPage.replace(/(?=#|$)/, function () { return location.search; }));
+            return;
+        }
     }
 
 
@@ -254,11 +260,13 @@
             consent.ts = Date.now();
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(consent)); } catch (e) {}
             applyConsent(consent);
+            // meta-pixel.js loads or revokes on this, so the choice applies without a reload.
+            document.dispatchEvent(new CustomEvent("ostento:consent", { detail: consent }));
         }
         function applyConsent(consent) {
-            // Gate real analytics/marketing scripts here, e.g.:
+            // Gate real analytics scripts here, e.g.:
             // if (consent.analytics) { loadAnalytics(); }
-            // if (consent.marketing) { loadMarketing(); }
+            // Marketing is gated in meta-pixel.js, which reads the same stored choice.
             document.documentElement.setAttribute("data-consent",
                 (consent.analytics ? "a" : "") + (consent.marketing ? "m" : "") || "necessary");
         }
@@ -273,6 +281,7 @@
         }
         function closeModal() { modal.classList.remove("is-open"); }
 
+        try { localStorage.removeItem("ostento_cookie_consent_v1"); } catch (e) {} // superseded by v2
         var existing = read();
         if (existing) { applyConsent(existing); }
         else { openBanner(); }
@@ -661,6 +670,29 @@
         });
     })();
 
+    /* ---------- Campaign parameters ---------- */
+    /* Carries the landing URL's utm_* values onto every internal link, so a
+       visit from an ad keeps its source and campaign through to the quote form.
+       The raw pairs are reused so their encoding stays exactly as received. */
+    (function keepCampaignParams() {
+        var utm = location.search.slice(1).split("&").filter(function (pair) {
+            return pair.indexOf("utm_") === 0;
+        });
+        if (!utm.length) { return; }
+        document.querySelectorAll("a[href]").forEach(function (link) {
+            var href = link.getAttribute("href");
+            var url;
+            try { url = new URL(href, location.href); } catch (e) { return; }
+            if (href.charAt(0) === "#" || url.origin !== location.origin) { return; }
+            var add = utm.filter(function (pair) { return !url.searchParams.has(pair.split("=")[0]); });
+            if (!add.length) { return; }
+            var hashAt = href.indexOf("#");
+            var path = hashAt === -1 ? href : href.slice(0, hashAt);
+            var hash = hashAt === -1 ? "" : href.slice(hashAt);
+            link.setAttribute("href", path + (path.indexOf("?") === -1 ? "?" : "&") + add.join("&") + hash);
+        });
+    })();
+
     /* ---------- Contact form: prepare a draft in the visitor's chosen app ---------- */
     (function contactDraft() {
         var form = document.querySelector("form[data-contact-draft]");
@@ -697,8 +729,15 @@
                 status.textContent = "Your draft is ready. Review it and press Send in " +
                     (channel === "whatsapp" ? "WhatsApp." : "your email app.");
             }
+            // meta-pixel.js records this as a Lead when Marketing consent is on.
+            document.dispatchEvent(new CustomEvent("ostento:lead", {
+                detail: { service: data.get("project_type"), channel: channel }
+            }));
             if (channel === "whatsapp") {
-                location.href = "https://wa.me/260770381593?text=" + encodeURIComponent(message);
+                var whatsappUrl = "https://wa.me/260770381593?text=" + encodeURIComponent(message);
+                // Leaving this page at once can cancel the Lead request, so give it a moment.
+                if (window.fbq) { window.setTimeout(function () { location.href = whatsappUrl; }, 300); }
+                else { location.href = whatsappUrl; }
             } else {
                 location.href = "mailto:growth@ostentomedia-agency.com?subject=" +
                     encodeURIComponent("Project inquiry from " + data.get("name").trim()) +
