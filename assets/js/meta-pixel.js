@@ -7,7 +7,7 @@
 (function () {
     "use strict";
 
-    var PIXEL_ID = "PASTE_YOUR_PIXEL_ID"; // the numeric ID from Meta Events Manager
+    var PIXEL_ID = "956320665525611"; // the numeric ID from Meta Events Manager
     var STORAGE_KEY = "ostento_cookie_consent_v2"; // same key as script.js
 
     var loaded = false;
@@ -33,6 +33,9 @@
         script.async = true;
         script.src = "https://connect.facebook.net/en_US/fbevents.js";
         document.head.appendChild(script);
+        // No automatic button-click or page-metadata events: only the events
+        // below are sent, as the Privacy Policy lists. Must come before init.
+        fbq("set", "autoConfig", false, PIXEL_ID);
         fbq("init", PIXEL_ID);
         fbq("track", "PageView");
         loaded = true;
