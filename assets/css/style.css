@@ -1243,3 +1243,107 @@ p { margin: 0 0 var(--sp-3); }
 @media (prefers-reduced-motion: reduce) {
     .studio-main .reveal.is-pending, .process-main .reveal.is-pending { opacity: 1; transform: none; }
 }
+
+/* ---------- Homepage hero entrance ----------
+   One choreographed sequence on arrival, so the page reads in order: the photo
+   settles into place, the headline lines rise out of their own masks, the
+   orange accent underlines the promise, then the supporting copy and the two
+   actions arrive. Each step starts before the last one ends (overlap, not
+   queue), and nothing runs again after it lands. Fill mode is
+   backwards everywhere: each final keyframe matches the resting style, so once
+   a step lands the element's own hover transforms apply again. The photo uses the
+   individual `scale` and `translate` properties so the entrance and the
+   pointer parallax in script.js never fight over `transform`. */
+.hero--motion {
+    --hero-px: 0px;
+    --hero-py: 0px;
+    --hero-lift: 0px;
+    --hero-fade: 1;
+}
+.hero--motion::before {
+    scale: 1.04;
+    translate: var(--hero-px) var(--hero-py);
+    animation: hero-photo-settle 2.2s var(--ease-out) backwards;
+    will-change: scale, translate;
+}
+.hero--motion::after { animation: hero-veil 1.2s var(--ease) backwards; }
+.hero--motion .hero__inner {
+    translate: 0 var(--hero-lift);
+    opacity: var(--hero-fade);
+}
+
+/* Each line sits in a clipping box and rises from below it. The extra padding
+   and matching negative margin keep descenders (g, p) inside the clip. */
+.hero--motion .hero__line {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+}
+.hero--motion .hero__line > span {
+    display: inline-block;
+    animation: hero-line-rise 1s var(--ease-out) backwards;
+    animation-delay: calc(0.25s + var(--line, 0) * 0.12s);
+}
+.hero--motion .hero__line:nth-of-type(2) > span { --line: 1; }
+.hero--motion .hero__line:nth-of-type(3) > span { --line: 2; }
+
+.hero--motion .hero__title em { position: relative; display: inline-block; }
+.hero--motion .hero__title em::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.02em; /* below the descender of the p, inside the line's clip */
+    height: 0.06em;
+    background: var(--orange);
+    border-radius: var(--r-pill);
+    transform-origin: left center;
+    animation: hero-underline 0.8s var(--ease-out) 1.05s backwards;
+}
+
+.hero--motion .hero__sub { animation: hero-rise 0.9s var(--ease-out) 0.75s backwards; }
+.hero--motion .hero__actions > * { animation: hero-rise 0.8s var(--ease-out) backwards; }
+.hero--motion .hero__actions > :nth-child(1) { animation-delay: 0.95s; }
+.hero--motion .hero__actions > :nth-child(2) { animation-delay: 1.05s; }
+
+/* The header steps down first so the brand is in place before the headline. */
+body:has(.hero--motion) .site-header { animation: hero-header-in 0.7s var(--ease-out) backwards; }
+
+@keyframes hero-photo-settle {
+    from { scale: 1.14; opacity: 0; }
+    to   { scale: 1.04; opacity: 0.78; }
+}
+@keyframes hero-veil { from { opacity: 0.6; } to { opacity: 1; } }
+@keyframes hero-line-rise { from { transform: translateY(160%); } to { transform: none; } }
+@keyframes hero-underline { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes hero-header-in {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* The mobile photo is stronger, so it settles to its own opacity. */
+@media (max-width: 760px) {
+    .hero--motion::before { animation-name: hero-photo-settle-sm; }
+}
+@keyframes hero-photo-settle-sm {
+    from { scale: 1.14; opacity: 0; }
+    to   { scale: 1.04; opacity: 0.92; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero--motion::before,
+    .hero--motion::after,
+    .hero--motion .hero__line > span,
+    .hero--motion .hero__title em::after,
+    .hero--motion .hero__sub,
+    .hero--motion .hero__actions > *,
+    body:has(.hero--motion) .site-header { animation: none; }
+    .hero--motion::before { scale: 1; translate: none; }
+    .hero--motion .hero__inner { translate: none; opacity: 1; }
+}
