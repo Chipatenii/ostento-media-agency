@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ostentomedia-agency.com/sitemap.xml
+Sitemap: https://ostentomedia-agency.com/sitemap.xml
